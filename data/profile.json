@@ -1,0 +1,86 @@
+{
+  "name": "Akshaj Lodhi",
+  "roleTitle": "Founder & Developer",
+  "organization": "AKSHAJ WEB STUDIO",
+  "tagline": "Turning Ideas Into Digital Reality.",
+  "photoUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop",
+  "personalPhotoUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop",
+  "professionalPhotoUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop",
+  "bioIntro": "Founder & Developer at AKSHAJ WEB STUDIO. Dedicated to turning ideas into digital reality through high-performance web development, modern application engineering, and intelligent AI solutions.",
+  "fullBio": "Hello, I am Akshaj Lodhi, Founder and Developer of AKSHAJ WEB STUDIO. I specialize in crafting bespoke websites, high-speed business applications, and AI-driven platforms that empower brands and enterprises to scale. With a deep passion for clean architectural code, futuristic aesthetics, and frictionless user experiences, I manage projects from initial concept to full production deployment.",
+  "businessJourney": "Driven by a relentless curiosity for software engineering and creative digital design, I founded AKSHAJ WEB STUDIO to provide end-to-end digital solutions—spanning modern full-stack web platforms, mobile software, and intelligent AI integrations. Today, AKSHAJ WEB STUDIO operates as a full-service digital agency turning client ideas into high-impact digital reality.",
+  "areasOfInterest": [
+    "Full-Stack Web Development (Next.js, React, TypeScript)",
+    "Artificial Intelligence & LLM Workflow Automation",
+    "Android & Cross-Platform Mobile Applications",
+    "High-Performance Database Architectures",
+    "Modern Glassmorphic & Futuristic UI/UX Design Systems",
+    "Custom Software & Enterprise Automation"
+  ],
+  "goals": "To engineer innovative digital solutions and high-converting web experiences for clients worldwide, setting new standards for digital excellence, responsiveness, and AI integration.",
+  "businessVision": "Building Ideas. Creating Technology. Shaping Tomorrow. Our mission at AKSHAJ WEB STUDIO is to deliver world-class digital assets that turn ambitious visions into scalable, tangible technology.",
+  "skills": [
+    {
+      "id": "skill-1",
+      "name": "Next.js / React / TypeScript",
+      "level": 95,
+      "category": "Frontend"
+    },
+    {
+      "id": "skill-2",
+      "name": "Node.js / Express & Python Backend",
+      "level": 90,
+      "category": "Backend"
+    },
+    {
+      "id": "skill-3",
+      "name": "AI & LLM Integration (Gemini, OpenAI)",
+      "level": 92,
+      "category": "AI Engineering"
+    },
+    {
+      "id": "skill-4",
+      "name": "Android Application Development",
+      "level": 86,
+      "category": "Mobile"
+    },
+    {
+      "id": "skill-5",
+      "name": "Tailwind CSS & Glassmorphic UI/UX",
+      "level": 96,
+      "category": "Design"
+    },
+    {
+      "id": "skill-6",
+      "name": "Databases (Firebase, PostgreSQL, MongoDB)",
+      "level": 88,
+      "category": "Database"
+    },
+    {
+      "id": "skill-7",
+      "name": "Cloud Deployment (Vercel, Google Cloud)",
+      "level": 90,
+      "category": "Cloud & DevOps"
+    }
+  ],
+  "education": [
+    {
+      "id": "edu-1",
+      "degree": "[Degree / Qualification - Add via Admin Dashboard]",
+      "institution": "[College / University Name - Add via Admin Dashboard]",
+      "year": "Optional / Editable",
+      "details": "Academic qualifications are customizable through the admin dashboard."
+    }
+  ],
+  "achievements": [
+    "Founded AKSHAJ WEB STUDIO as an independent software development & digital agency.",
+    "Architected and deployed full-stack web applications with verified 100% mobile responsiveness.",
+    "Engineered intelligent AI-driven conversational bots and vector knowledge workflows.",
+    "Established a seamless UPI payment and inquiry management pipeline for international clients."
+  ],
+  "experienceYears": 3,
+  "projectsCompleted": 10,
+  "clientSatisfaction": 100,
+  "location": "Available for Projects Worldwide",
+  "availableForHire": true
+}
