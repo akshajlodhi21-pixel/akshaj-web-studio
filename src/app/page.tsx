@@ -363,7 +363,7 @@ export default function HomePage() {
                   src={store.profile.professionalPhotoUrl || store.profile.photoUrl}
                   alt={store.profile.name || "Akshaj Lodhi"}
                   fill
-                  className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                  className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, 40vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/20 to-transparent pointer-events-none" />

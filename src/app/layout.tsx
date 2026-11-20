@@ -106,6 +106,7 @@ export default function RootLayout({
           "@type": "Person",
           name: "Akshaj Lodhi",
           jobTitle: "Founder & Developer",
+          image: "https://akshaj-web-studio.vercel.app/images/akshaj-lodhi.jpg",
         },
         telephone: "+91 91985 62197",
         priceRange: "₹₹₹",

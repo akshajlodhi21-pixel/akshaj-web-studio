@@ -29,12 +29,9 @@ export const initialProfile: AdminProfile = {
   roleTitle: "Founder & Developer",
   organization: "AKSHAJ WEB STUDIO",
   tagline: "Turning Ideas Into Digital Reality.",
-  photoUrl:
-    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop",
-  personalPhotoUrl:
-    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop",
-  professionalPhotoUrl:
-    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop",
+  photoUrl: "/images/akshaj-lodhi.jpg",
+  personalPhotoUrl: "/images/akshaj-lodhi.jpg",
+  professionalPhotoUrl: "/images/akshaj-lodhi.jpg",
   bioIntro:
     "Founder & Developer at AKSHAJ WEB STUDIO. Dedicated to turning ideas into digital reality through high-performance web development, modern application engineering, and intelligent AI solutions.",
   fullBio:

@@ -125,7 +125,7 @@ export default function AboutPage() {
                 src={currentPhoto}
                 alt={store.profile.name || "Akshaj Lodhi"}
                 fill
-                className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
                 priority
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
               />

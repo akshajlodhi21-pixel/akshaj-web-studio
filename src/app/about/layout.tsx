@@ -12,6 +12,14 @@ export const metadata: Metadata = {
     description:
       "Meet Akshaj Lodhi, Founder & Developer of AKSHAJ WEB STUDIO. Transforming ideas into digital reality.",
     url: "https://akshaj-web-studio.vercel.app/about",
+    images: [
+      {
+        url: "https://akshaj-web-studio.vercel.app/images/akshaj-lodhi.jpg",
+        width: 800,
+        height: 1067,
+        alt: "Akshaj Lodhi - Founder & Developer, AKSHAJ WEB STUDIO",
+      },
+    ],
   },
 };
 
