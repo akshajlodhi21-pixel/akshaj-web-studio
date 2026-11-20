@@ -190,7 +190,7 @@ export default function Footer() {
               </a>
 
               <a
-                href={`https://wa.me/${store.contact.whatsapp.replace(/\+/g, "")}`}
+                href={`https://wa.me/${store.contact.whatsapp.replace(/[^0-9]/g, "")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2.5 hover:text-white transition-colors text-emerald-400"

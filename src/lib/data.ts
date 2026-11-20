@@ -85,10 +85,10 @@ export const initialProfile: AdminProfile = {
 };
 
 export const initialContactInfo: ContactInfo = {
-  personalPhone: "+91 98765 43210",
-  businessPhone: "+91 98765 43211",
-  phone: "+91 98765 43210",
-  whatsapp: "+919876543210",
+  personalPhone: "+91 91985 62197",
+  businessPhone: "+91 91985 62197",
+  phone: "+91 91985 62197",
+  whatsapp: "+91 91985 62197",
   instagramUsername: "akshajwebstudio",
   instagramUrl: "https://instagram.com/akshajwebstudio",
   businessEmail: "contact@akshajwebstudio.com",

@@ -276,7 +276,7 @@ function HireFormContent() {
                     onChange={(e) =>
                       setFormData({ ...formData, phoneNumber: e.target.value })
                     }
-                    placeholder="e.g. +91 98765 43210"
+                    placeholder="e.g. +91 91985 62197"
                     className="w-full bg-dark-900 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-gold-500 transition-colors"
                   />
                 </div>
@@ -295,7 +295,7 @@ function HireFormContent() {
                     onChange={(e) =>
                       setFormData({ ...formData, whatsappNumber: e.target.value })
                     }
-                    placeholder="e.g. +91 98765 43210"
+                    placeholder="e.g. +91 91985 62197"
                     className="w-full bg-dark-900 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-gold-500 transition-colors"
                   />
                 </div>

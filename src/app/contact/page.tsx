@@ -428,7 +428,7 @@ export default function ContactPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, phone: e.target.value })
                       }
-                      placeholder="e.g. +91 98765 43210"
+                      placeholder="e.g. +91 91985 62197"
                       className="w-full bg-dark-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white placeholder-gray-500 focus:outline-none focus:border-gold-500 transition-colors"
                     />
                   </div>

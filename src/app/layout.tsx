@@ -107,7 +107,7 @@ export default function RootLayout({
           name: "Akshaj Lodhi",
           jobTitle: "Founder & Developer",
         },
-        telephone: "+91 98765 43210",
+        telephone: "+91 91985 62197",
         priceRange: "₹₹₹",
         address: {
           "@type": "PostalAddress",

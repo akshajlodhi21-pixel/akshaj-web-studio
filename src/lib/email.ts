@@ -97,7 +97,7 @@ export async function sendInquiryEmails(payload: InquiryEmailPayload): Promise<{
             Our principal solutions architect is actively reviewing your project specifications and technical scope. We will formulate a comprehensive proposal and reach out to you within 24 business hours.
           </p>
           <p class="body-text" style="margin-top: 20px; font-size: 13px; color: #94a3b8;">
-            If you need urgent assistance, you can also reach us directly on WhatsApp at +91 98765 43210.
+            If you need urgent assistance, you can also reach us directly on WhatsApp at +91 91985 62197.
           </p>
           <div style="margin-top: 24px; border-top: 1px solid #1e2036; padding-top: 16px; font-size: 12px; color: #64748b; text-align: center;">
             © ${new Date().getFullYear()} AKSHAJ WEB STUDIO. All rights reserved.
