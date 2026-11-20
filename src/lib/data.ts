@@ -18,7 +18,7 @@ export const initialSiteSettings: SiteSettings = {
     "We build powerful websites, innovative applications and intelligent digital solutions to help businesses grow.",
   footerAboutText:
     "A world-class digital agency crafting bespoke digital experiences, mission-critical web applications, AI automation tools, and native Android software for enterprises and forward-thinking businesses worldwide.",
-  googleSiteVerification: "google-site-verification-placeholder-akshaj",
+  googleSiteVerification: "google2cb903cb381db4e1",
   googleAnalyticsId: "G-AKSHAJSTUDIO",
   metaDescription:
     "AKSHAJ WEB STUDIO - Turning Ideas Into Digital Reality. Professional website development, Android application engineering, AI solutions, and custom software.",

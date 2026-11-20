@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Akshaj Lodhi", url: "https://akshajwebstudio.com" }],
   creator: "Akshaj Lodhi",
   verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "google-site-verification-placeholder-akshaj",
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "google2cb903cb381db4e1",
   },
   openGraph: {
     type: "website",
