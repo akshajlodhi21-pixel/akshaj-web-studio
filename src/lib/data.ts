@@ -13,15 +13,15 @@ export const initialSiteSettings: SiteSettings = {
   tagline: "Turning Ideas Into Digital Reality.",
   heroHeadline: "AKSHAJ WEB STUDIO",
   heroIntroduction:
-    "We transform ideas into powerful digital experiences. From professional websites to innovative applications and AI-powered solutions, we help businesses establish their digital presence.",
+    "We transform ideas into powerful digital experiences. AKSHAJ WEB STUDIO specializes in custom Website Development, futuristic Web Design, native App Development, and scalable AI Solutions to help forward-thinking businesses establish and expand their digital presence.",
   heroSubheadline:
-    "We build powerful websites, innovative applications and intelligent digital solutions to help businesses grow.",
+    "Engineering next-generation Website Development, mobile App Development, creative Web Design, and custom AI Solutions that empower your business to scale.",
   footerAboutText:
     "A world-class digital agency crafting bespoke digital experiences, mission-critical web applications, AI automation tools, and native Android software for enterprises and forward-thinking businesses worldwide.",
   googleSiteVerification: "google2cb903cb381db4e1",
   googleAnalyticsId: "G-AKSHAJSTUDIO",
   metaDescription:
-    "AKSHAJ WEB STUDIO - Turning Ideas Into Digital Reality. Professional website development, Android application engineering, AI solutions, and custom software.",
+    "AKSHAJ WEB STUDIO - Turning Ideas Into Digital Reality. Premier digital engineering agency delivering custom Website Development, mobile App Development, intelligent AI Solutions, and modern Web Design.",
 };
 
 export const initialProfile: AdminProfile = {
