@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/admin/", "/api/"],
     },
-    sitemap: "https://akshajwebstudio.com/sitemap.xml",
+    sitemap: "https://akshaj-web-studio.vercel.app/sitemap.xml",
   };
 }

@@ -5,7 +5,10 @@ import Footer from "@/components/Footer";
 import WhatsAppFloating from "@/components/WhatsAppFloating";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://akshajwebstudio.com"),
+  metadataBase: new URL("https://akshaj-web-studio.vercel.app"),
+  alternates: {
+    canonical: "https://akshaj-web-studio.vercel.app",
+  },
   title: {
     default: "AKSHAJ WEB STUDIO | Turning Ideas Into Digital Reality",
     template: "%s | AKSHAJ WEB STUDIO",
@@ -24,7 +27,7 @@ export const metadata: Metadata = {
     "Custom Software Engineering",
     "Next.js Development",
   ],
-  authors: [{ name: "Akshaj Lodhi", url: "https://akshajwebstudio.com" }],
+  authors: [{ name: "Akshaj Lodhi", url: "https://akshaj-web-studio.vercel.app" }],
   creator: "Akshaj Lodhi",
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "google2cb903cb381db4e1",
@@ -32,7 +35,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://akshajwebstudio.com",
+    url: "https://akshaj-web-studio.vercel.app",
     title: "AKSHAJ WEB STUDIO | Turning Ideas Into Digital Reality",
     description:
       "We transform ideas into powerful digital experiences. From professional websites to innovative applications and AI-powered solutions, we help businesses establish their digital presence.",
@@ -85,7 +88,7 @@ export default function RootLayout({
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200",
     description:
       "We transform ideas into powerful digital experiences. From professional websites to innovative applications and AI-powered solutions, we help businesses establish their digital presence.",
-    url: "https://akshajwebstudio.com",
+    url: "https://akshaj-web-studio.vercel.app",
     telephone: "+91 98765 43210",
     priceRange: "₹₹₹",
     address: {
