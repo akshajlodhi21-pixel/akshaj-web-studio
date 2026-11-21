@@ -10,6 +10,7 @@ import {
   Clock,
   Send,
   CheckCircle2,
+  AlertCircle,
   Shield,
   Github,
   Linkedin,
@@ -21,10 +22,15 @@ import {
   ExternalLink,
   PhoneCall,
   UserPlus,
+  Loader2,
 } from "lucide-react";
 import SectionHeading from "@/components/SectionHeading";
 import { useStudioStore } from "@/lib/store";
 import { generateId } from "@/lib/utils";
+
+// RFC 5322 Compliant Email Format Validator
+const EMAIL_REGEX =
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
 
 export default function ContactPage() {
   const store = useStudioStore();
@@ -35,8 +41,14 @@ export default function ContactPage() {
     subject: "",
     message: "",
   });
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submissionDetails, setSubmissionDetails] = useState<{
+    messageId?: string;
+    message?: string;
+  }>({});
+  const [serverError, setServerError] = useState<string | null>(null);
 
   // Official Action Links
   const cleanWhatsApp = store.contact.whatsapp.replace(/[^0-9]/g, "");
@@ -47,44 +59,87 @@ export default function ContactPage() {
   const igUsername = store.contact.instagramUsername || "akshajwebstudio";
   const igProfileUrl = store.contact.instagramUrl || `https://instagram.com/${igUsername}`;
   const igDirectMessageUrl = `https://ig.me/m/${igUsername}`;
-  const mailtoUrl = `mailto:${store.contact.businessEmail}?subject=Project%20Inquiry%20-%20Akshaj%20Web%20Studio`;
+  const officialEmail = store.contact.email || "akshajlodhi21@gmail.com";
+  const officialLinkedIn =
+    store.contact.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/";
+  const mailtoUrl = `mailto:${officialEmail}?subject=Project%20Inquiry%20-%20AKSHAJ%20WEB%20STUDIO`;
   const callUrl = `tel:${store.contact.businessPhone.replace(/\s+/g, "")}`;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // 1. Client-Side Field Validation
+    const errors: Record<string, string> = {};
+    if (!formData.name.trim() || formData.name.trim().length < 2) {
+      errors.name = "Please enter your full name (at least 2 characters).";
+    }
+
+    if (!formData.email.trim()) {
+      errors.email = "Please enter your email address.";
+    } else if (!EMAIL_REGEX.test(formData.email.trim())) {
+      errors.email = "Please enter a valid email format (e.g. name@example.com).";
+    }
+
+    if (!formData.subject.trim() || formData.subject.trim().length < 3) {
+      errors.subject = "Please enter a subject (at least 3 characters).";
+    }
+
+    if (!formData.message.trim() || formData.message.trim().length < 10) {
+      errors.message = "Please write your message (at least 10 characters).";
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setFieldErrors(errors);
+      return;
+    }
+
+    setFieldErrors({});
+    setServerError(null);
     setSubmitting(true);
 
     try {
-      // Send through the server-side API
-      const res = await fetch("/api/inquiries", {
+      // 2. Transmit through Secure Server-Side Contact API
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          clientName: formData.name.trim(),
+          fullName: formData.name.trim(),
           email: formData.email.trim(),
-          phoneNumber: formData.phone.trim() || store.contact.personalPhone,
-          requiredService: formData.subject.trim() || "General Consultation",
-          projectDescription: formData.message.trim(),
-          budget: "Direct Inquiry",
-          expectedDeadline: "Normal",
+          subject: formData.subject.trim(),
+          message: formData.message.trim(),
+          phone: formData.phone.trim() || undefined,
         }),
       });
 
-      // Also store in reactive local store
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(
+          data.error || "Failed to dispatch message. Please try again or email directly."
+        );
+      }
+
+      // 3. Record in local store for immediate client visibility
       store.addInquiry({
-        id: generateId("AWS-MSG"),
+        id: data.messageId || generateId("AWS-MSG"),
         clientName: formData.name.trim(),
         email: formData.email.trim(),
         phoneNumber: formData.phone.trim() || store.contact.personalPhone,
-        requiredService: formData.subject.trim() || "General Consultation",
+        requiredService: formData.subject.trim(),
         projectDescription: formData.message.trim(),
-        budget: "Direct Inquiry",
-        expectedDeadline: "Normal",
+        budget: "Direct Contact Form",
+        expectedDeadline: "Standard",
         status: "New",
         createdAt: new Date().toISOString(),
-        notes: `Direct transmission from contact form. Subject: ${formData.subject}`,
+        notes: `Transmission to akshajlodhi21@gmail.com. Subject: ${formData.subject}`,
       });
 
+      setSubmissionDetails({
+        messageId: data.messageId,
+        message:
+          data.message ||
+          "Your message has been sent successfully to akshajlodhi21@gmail.com. Akshaj Lodhi will respond within 24 hours.",
+      });
       setSubmitted(true);
       setFormData({
         name: "",
@@ -93,8 +148,11 @@ export default function ContactPage() {
         subject: "",
         message: "",
       });
-    } catch (err) {
-      console.error(err);
+    } catch (err: any) {
+      setServerError(
+        err.message ||
+          "Network transmission error. Please try again or email akshajlodhi21@gmail.com directly."
+      );
     } finally {
       setSubmitting(false);
     }
@@ -109,7 +167,7 @@ export default function ContactPage() {
       <SectionHeading
         badge="Direct Studio Communications"
         title="Connect With AKSHAJ WEB STUDIO"
-        subtitle="Reach out directly through our verified digital lines. Every message is received directly by the lead architect."
+        subtitle="Reach out directly through our verified digital lines. Every message is received directly by Founder & Developer Akshaj Lodhi."
       />
 
       {/* Admin indicator pill */}
@@ -123,8 +181,8 @@ export default function ContactPage() {
         </Link>
       </div>
 
-      {/* 5 Prominent Contact Action Buttons (As specifically requested) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 mb-14">
+      {/* 6 Prominent Contact Action Buttons */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3.5 mb-14">
         {/* 1. Chat on WhatsApp */}
         <a
           href={waUrl}
@@ -137,7 +195,39 @@ export default function ContactPage() {
           <span className="text-[10px] text-emerald-400 mt-0.5">Instant Direct Line</span>
         </a>
 
-        {/* 2. Message on Instagram */}
+        {/* 2. Connect on LinkedIn */}
+        <a
+          href={officialLinkedIn}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="p-4 rounded-2xl bg-[#0A66C2]/15 hover:bg-[#0A66C2]/25 border border-[#0A66C2]/50 text-[#70b5f9] transition-all flex flex-col items-center justify-center text-center group shadow-[0_4px_20px_rgba(10,102,194,0.2)]"
+        >
+          <Linkedin className="w-6 h-6 mb-2 fill-[#0A66C2] group-hover:scale-110 transition-transform" />
+          <span className="text-xs font-bold text-white">Connect on LinkedIn</span>
+          <span className="text-[10px] text-[#70b5f9] mt-0.5">Official Profile</span>
+        </a>
+
+        {/* 3. Email Me Directly */}
+        <a
+          href={mailtoUrl}
+          className="p-4 rounded-2xl bg-gold-500/10 hover:bg-gold-500/20 border border-gold-500/40 text-gold-300 transition-all flex flex-col items-center justify-center text-center group shadow-[0_4px_20px_rgba(212,175,55,0.15)]"
+        >
+          <Mail className="w-6 h-6 mb-2 group-hover:scale-110 transition-transform" />
+          <span className="text-xs font-bold text-white">Email Me</span>
+          <span className="text-[10px] text-gold-400 mt-0.5 truncate max-w-[130px]">{officialEmail}</span>
+        </a>
+
+        {/* 4. Call Now */}
+        <a
+          href={callUrl}
+          className="p-4 rounded-2xl bg-dark-900 hover:bg-dark-850 border border-white/10 hover:border-gold-500/40 text-gray-200 transition-all flex flex-col items-center justify-center text-center group"
+        >
+          <PhoneCall className="w-6 h-6 mb-2 text-gold-400 group-hover:scale-110 transition-transform" />
+          <span className="text-xs font-bold text-white">Call Now</span>
+          <span className="text-[10px] text-gray-400 mt-0.5">+91 91985 62197</span>
+        </a>
+
+        {/* 5. Message on Instagram */}
         <a
           href={igDirectMessageUrl}
           target="_blank"
@@ -149,27 +239,7 @@ export default function ContactPage() {
           <span className="text-[10px] text-pink-400 mt-0.5">@{igUsername}</span>
         </a>
 
-        {/* 3. Send an Email */}
-        <a
-          href={mailtoUrl}
-          className="p-4 rounded-2xl bg-gold-500/10 hover:bg-gold-500/20 border border-gold-500/40 text-gold-300 transition-all flex flex-col items-center justify-center text-center group"
-        >
-          <Mail className="w-6 h-6 mb-2 group-hover:scale-110 transition-transform" />
-          <span className="text-xs font-bold text-white">Send an Email</span>
-          <span className="text-[10px] text-gold-400 mt-0.5">Corporate Mailto</span>
-        </a>
-
-        {/* 4. Call Now */}
-        <a
-          href={callUrl}
-          className="p-4 rounded-2xl bg-dark-900 hover:bg-dark-850 border border-white/10 hover:border-gold-500/40 text-gray-200 transition-all flex flex-col items-center justify-center text-center group"
-        >
-          <PhoneCall className="w-6 h-6 mb-2 text-gold-400 group-hover:scale-110 transition-transform" />
-          <span className="text-xs font-bold text-white">Call Now</span>
-          <span className="text-[10px] text-gray-400 mt-0.5">Direct Voice</span>
-        </a>
-
-        {/* 5. Follow on Instagram */}
+        {/* 6. Follow on Instagram */}
         <a
           href={igProfileUrl}
           target="_blank"
@@ -255,43 +325,80 @@ export default function ContactPage() {
 
           {/* Detailed Email Addresses Card */}
           <div className="p-6 rounded-3xl glass-panel border border-gold-500/25 space-y-4">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-gold-400 font-mono">
-              Electronic Mail Inboxes
-            </h4>
+            <div className="flex items-center justify-between">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-gold-400 font-mono">
+                Electronic Mail Inboxes
+              </h4>
+              <span className="text-[10px] text-emerald-400 font-mono flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                Active Inbox
+              </span>
+            </div>
 
             <div className="space-y-3 text-xs">
+              {/* Primary Official Gmail Box */}
+              <div className="p-3.5 rounded-xl bg-dark-900 border border-gold-500/30 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] text-gold-400 uppercase font-mono block">
+                    Official Primary Email
+                  </span>
+                  <span className="px-2 py-0.5 rounded-full bg-gold-500/20 text-gold-300 text-[10px] font-bold">
+                    Primary
+                  </span>
+                </div>
+                <a
+                  href={`mailto:${officialEmail}`}
+                  className="font-bold text-white hover:text-gold-300 block truncate text-sm"
+                >
+                  {officialEmail}
+                </a>
+                <div className="pt-1">
+                  <a
+                    href={mailtoUrl}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gold-500/15 hover:bg-gold-500/25 text-gold-300 hover:text-white border border-gold-500/40 text-[11px] font-bold transition-all shadow-[0_0_10px_rgba(212,175,55,0.15)]"
+                  >
+                    <Mail className="w-3.5 h-3.5 text-gold-400" />
+                    <span>Email Me Directly</span>
+                  </a>
+                </div>
+              </div>
+
               <div className="p-3 rounded-xl bg-dark-900 border border-white/5">
                 <span className="text-[10px] text-gray-400 uppercase font-mono block">
                   Business & Corporate Inquiries
                 </span>
                 <a
-                  href={`mailto:${store.contact.businessEmail}`}
+                  href={`mailto:${store.contact.businessEmail || officialEmail}`}
                   className="font-bold text-white hover:text-gold-300 block truncate"
                 >
-                  {store.contact.businessEmail}
-                </a>
-              </div>
-
-              <div className="p-3 rounded-xl bg-dark-900 border border-white/5">
-                <span className="text-[10px] text-gray-400 uppercase font-mono block">
-                  Personal Correspondence
-                </span>
-                <a
-                  href={`mailto:${store.contact.personalEmail}`}
-                  className="font-bold text-white hover:text-gold-300 block truncate"
-                >
-                  {store.contact.personalEmail}
+                  {store.contact.businessEmail || officialEmail}
                 </a>
               </div>
             </div>
           </div>
 
-          {/* Social Media Networks Grid */}
+          {/* Social Media Networks Grid with LinkedIn Highlight */}
           <div className="p-6 rounded-3xl glass-panel border border-gold-500/20">
             <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-3 font-mono text-gold-gradient">
               Social Media Ecosystem
             </h4>
             <div className="grid grid-cols-2 gap-2.5 text-xs">
+              {/* Official LinkedIn Banner */}
+              <a
+                href={officialLinkedIn}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="col-span-2 flex items-center justify-between p-3 rounded-xl bg-[#0A66C2]/15 border border-[#0A66C2]/40 text-[#70b5f9] hover:text-white transition-all group"
+              >
+                <div className="flex items-center gap-2.5">
+                  <Linkedin className="w-4 h-4 fill-[#0A66C2] group-hover:scale-110 transition-transform shrink-0" />
+                  <span className="font-bold text-xs text-white">Connect on LinkedIn</span>
+                </div>
+                <span className="text-[10px] px-2 py-0.5 rounded-md bg-[#0A66C2]/30 text-[#70b5f9] font-mono group-hover:text-white">
+                  lucky-bro-b4ab043a1 &rarr;
+                </span>
+              </a>
+
               <a
                 href={igProfileUrl}
                 target="_blank"
@@ -300,16 +407,6 @@ export default function ContactPage() {
               >
                 <Instagram className="w-4 h-4 text-pink-400 shrink-0" />
                 <span className="truncate">Instagram</span>
-              </a>
-
-              <a
-                href={store.contact.socials.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-2 p-2.5 rounded-xl bg-dark-900 border border-white/10 text-gray-300 hover:text-white hover:border-gold-500/40 transition-colors"
-              >
-                <Linkedin className="w-4 h-4 text-gold-400 shrink-0" />
-                <span className="truncate">LinkedIn</span>
               </a>
 
               <a
@@ -346,7 +443,7 @@ export default function ContactPage() {
                 href={store.contact.socials.twitter}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-2 p-2.5 rounded-xl bg-dark-900 border border-white/10 text-gray-300 hover:text-white hover:border-gold-500/40 transition-colors"
+                className="col-span-2 flex items-center gap-2 p-2.5 rounded-xl bg-dark-900 border border-white/10 text-gray-300 hover:text-white hover:border-gold-500/40 transition-colors"
               >
                 <Twitter className="w-4 h-4 text-gold-400 shrink-0" />
                 <span className="truncate">Twitter / X</span>
@@ -358,48 +455,103 @@ export default function ContactPage() {
         {/* Right Column: Transmission Form (Cols 6 - 12) */}
         <div className="lg:col-span-7">
           <div className="p-6 sm:p-10 rounded-3xl glass-panel border border-gold-500/30 shadow-gold-sm">
-            <h3 className="text-2xl font-black text-white mb-2">
-              Send An Encrypted Message
-            </h3>
+            <div className="flex items-center justify-between mb-2">
+              <h3 className="text-2xl font-black text-white">
+                Send Direct Message
+              </h3>
+              <span className="text-[11px] font-mono text-gold-400 px-2.5 py-1 rounded-full bg-gold-500/10 border border-gold-500/20">
+                To: {officialEmail}
+              </span>
+            </div>
             <p className="text-xs sm:text-sm text-gray-400 mb-6 leading-relaxed">
-              Fill in your details below. Your transmission is processed by our secure server API and acknowledged within 24 business hours.
+              Fill in your details below. Your transmission is processed by our secure server API and delivered directly to Founder Akshaj Lodhi&apos;s verified inbox.
             </p>
 
+            {/* Server Error Alert Banner */}
+            {serverError && (
+              <div className="mb-6 p-4 rounded-2xl bg-red-500/10 border border-red-500/30 text-xs text-red-300 flex items-start gap-3">
+                <AlertCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
+                <div className="flex-1">
+                  <p className="font-semibold">{serverError}</p>
+                  <p className="mt-1 text-gray-300">
+                    You can also email directly:{" "}
+                    <a
+                      href={mailtoUrl}
+                      className="underline text-gold-400 hover:text-white font-bold"
+                    >
+                      {officialEmail}
+                    </a>
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* Success State Screen */}
             {submitted ? (
               <div className="p-8 rounded-2xl bg-gold-500/10 border border-gold-500/30 text-center animate-fade-in">
                 <CheckCircle2 className="w-12 h-12 text-gold-400 mx-auto mb-3" />
                 <h4 className="text-lg font-bold text-white mb-2">
                   Message Dispatched Successfully
                 </h4>
-                <p className="text-xs text-gray-300 mb-6">
-                  Thank you for reaching out. We will respond to your provided email and contact number promptly.
+                {submissionDetails.messageId && (
+                  <div className="inline-block px-3 py-1 rounded-full bg-dark-900 border border-gold-500/30 text-[11px] font-mono text-gold-300 mb-3">
+                    Ref ID: {submissionDetails.messageId}
+                  </div>
+                )}
+                <p className="text-xs text-gray-300 mb-4 max-w-md mx-auto leading-relaxed">
+                  {submissionDetails.message ||
+                    "Thank you for reaching out. Your message has been routed to akshajlodhi21@gmail.com. We will respond within 24 business hours."}
                 </p>
-                <button
-                  onClick={() => setSubmitted(false)}
-                  className="btn-gold px-6 py-2 rounded-xl text-xs font-bold"
-                >
-                  Send Another Transmission
-                </button>
+                <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+                  <button
+                    onClick={() => setSubmitted(false)}
+                    className="btn-gold px-6 py-2 rounded-xl text-xs font-bold"
+                  >
+                    Send Another Message
+                  </button>
+                  <a
+                    href={officialLinkedIn}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 rounded-xl border border-[#0A66C2]/40 text-xs font-semibold text-[#70b5f9] hover:text-white bg-[#0A66C2]/15 flex items-center gap-1.5"
+                  >
+                    <Linkedin className="w-3.5 h-3.5 fill-[#0A66C2]" />
+                    <span>Connect on LinkedIn</span>
+                  </a>
+                </div>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} noValidate className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {/* Field 1: Full Name */}
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-1.5">
-                      Your Name <span className="text-gold-400">*</span>
+                      Full Name <span className="text-gold-400">*</span>
                     </label>
                     <input
                       type="text"
                       required
                       value={formData.name}
-                      onChange={(e) =>
-                        setFormData({ ...formData, name: e.target.value })
-                      }
+                      onChange={(e) => {
+                        setFormData({ ...formData, name: e.target.value });
+                        if (fieldErrors.name) setFieldErrors({ ...fieldErrors, name: "" });
+                      }}
                       placeholder="e.g. Vikram Singhania"
-                      className="w-full bg-dark-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white placeholder-gray-500 focus:outline-none focus:border-gold-500 transition-colors"
+                      className={`w-full bg-dark-900 border rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white placeholder-gray-500 focus:outline-none transition-colors ${
+                        fieldErrors.name
+                          ? "border-red-500 focus:border-red-400"
+                          : "border-white/10 focus:border-gold-500"
+                      }`}
                     />
+                    {fieldErrors.name && (
+                      <p className="text-[11px] text-red-400 mt-1 flex items-center gap-1">
+                        <AlertCircle className="w-3 h-3" />
+                        <span>{fieldErrors.name}</span>
+                      </p>
+                    )}
                   </div>
 
+                  {/* Field 2: Email Address */}
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-1.5">
                       Email Address <span className="text-gold-400">*</span>
@@ -408,19 +560,31 @@ export default function ContactPage() {
                       type="email"
                       required
                       value={formData.email}
-                      onChange={(e) =>
-                        setFormData({ ...formData, email: e.target.value })
-                      }
+                      onChange={(e) => {
+                        setFormData({ ...formData, email: e.target.value });
+                        if (fieldErrors.email) setFieldErrors({ ...fieldErrors, email: "" });
+                      }}
                       placeholder="e.g. vikram@horizon.io"
-                      className="w-full bg-dark-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white placeholder-gray-500 focus:outline-none focus:border-gold-500 transition-colors"
+                      className={`w-full bg-dark-900 border rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white placeholder-gray-500 focus:outline-none transition-colors ${
+                        fieldErrors.email
+                          ? "border-red-500 focus:border-red-400"
+                          : "border-white/10 focus:border-gold-500"
+                      }`}
                     />
+                    {fieldErrors.email && (
+                      <p className="text-[11px] text-red-400 mt-1 flex items-center gap-1">
+                        <AlertCircle className="w-3 h-3" />
+                        <span>{fieldErrors.email}</span>
+                      </p>
+                    )}
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {/* Field: Phone (Optional) */}
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-1.5">
-                      Phone Number
+                      Phone Number <span className="text-gray-500 text-[10px] lowercase font-normal">(optional)</span>
                     </label>
                     <input
                       type="tel"
@@ -433,6 +597,7 @@ export default function ContactPage() {
                     />
                   </div>
 
+                  {/* Field 3: Subject */}
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-1.5">
                       Subject / Topic <span className="text-gold-400">*</span>
@@ -441,15 +606,27 @@ export default function ContactPage() {
                       type="text"
                       required
                       value={formData.subject}
-                      onChange={(e) =>
-                        setFormData({ ...formData, subject: e.target.value })
-                      }
-                      placeholder="e.g. New Project Inquiry / Partnership"
-                      className="w-full bg-dark-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white placeholder-gray-500 focus:outline-none focus:border-gold-500 transition-colors"
+                      onChange={(e) => {
+                        setFormData({ ...formData, subject: e.target.value });
+                        if (fieldErrors.subject) setFieldErrors({ ...fieldErrors, subject: "" });
+                      }}
+                      placeholder="e.g. Web Development / Mobile App / AI"
+                      className={`w-full bg-dark-900 border rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white placeholder-gray-500 focus:outline-none transition-colors ${
+                        fieldErrors.subject
+                          ? "border-red-500 focus:border-red-400"
+                          : "border-white/10 focus:border-gold-500"
+                      }`}
                     />
+                    {fieldErrors.subject && (
+                      <p className="text-[11px] text-red-400 mt-1 flex items-center gap-1">
+                        <AlertCircle className="w-3 h-3" />
+                        <span>{fieldErrors.subject}</span>
+                      </p>
+                    )}
                   </div>
                 </div>
 
+                {/* Field 4: Message */}
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-1.5">
                     Your Message <span className="text-gold-400">*</span>
@@ -458,28 +635,47 @@ export default function ContactPage() {
                     required
                     rows={5}
                     value={formData.message}
-                    onChange={(e) =>
-                      setFormData({ ...formData, message: e.target.value })
-                    }
-                    placeholder="Share how we can assist your digital venture..."
-                    className="w-full bg-dark-900 border border-white/10 rounded-xl p-4 text-xs sm:text-sm text-white placeholder-gray-500 focus:outline-none focus:border-gold-500 transition-colors"
+                    onChange={(e) => {
+                      setFormData({ ...formData, message: e.target.value });
+                      if (fieldErrors.message) setFieldErrors({ ...fieldErrors, message: "" });
+                    }}
+                    placeholder="Describe your project, timeline, and requirements in detail..."
+                    className={`w-full bg-dark-900 border rounded-xl p-4 text-xs sm:text-sm text-white placeholder-gray-500 focus:outline-none transition-colors ${
+                      fieldErrors.message
+                        ? "border-red-500 focus:border-red-400"
+                        : "border-white/10 focus:border-gold-500"
+                    }`}
                   />
+                  {fieldErrors.message && (
+                    <p className="text-[11px] text-red-400 mt-1 flex items-center gap-1">
+                      <AlertCircle className="w-3 h-3" />
+                      <span>{fieldErrors.message}</span>
+                    </p>
+                  )}
                 </div>
 
+                {/* Submit Button with Loading Indicator */}
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full btn-gold py-3.5 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-gold-sm disabled:opacity-50"
+                  className="w-full btn-gold py-3.5 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-gold-sm disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                 >
                   {submitting ? (
-                    <span>Transmitting...</span>
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin text-dark-950" />
+                      <span>Sending To akshajlodhi21@gmail.com...</span>
+                    </>
                   ) : (
                     <>
                       <Send className="w-4 h-4" />
-                      <span>Transmit Message</span>
+                      <span>Send Message to Akshaj Lodhi</span>
                     </>
                   )}
                 </button>
+
+                <p className="text-[11px] text-center text-gray-500 mt-2">
+                  Encrypted transmission. Delivery to <span className="text-gold-400">{officialEmail}</span> verified.
+                </p>
               </form>
             )}
           </div>

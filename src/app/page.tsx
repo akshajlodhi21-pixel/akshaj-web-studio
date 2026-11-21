@@ -22,6 +22,8 @@ import {
   Briefcase,
   Play,
   User,
+  Mail,
+  Linkedin,
 } from "lucide-react";
 import HeroCanvas from "@/components/HeroCanvas";
 import SectionHeading from "@/components/SectionHeading";
@@ -110,6 +112,26 @@ export default function HomePage() {
               <PhoneCall className="w-4 h-4 text-emerald-400" />
               <span>Contact Me</span>
             </Link>
+          </div>
+
+          {/* Quick Direct Email & LinkedIn Contact Options */}
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-xs">
+            <a
+              href={`mailto:${store.contact.email || "akshajlodhi21@gmail.com"}?subject=Project%20Inquiry%20-%20AKSHAJ%20WEB%20STUDIO`}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gold-500/10 hover:bg-gold-500/20 border border-gold-500/30 text-gold-300 font-semibold transition-all shadow-[0_0_12px_rgba(212,175,55,0.15)] group"
+            >
+              <Mail className="w-3.5 h-3.5 text-gold-400 group-hover:scale-110 transition-transform" />
+              <span>Email Me: {store.contact.email || "akshajlodhi21@gmail.com"}</span>
+            </a>
+            <a
+              href={store.contact.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#0A66C2]/10 hover:bg-[#0A66C2]/20 border border-[#0A66C2]/40 text-[#70b5f9] hover:text-white font-semibold transition-all"
+            >
+              <Linkedin className="w-3.5 h-3.5 fill-[#0A66C2]" />
+              <span>LinkedIn</span>
+            </a>
           </div>
 
           {/* Floating High-Tech Metrics Bar */}
@@ -572,12 +594,43 @@ export default function HomePage() {
                 <span>Hire Me / Submit Project Request</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
+              <a
+                href={`mailto:${store.contact.email || "akshajlodhi21@gmail.com"}?subject=Project%20Inquiry%20-%20AKSHAJ%20WEB%20STUDIO`}
+                className="w-full sm:w-auto btn-gold-outline px-7 py-3.5 rounded-xl text-sm font-bold flex items-center justify-center gap-2 group"
+              >
+                <Mail className="w-4 h-4 text-gold-400 group-hover:scale-110 transition-transform" />
+                <span>Email Me Directly</span>
+              </a>
               <Link
                 href="/contact"
-                className="w-full sm:w-auto btn-gold-outline px-7 py-3.5 rounded-xl text-sm font-bold flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-7 py-3.5 rounded-xl border border-white/10 hover:border-gold-500/40 bg-dark-900/70 hover:bg-dark-900 text-gray-300 hover:text-white text-sm font-semibold transition-all flex items-center justify-center gap-2"
               >
                 <span>Schedule Consultation</span>
               </Link>
+            </div>
+
+            {/* Direct Channel Strip */}
+            <div className="mt-8 pt-6 border-t border-white/10 flex flex-wrap items-center justify-center gap-4 text-xs text-gray-400">
+              <span className="flex items-center gap-2">
+                <Mail className="w-4 h-4 text-gold-400" />
+                <span>Official Gmail:</span>
+                <a
+                  href={`mailto:${store.contact.email || "akshajlodhi21@gmail.com"}`}
+                  className="font-bold text-white hover:text-gold-300 underline"
+                >
+                  {store.contact.email || "akshajlodhi21@gmail.com"}
+                </a>
+              </span>
+              <span>•</span>
+              <a
+                href={store.contact.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#70b5f9] hover:text-white flex items-center gap-1.5 font-semibold"
+              >
+                <Linkedin className="w-3.5 h-3.5 fill-[#0A66C2]" />
+                <span>Connect on LinkedIn</span>
+              </a>
             </div>
           </div>
         </div>

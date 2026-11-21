@@ -107,7 +107,10 @@ export default function RootLayout({
           name: "Akshaj Lodhi",
           jobTitle: "Founder & Developer",
           image: "https://akshaj-web-studio.vercel.app/images/akshaj-lodhi.jpg",
+          email: "akshajlodhi21@gmail.com",
+          sameAs: ["https://www.linkedin.com/in/lucky-bro-b4ab043a1/"],
         },
+        email: "akshajlodhi21@gmail.com",
         telephone: "+91 91985 62197",
         priceRange: "₹₹₹",
         address: {
@@ -134,11 +137,11 @@ export default function RootLayout({
         ],
         sameAs: [
           "https://github.com/akshajlodhi21-pixel",
-          "https://linkedin.com",
-          "https://twitter.com",
+          "https://www.linkedin.com/in/lucky-bro-b4ab043a1/",
+          "https://twitter.com/akshajwebstudio",
           "https://instagram.com/akshajwebstudio",
-          "https://facebook.com",
-          "https://youtube.com",
+          "https://facebook.com/akshajwebstudio",
+          "https://youtube.com/@akshajwebstudio",
         ],
         knowsAbout: [
           "Website Development",

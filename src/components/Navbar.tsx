@@ -16,6 +16,7 @@ import {
   CreditCard,
   DollarSign,
   Home,
+  Linkedin,
 } from "lucide-react";
 import { useStudioStore } from "@/lib/store";
 
@@ -99,6 +100,19 @@ export default function Navbar() {
 
             {/* Right CTAs */}
             <div className="hidden sm:flex items-center gap-3">
+              {/* Official LinkedIn Profile Link */}
+              <a
+                href={store.contact.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/"}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Connect with Akshaj Lodhi on LinkedIn"
+                aria-label="Official LinkedIn Profile"
+                className="p-2 sm:px-3 sm:py-2 rounded-lg border border-[#0A66C2]/40 bg-[#0A66C2]/10 hover:bg-[#0A66C2]/20 text-[#70b5f9] hover:text-white transition-all text-xs font-semibold flex items-center gap-1.5 shadow-[0_0_12px_rgba(10,102,194,0.25)] hover:shadow-[0_0_18px_rgba(10,102,194,0.45)] group"
+              >
+                <Linkedin className="w-4 h-4 text-[#0A66C2] group-hover:text-white fill-[#0A66C2] group-hover:fill-white transition-colors shrink-0" />
+                <span className="hidden xl:inline">LinkedIn</span>
+              </a>
+
               {/* Admin Portal icon */}
               <Link
                 href="/admin"
@@ -125,8 +139,18 @@ export default function Navbar() {
               </Link>
             </div>
 
-            {/* Mobile Hamburger Button */}
+            {/* Mobile Actions Button */}
             <div className="flex sm:hidden items-center gap-2">
+              <a
+                href={store.contact.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/"}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Official LinkedIn Profile"
+                aria-label="Official LinkedIn Profile"
+                className="p-2 rounded-lg border border-[#0A66C2]/40 bg-[#0A66C2]/15 text-[#70b5f9] flex items-center justify-center"
+              >
+                <Linkedin className="w-4 h-4 text-[#0A66C2] fill-[#0A66C2]" />
+              </a>
               <Link
                 href="/hire"
                 className="btn-gold px-3 py-1.5 rounded-lg text-xs font-bold"
@@ -201,6 +225,16 @@ export default function Navbar() {
 
             {/* Bottom actions in drawer */}
             <div className="pt-6 border-t border-white/10 flex flex-col gap-3">
+              <a
+                href={store.contact.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-3 rounded-xl text-center text-xs text-[#70b5f9] hover:text-white border border-[#0A66C2]/40 bg-[#0A66C2]/15 flex items-center justify-center gap-2 font-bold transition-all shadow-[0_0_15px_rgba(10,102,194,0.2)]"
+              >
+                <Linkedin className="w-4 h-4 text-[#0A66C2] fill-[#0A66C2]" />
+                <span>Connect on LinkedIn</span>
+              </a>
+
               <Link
                 href="/hire"
                 className="btn-gold w-full py-3 rounded-xl text-center text-sm font-bold flex items-center justify-center gap-2"

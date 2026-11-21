@@ -200,12 +200,27 @@ export default function Footer() {
               </a>
 
               <a
-                href={`mailto:${store.contact.email}`}
-                className="flex items-center gap-2.5 hover:text-white transition-colors"
+                href={`mailto:${store.contact.email || "akshajlodhi21@gmail.com"}`}
+                className="flex items-center gap-2.5 hover:text-white transition-colors group"
+                title="Send an email to Akshaj Lodhi"
               >
-                <Mail className="w-3.5 h-3.5 text-gold-400 shrink-0" />
-                <span className="truncate">{store.contact.email}</span>
+                <div className="w-6 h-6 rounded-md bg-gold-500/10 border border-gold-500/30 flex items-center justify-center shrink-0 group-hover:border-gold-400">
+                  <Mail className="w-3.5 h-3.5 text-gold-400" />
+                </div>
+                <span className="truncate text-white font-medium">{store.contact.email || "akshajlodhi21@gmail.com"}</span>
               </a>
+
+              {/* Direct Email Me Action Button */}
+              <div className="pt-1">
+                <a
+                  href={`mailto:${store.contact.email || "akshajlodhi21@gmail.com"}?subject=Project%20Inquiry%20-%20AKSHAJ%20WEB%20STUDIO`}
+                  className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg border border-gold-500/40 bg-gold-500/10 hover:bg-gold-500/20 text-gold-300 text-xs font-bold transition-all shadow-[0_0_10px_rgba(212,175,55,0.15)] group"
+                >
+                  <Mail className="w-3.5 h-3.5 text-gold-400 group-hover:scale-110 transition-transform" />
+                  <span>Email Me Directly</span>
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                </a>
+              </div>
 
               <div className="flex items-start gap-2.5 text-gray-400">
                 <MapPin className="w-3.5 h-3.5 text-gold-400 shrink-0 mt-0.5" />
@@ -218,8 +233,31 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Social Icons */}
-            <div className="mt-2 pt-3 border-t border-white/10 flex items-center gap-3">
+            {/* Social & Contact Icons */}
+            <div className="mt-2 pt-3 border-t border-white/10 flex items-center gap-2.5">
+              {/* Official LinkedIn */}
+              <a
+                href={store.contact.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-lg bg-dark-900 border border-[#0A66C2]/40 text-[#70b5f9] hover:text-white hover:bg-[#0A66C2]/20 hover:border-[#0A66C2] transition-colors"
+                aria-label="Official LinkedIn Profile"
+                title="LinkedIn Profile"
+              >
+                <Linkedin className="w-4 h-4 fill-[#0A66C2]" />
+              </a>
+
+              {/* Official Gmail Mailto */}
+              <a
+                href={`mailto:${store.contact.email || "akshajlodhi21@gmail.com"}`}
+                className="p-2 rounded-lg bg-dark-900 border border-gold-500/30 text-gold-400 hover:text-white hover:bg-gold-500/20 hover:border-gold-400 transition-colors"
+                aria-label="Send Email to Akshaj Lodhi"
+                title="Email: akshajlodhi21@gmail.com"
+              >
+                <Mail className="w-4 h-4" />
+              </a>
+
+              {/* GitHub */}
               <a
                 href={store.contact.socials.github}
                 target="_blank"
@@ -229,15 +267,19 @@ export default function Footer() {
               >
                 <Github className="w-4 h-4" />
               </a>
+
+              {/* Instagram */}
               <a
-                href={store.contact.socials.linkedin}
+                href={store.contact.socials.instagram}
                 target="_blank"
                 rel="noreferrer"
-                className="p-2 rounded-lg bg-dark-900 border border-white/10 text-gray-400 hover:text-gold-400 hover:border-gold-500/40 transition-colors"
-                aria-label="LinkedIn"
+                className="p-2 rounded-lg bg-dark-900 border border-white/10 text-gray-400 hover:text-pink-400 hover:border-pink-500/40 transition-colors"
+                aria-label="Instagram"
               >
-                <Linkedin className="w-4 h-4" />
+                <Instagram className="w-4 h-4" />
               </a>
+
+              {/* Twitter / X */}
               <a
                 href={store.contact.socials.twitter}
                 target="_blank"
@@ -246,15 +288,6 @@ export default function Footer() {
                 aria-label="Twitter / X"
               >
                 <Twitter className="w-4 h-4" />
-              </a>
-              <a
-                href={store.contact.socials.instagram}
-                target="_blank"
-                rel="noreferrer"
-                className="p-2 rounded-lg bg-dark-900 border border-white/10 text-gray-400 hover:text-gold-400 hover:border-gold-500/40 transition-colors"
-                aria-label="Instagram"
-              >
-                <Instagram className="w-4 h-4" />
               </a>
             </div>
           </div>

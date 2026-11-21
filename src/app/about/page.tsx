@@ -34,6 +34,7 @@ import {
   Clock,
   Cpu,
   Zap,
+  Linkedin,
 } from "lucide-react";
 import { useStudioStore } from "@/lib/store";
 
@@ -176,6 +177,28 @@ export default function AboutPage() {
               <span>Hire Akshaj Lodhi</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
+
+            {/* Official Connect on LinkedIn Button in Founder Profile Section */}
+            <a
+              href={store.contact.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="py-3 px-4 rounded-2xl bg-[#0A66C2]/15 hover:bg-[#0A66C2]/25 border border-[#0A66C2]/50 text-[#70b5f9] hover:text-white font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(10,102,194,0.25)] group"
+            >
+              <Linkedin className="w-4 h-4 fill-[#0A66C2] group-hover:fill-white text-[#0A66C2] group-hover:text-white transition-colors" />
+              <span>Connect on LinkedIn</span>
+              <ExternalLink className="w-3.5 h-3.5 text-[#70b5f9] group-hover:text-white transition-colors" />
+            </a>
+
+            {/* Direct Email Me Button */}
+            <a
+              href={`mailto:${store.contact.email || "akshajlodhi21@gmail.com"}?subject=Consultation%20with%20Akshaj%20Lodhi`}
+              className="py-3 px-4 rounded-2xl bg-dark-900 hover:bg-dark-850 border border-gold-500/30 hover:border-gold-500/60 text-gold-300 font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2"
+            >
+              <Mail className="w-4 h-4 text-gold-400" />
+              <span>Email Me</span>
+            </a>
+
             <a
               href={`https://wa.me/${store.contact.whatsapp.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(
                 "Hello Akshaj Lodhi, I am interested in discussing a project with AKSHAJ WEB STUDIO."
@@ -601,25 +624,28 @@ export default function AboutPage() {
                 <ExternalLink className="w-3.5 h-3.5 text-pink-400" />
               </a>
 
-              {/* LinkedIn */}
+              {/* Official LinkedIn */}
               <a
-                href={store.contact.socials.linkedin}
+                href={store.contact.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/"}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-4 rounded-2xl bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/30 transition-all text-xs flex items-center justify-between group"
+                className="p-4 rounded-2xl bg-[#0A66C2]/10 hover:bg-[#0A66C2]/20 border border-[#0A66C2]/30 hover:border-[#0A66C2]/60 transition-all text-xs flex items-center justify-between group shadow-[0_0_15px_rgba(10,102,194,0.15)]"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center shrink-0">
-                    <Globe className="w-5 h-5" />
+                  <div className="w-9 h-9 rounded-xl bg-[#0A66C2]/20 text-[#0A66C2] flex items-center justify-center shrink-0">
+                    <Linkedin className="w-5 h-5 fill-[#0A66C2]" />
                   </div>
                   <div>
-                    <div className="font-bold text-blue-200">LinkedIn Profile</div>
-                    <div className="text-[11px] text-blue-400 truncate max-w-[170px]">
-                      {store.contact.socials.linkedin}
+                    <div className="font-bold text-[#70b5f9] group-hover:text-white transition-colors">Connect on LinkedIn</div>
+                    <div className="text-[11px] text-gray-400 truncate max-w-[170px]">
+                      {store.contact.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/"}
                     </div>
                   </div>
                 </div>
-                <ExternalLink className="w-3.5 h-3.5 text-blue-400" />
+                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#0A66C2]/20 text-[10px] font-bold text-[#70b5f9] group-hover:text-white transition-colors">
+                  <span>Connect</span>
+                  <ExternalLink className="w-3 h-3" />
+                </div>
               </a>
 
               {/* GitHub */}

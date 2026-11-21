@@ -35,16 +35,16 @@ import {
 } from "firebase/firestore";
 
 const STORAGE_KEYS = {
-  PROFILE: "aws_store_profile_v2",
-  CONTACT: "aws_store_contact_v2",
-  SERVICES: "aws_store_services_v2",
-  PROJECTS: "aws_store_projects_v2",
-  PRICING: "aws_store_pricing_v2",
-  INQUIRIES: "aws_store_inquiries_v2",
-  PAYMENTS: "aws_store_payments_v2",
-  TESTIMONIALS: "aws_store_testimonials_v2",
-  SETTINGS: "aws_store_settings_v2",
-  ADMIN_SESSION: "aws_store_admin_auth_v2",
+  PROFILE: "aws_store_profile_v3",
+  CONTACT: "aws_store_contact_v3",
+  SERVICES: "aws_store_services_v3",
+  PROJECTS: "aws_store_projects_v3",
+  PRICING: "aws_store_pricing_v3",
+  INQUIRIES: "aws_store_inquiries_v3",
+  PAYMENTS: "aws_store_payments_v3",
+  TESTIMONIALS: "aws_store_testimonials_v3",
+  SETTINGS: "aws_store_settings_v3",
+  ADMIN_SESSION: "aws_store_admin_auth_v3",
 };
 
 class StudioStore {
@@ -94,6 +94,23 @@ class StudioStore {
 
       this.profile = getStored(STORAGE_KEYS.PROFILE, initialProfile);
       this.contact = getStored(STORAGE_KEYS.CONTACT, initialContactInfo);
+
+      // Reconcile official verified contact credentials
+      if (!this.contact.businessEmail || this.contact.businessEmail.includes("contact@akshajwebstudio.com")) {
+        this.contact.businessEmail = "akshajlodhi21@gmail.com";
+      }
+      if (!this.contact.email || this.contact.email.includes("contact@akshajwebstudio.com")) {
+        this.contact.email = "akshajlodhi21@gmail.com";
+      }
+      if (!this.contact.personalEmail || this.contact.personalEmail.includes("akshaj.dev@gmail.com")) {
+        this.contact.personalEmail = "akshajlodhi21@gmail.com";
+      }
+      if (!this.contact.socials?.linkedin || this.contact.socials.linkedin.includes("akshajwebstudio")) {
+        this.contact.socials = {
+          ...this.contact.socials,
+          linkedin: "https://www.linkedin.com/in/lucky-bro-b4ab043a1/",
+        };
+      }
       this.services = getStored(STORAGE_KEYS.SERVICES, initialServices);
       this.projects = getStored(STORAGE_KEYS.PROJECTS, initialProjects);
       this.pricing = getStored(STORAGE_KEYS.PRICING, initialPricingCategories);

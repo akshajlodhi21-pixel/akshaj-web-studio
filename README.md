@@ -126,7 +126,7 @@ To activate live email delivery via Resend:
 3. Add to your `.env.local`:
    ```env
    RESEND_API_KEY=re_your_api_key_here
-   STUDIO_BUSINESS_EMAIL=contact@akshajwebstudio.com
+   STUDIO_BUSINESS_EMAIL=akshajlodhi21@gmail.com
    ```
 
 ---

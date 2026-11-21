@@ -47,7 +47,7 @@ export default function PrivacyPage() {
         <div>
           <h3 className="text-lg font-bold text-white mb-2">5. Inquiries & Data Rights</h3>
           <p>
-            You have the right to request access, correction, or deletion of your client inquiry record at any time by contacting our lead administrative team at <a href="mailto:contact@akshajwebstudio.com" className="text-gold-400 underline">contact@akshajwebstudio.com</a>.
+            You have the right to request access, correction, or deletion of your client inquiry record at any time by contacting our lead administrative team at <a href="mailto:akshajlodhi21@gmail.com" className="text-gold-400 underline">akshajlodhi21@gmail.com</a>.
           </p>
         </div>
 
