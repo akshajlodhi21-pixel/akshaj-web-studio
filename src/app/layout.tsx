@@ -73,20 +73,20 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/favicon.png", type: "image/png" },
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-      { url: "/favicon-48x48.png", sizes: "48x48", type: "image/png" },
-      { url: "/android-chrome-192x192.png", sizes: "192x192", type: "image/png" },
-      { url: "/android-chrome-512x512.png", sizes: "512x512", type: "image/png" },
+      { url: "https://akshaj-web-studio.vercel.app/favicon.ico", sizes: "any" },
+      { url: "https://akshaj-web-studio.vercel.app/favicon-48x48.png", sizes: "48x48", type: "image/png" },
+      { url: "https://akshaj-web-studio.vercel.app/favicon.png", type: "image/png" },
+      { url: "https://akshaj-web-studio.vercel.app/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "https://akshaj-web-studio.vercel.app/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "https://akshaj-web-studio.vercel.app/android-chrome-192x192.png", sizes: "192x192", type: "image/png" },
+      { url: "https://akshaj-web-studio.vercel.app/android-chrome-512x512.png", sizes: "512x512", type: "image/png" },
     ],
-    shortcut: "/favicon.ico",
+    shortcut: "https://akshaj-web-studio.vercel.app/favicon.ico",
     apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+      { url: "https://akshaj-web-studio.vercel.app/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
     ],
   },
-  manifest: "/site.webmanifest",
+  manifest: "https://akshaj-web-studio.vercel.app/site.webmanifest",
 };
 
 export default function RootLayout({
@@ -174,14 +174,16 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
-        <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png" />
-        <link rel="manifest" href="/site.webmanifest" />
+        {/* Google Search Favicon Guidelines Canonical Declarations */}
+        <link rel="icon" href="https://akshaj-web-studio.vercel.app/favicon.ico" sizes="any" />
+        <link rel="shortcut icon" href="https://akshaj-web-studio.vercel.app/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="48x48" href="https://akshaj-web-studio.vercel.app/favicon-48x48.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="https://akshaj-web-studio.vercel.app/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="https://akshaj-web-studio.vercel.app/favicon-16x16.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="https://akshaj-web-studio.vercel.app/android-chrome-192x192.png" />
+        <link rel="icon" type="image/png" sizes="512x512" href="https://akshaj-web-studio.vercel.app/android-chrome-512x512.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="https://akshaj-web-studio.vercel.app/apple-touch-icon.png" />
+        <link rel="manifest" href="https://akshaj-web-studio.vercel.app/site.webmanifest" />
         <meta name="theme-color" content="#030306" />
         <script
           type="application/ld+json"
