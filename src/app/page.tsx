@@ -25,6 +25,7 @@ import {
   Mail,
   Linkedin,
   Instagram,
+  MessageSquare,
   Palette,
   Calculator,
   Lightbulb,
@@ -80,46 +81,45 @@ export default function HomePage() {
 
           {/* Introduction exact text */}
           <p className="max-w-3xl mx-auto text-gray-300 text-base sm:text-lg md:text-xl font-normal leading-relaxed mb-8">
-            {store.settings.heroIntroduction}
+            We explore and build modern digital experiences through web development, app development, and AI-powered solutions.
           </p>
 
-          {/* The 4 Core Navigation CTAs */}
+          {/* Core Navigation CTAs */}
           <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 max-w-2xl mx-auto">
-            {/* Button 1: Hire Me */}
+            {/* Primary CTA: Explore Our Work */}
             <Link
-              href="/hire"
-              className="btn-gold px-7 py-3.5 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 group shadow-gold-md"
+              href="#interactive-portfolio"
+              className="btn-gold px-8 py-3.5 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 group shadow-gold-md"
             >
-              <Sparkles className="w-4 h-4 text-dark-950" />
-              <span>Hire Me</span>
+              <Briefcase className="w-4 h-4 text-dark-950" />
+              <span>Explore Our Work</span>
               <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
             </Link>
 
-            {/* Button 2: Explore Services */}
+            {/* Secondary CTA: Start a Project */}
+            <Link
+              href="/hire"
+              className="btn-gold-outline px-8 py-3.5 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 group shadow-gold-sm"
+            >
+              <Sparkles className="w-4 h-4 text-gold-400 transform group-hover:scale-110 transition-transform" />
+              <span>Start a Project</span>
+            </Link>
+
+            {/* Quick Access to Services & Contact */}
             <Link
               href="/services"
-              className="btn-gold-outline px-6 py-3.5 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 group"
-            >
-              <Layers className="w-4 h-4 text-gold-400 transform group-hover:scale-110 transition-transform" />
-              <span>Explore Services</span>
-            </Link>
-
-            {/* Button 3: View My Projects */}
-            <Link
-              href="/portfolio"
               className="px-6 py-3.5 rounded-xl border border-white/10 hover:border-gold-500/40 bg-dark-900/70 hover:bg-dark-900 text-gray-300 hover:text-white text-xs sm:text-sm font-semibold transition-all flex items-center justify-center gap-2"
             >
-              <Briefcase className="w-4 h-4 text-gold-400" />
-              <span>View My Projects</span>
+              <Layers className="w-4 h-4 text-gold-400" />
+              <span>Services</span>
             </Link>
 
-            {/* Button 4: Contact Me */}
             <Link
               href="/contact"
               className="px-6 py-3.5 rounded-xl border border-white/10 hover:border-gold-500/40 bg-dark-900/70 hover:bg-dark-900 text-gray-300 hover:text-white text-xs sm:text-sm font-semibold transition-all flex items-center justify-center gap-2"
             >
               <PhoneCall className="w-4 h-4 text-emerald-400" />
-              <span>Contact Me</span>
+              <span>Contact</span>
             </Link>
           </div>
 
@@ -130,7 +130,18 @@ export default function HomePage() {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gold-500/10 hover:bg-gold-500/20 border border-gold-500/30 text-gold-300 font-semibold transition-all shadow-[0_0_12px_rgba(212,175,55,0.15)] group"
             >
               <Mail className="w-3.5 h-3.5 text-gold-400 group-hover:scale-110 transition-transform" />
-              <span>Email Me: {store.contact.email || "akshajlodhi21@gmail.com"}</span>
+              <span>Email: {store.contact.email || "akshajlodhi21@gmail.com"}</span>
+            </a>
+            <a
+              href={`https://wa.me/${store.contact.whatsapp.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(
+                "Hi Akshaj, I want to discuss a project with AKSHAJ WEB STUDIO."
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 text-emerald-300 hover:text-white font-semibold transition-all shadow-[0_0_12px_rgba(16,185,129,0.2)] group"
+            >
+              <MessageSquare className="w-3.5 h-3.5 text-emerald-400 group-hover:scale-110 transition-transform" />
+              <span>WhatsApp: {store.contact.whatsapp}</span>
             </a>
             <a
               href={store.contact.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/"}
@@ -197,42 +208,42 @@ export default function HomePage() {
             </a>
           </div>
 
-          {/* Floating High-Tech Metrics Bar */}
+          {/* Studio Engineering Pillars (Replacing Unverified Metrics) */}
           <div className="mt-14 sm:mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 p-5 sm:p-6 rounded-2xl glass-panel border border-gold-500/20 max-w-4xl mx-auto text-left shadow-gold-sm">
             <div className="p-3 border-r border-white/5 last:border-none">
-              <div className="text-2xl sm:text-3xl font-extrabold text-gold-gradient font-mono">
-                {store.profile.projectsCompleted}+
+              <div className="text-base sm:text-lg font-bold text-white flex items-center gap-1.5">
+                <Code2 className="w-4 h-4 text-gold-400" />
+                <span>Full-Stack</span>
               </div>
-              <div className="text-xs text-gray-400 uppercase tracking-wider mt-1">
-                Projects Shipped
-              </div>
+              <div className="text-xs text-gold-300 font-mono mt-1">Next.js & TypeScript</div>
+              <div className="text-[11px] text-gray-400 mt-0.5">High-speed modular web apps</div>
             </div>
 
             <div className="p-3 border-r border-white/5 last:border-none">
-              <div className="text-2xl sm:text-3xl font-extrabold text-gold-gradient font-mono">
-                {store.profile.clientSatisfaction}%
+              <div className="text-base sm:text-lg font-bold text-white flex items-center gap-1.5">
+                <Cpu className="w-4 h-4 text-gold-400" />
+                <span>AI Systems</span>
               </div>
-              <div className="text-xs text-gray-400 uppercase tracking-wider mt-1">
-                Client Satisfaction
-              </div>
+              <div className="text-xs text-gold-300 font-mono mt-1">Gemini & LLM Agents</div>
+              <div className="text-[11px] text-gray-400 mt-0.5">Automations & custom bots</div>
             </div>
 
             <div className="p-3 border-r border-white/5 last:border-none">
-              <div className="text-2xl sm:text-3xl font-extrabold text-gold-gradient font-mono">
-                {store.profile.experienceYears}+ Yrs
+              <div className="text-base sm:text-lg font-bold text-white flex items-center gap-1.5">
+                <Smartphone className="w-4 h-4 text-gold-400" />
+                <span>Responsive</span>
               </div>
-              <div className="text-xs text-gray-400 uppercase tracking-wider mt-1">
-                Full-Stack Mastery
-              </div>
+              <div className="text-xs text-gold-300 font-mono mt-1">100% Fluid Layouts</div>
+              <div className="text-[11px] text-gray-400 mt-0.5">Mobile, tablet & desktop</div>
             </div>
 
             <div className="p-3">
-              <div className="text-2xl sm:text-3xl font-extrabold text-gold-gradient font-mono">
-                24/7
+              <div className="text-base sm:text-lg font-bold text-white flex items-center gap-1.5">
+                <ShieldCheck className="w-4 h-4 text-gold-400" />
+                <span>Direct Access</span>
               </div>
-              <div className="text-xs text-gray-400 uppercase tracking-wider mt-1">
-                Global Delivery
-              </div>
+              <div className="text-xs text-gold-300 font-mono mt-1">Founder Engineering</div>
+              <div className="text-[11px] text-gray-400 mt-0.5">Hands-on code by Akshaj</div>
             </div>
           </div>
         </div>
@@ -429,12 +440,13 @@ export default function HomePage() {
                   Technical Expertise
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  {store.profile.skills?.slice(0, 5).map((sk) => (
+                  {store.profile.skills?.slice(0, 6).map((sk) => (
                     <span
                       key={sk.id}
-                      className="px-2.5 py-1 rounded-lg bg-dark-900 border border-gold-500/20 text-xs text-gray-200 font-mono"
+                      className="px-2.5 py-1 rounded-lg bg-dark-900 border border-gold-500/20 text-xs text-gray-200 font-mono flex items-center gap-1.5"
                     >
-                      {sk.name} <span className="text-gold-400">({sk.level}%)</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-gold-400" />
+                      <span>{sk.name}</span>
                     </span>
                   ))}
                 </div>
@@ -468,7 +480,60 @@ export default function HomePage() {
       </section>
 
       {/* ========================================================
-          8. WHY CHOOSE US / VALUE PROPOSITION
+          8. OUR PROCESS / ENGINEERING METHODOLOGY
+         ======================================================== */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10 border-t border-white/5">
+        <SectionHeading
+          badge="Our Engineering Process"
+          title="Structured Methodology. Predictable Results."
+          subtitle="From initial conceptualization to high-availability deployment, our battle-tested workflow ensures absolute quality, clear milestones, and zero surprises."
+        />
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="p-6 rounded-2xl glass-panel border border-gold-500/20 relative group hover:border-gold-500/50 transition-all">
+            <div className="text-3xl font-black font-mono text-gold-500/30 group-hover:text-gold-400/60 transition-colors mb-3">
+              01
+            </div>
+            <h4 className="text-lg font-bold text-white mb-2">Discovery & Blueprint</h4>
+            <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
+              We define project objectives, user journeys, data architecture, and technological stack before writing any code.
+            </p>
+          </div>
+
+          <div className="p-6 rounded-2xl glass-panel border border-gold-500/20 relative group hover:border-gold-500/50 transition-all">
+            <div className="text-3xl font-black font-mono text-gold-500/30 group-hover:text-gold-400/60 transition-colors mb-3">
+              02
+            </div>
+            <h4 className="text-lg font-bold text-white mb-2">Bespoke UI/UX Design</h4>
+            <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
+              Crafting futuristic, high-contrast dark-and-gold visual layouts with fluid responsiveness across mobile, tablet, and desktop screens.
+            </p>
+          </div>
+
+          <div className="p-6 rounded-2xl glass-panel border border-gold-500/20 relative group hover:border-gold-500/50 transition-all">
+            <div className="text-3xl font-black font-mono text-gold-500/30 group-hover:text-gold-400/60 transition-colors mb-3">
+              03
+            </div>
+            <h4 className="text-lg font-bold text-white mb-2">Full-Stack Development</h4>
+            <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
+              Clean TypeScript, modular React components, and secure APIs engineered for speed, SEO excellence, and frictionless performance.
+            </p>
+          </div>
+
+          <div className="p-6 rounded-2xl glass-panel border border-gold-500/20 relative group hover:border-gold-500/50 transition-all">
+            <div className="text-3xl font-black font-mono text-gold-500/30 group-hover:text-gold-400/60 transition-colors mb-3">
+              04
+            </div>
+            <h4 className="text-lg font-bold text-white mb-2">Rigorous QA & Handover</h4>
+            <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
+              Cross-browser verification, Google Core Web Vitals optimization, live production deployment, and 30–60 days post-launch support.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================
+          9. WHY CHOOSE US / VALUE PROPOSITION
          ======================================================== */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10 border-t border-white/5">
         <SectionHeading
@@ -517,55 +582,6 @@ export default function HomePage() {
               Work directly with the principal software architect. No junior handoffs, transparent weekly milestones, and obsessive quality control.
             </p>
           </div>
-        </div>
-      </section>
-
-      {/* ========================================================
-          9. CLIENT ENDORSEMENTS
-         ======================================================== */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10 border-t border-white/5">
-        <SectionHeading
-          badge="Client Endorsements"
-          title="Trusted By Ambitious Leaders"
-          subtitle="Read how our software engineering and design solutions have driven tangible commercial success for our international clientele."
-        />
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {store.testimonials.map((test) => (
-            <div
-              key={test.id}
-              className="p-6 rounded-2xl glass-panel border border-gold-500/20 flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center gap-1 mb-4">
-                  {[...Array(test.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-gold-400 text-gold-400" />
-                  ))}
-                </div>
-
-                <p className="text-gray-300 text-xs sm:text-sm leading-relaxed italic mb-6">
-                  &ldquo;{test.quote}&rdquo;
-                </p>
-              </div>
-
-              <div className="pt-4 border-t border-white/10 flex items-center gap-3">
-                <div className="relative w-10 h-10 rounded-full overflow-hidden border border-gold-500/30 bg-dark-900 shrink-0">
-                  <Image
-                    src={test.avatarUrl}
-                    alt={test.clientName}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div>
-                  <h5 className="text-sm font-bold text-white">{test.clientName}</h5>
-                  <p className="text-[11px] text-gray-400">
-                    {test.clientRole}, {test.clientCompany}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
         </div>
       </section>
 
@@ -632,6 +648,16 @@ export default function HomePage() {
                   {store.contact.email || "akshajlodhi21@gmail.com"}
                 </a>
               </span>
+              <span>•</span>
+              <a
+                href={`https://wa.me/${store.contact.whatsapp.replace(/[^0-9]/g, "")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-emerald-400 hover:text-white flex items-center gap-1.5 font-semibold"
+              >
+                <MessageSquare className="w-3.5 h-3.5 text-emerald-400" />
+                <span>WhatsApp: {store.contact.whatsapp}</span>
+              </a>
               <span>•</span>
               <a
                 href={store.contact.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/"}

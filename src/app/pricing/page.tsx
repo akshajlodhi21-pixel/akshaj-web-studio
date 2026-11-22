@@ -43,6 +43,31 @@ export default function PricingPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch mb-20">
         {store.pricing.map((tier) => {
           const isProf = tier.id === "PROFESSIONAL";
+          const isStarter = tier.id === "STARTER";
+
+          const deliverables = isStarter
+            ? {
+                pages: "Up to 5 Pages (Home, About, Services, Portfolio, Contact)",
+                responsive: "100% Fluid (Mobile, Tablet, Desktop)",
+                revisions: "2 Iterative Review & Feedback Sprints",
+                delivery: "5 – 7 Business Days",
+                additionalCharges: "Domain & hosting billed directly by registrar (no markup)",
+              }
+            : isProf
+            ? {
+                pages: "Up to 12 Bespoke Pages & Conversion Funnels",
+                responsive: "100% Fluid Touch-Optimized Layouts",
+                revisions: "4 Iterative Review & Refinement Sprints",
+                delivery: "10 – 15 Business Days",
+                additionalCharges: "Payment gateway fees & 3rd-party SaaS billed at cost",
+              }
+            : {
+                pages: "Custom Multi-Page Portal & System Architecture",
+                responsive: "Cross-Device Web & Mobile App Ecosystem",
+                revisions: "Continuous Milestone-Based Sprint Reviews",
+                delivery: "20 – 35 Business Days (Phased Milestones)",
+                additionalCharges: "High-volume Cloud / LLM API token usage billed at cost",
+              };
 
           return (
             <div
@@ -86,10 +111,37 @@ export default function PricingPage() {
                   </div>
                 </div>
 
+                {/* Explicit Package Inclusions & Deliverables */}
+                <div className="p-4 rounded-2xl bg-dark-950/80 border border-gold-500/20 mb-6 space-y-2 text-xs">
+                  <div className="text-[10px] font-mono uppercase tracking-wider text-gold-400 font-bold mb-1">
+                    Verified Deliverables Breakdown:
+                  </div>
+                  <div className="flex items-start justify-between gap-2 border-b border-white/5 pb-1.5">
+                    <span className="text-gray-400">Page Scope:</span>
+                    <span className="text-white font-medium text-right">{deliverables.pages}</span>
+                  </div>
+                  <div className="flex items-start justify-between gap-2 border-b border-white/5 pb-1.5">
+                    <span className="text-gray-400">Responsiveness:</span>
+                    <span className="text-gold-300 font-medium text-right">{deliverables.responsive}</span>
+                  </div>
+                  <div className="flex items-start justify-between gap-2 border-b border-white/5 pb-1.5">
+                    <span className="text-gray-400">Revision Policy:</span>
+                    <span className="text-gray-200 font-medium text-right">{deliverables.revisions}</span>
+                  </div>
+                  <div className="flex items-start justify-between gap-2 border-b border-white/5 pb-1.5">
+                    <span className="text-gray-400">Delivery Expectation:</span>
+                    <span className="text-emerald-400 font-mono font-medium text-right">{deliverables.delivery}</span>
+                  </div>
+                  <div className="flex items-start justify-between gap-2 pt-0.5">
+                    <span className="text-gray-400">Additional Charges:</span>
+                    <span className="text-gray-300 text-[11px] text-right">{deliverables.additionalCharges}</span>
+                  </div>
+                </div>
+
                 {/* Features List */}
                 <div className="space-y-3 mb-8">
                   <span className="text-xs font-bold uppercase tracking-wider text-gray-400 block font-mono">
-                    Package Inclusions:
+                    Key Features Included:
                   </span>
                   {tier.features.map((feat, fIdx) => (
                     <div key={fIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-gray-300">
@@ -101,7 +153,7 @@ export default function PricingPage() {
               </div>
 
               {/* Action Button */}
-              <div className="pt-6 border-t border-white/10">
+              <div className="pt-6 border-t border-white/10 space-y-2">
                 <Link
                   href={`/hire?service=${encodeURIComponent(tier.name)}`}
                   className={`w-full py-3.5 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all text-center ${
@@ -113,10 +165,64 @@ export default function PricingPage() {
                   <span>{tier.ctaText}</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
+                <Link
+                  href={`/hire?service=Custom%20Quote&budget=${encodeURIComponent(tier.price)}`}
+                  className="w-full py-2 rounded-xl text-[11px] text-gray-400 hover:text-gold-300 flex items-center justify-center gap-1 transition-colors"
+                >
+                  <span>Request a Custom Quote &rarr;</span>
+                </Link>
               </div>
             </div>
           );
         })}
+      </div>
+
+      {/* Deliverables Transparency & Terms Section */}
+      <div className="mb-16 p-8 sm:p-10 rounded-3xl glass-panel border border-gold-500/20">
+        <div className="text-center max-w-2xl mx-auto mb-8">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold-500/10 border border-gold-500/30 text-xs font-mono uppercase tracking-widest text-gold-400 mb-2">
+            <Shield className="w-3.5 h-3.5 text-gold-400" />
+            <span>Honest & Transparent Engineering</span>
+          </div>
+          <h3 className="text-2xl sm:text-3xl font-black text-white">
+            Deliverables Policy & Standards
+          </h3>
+          <p className="text-xs sm:text-sm text-gray-400 mt-2">
+            Clear guidelines on how we scope, deliver, and support every software solution.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="p-5 rounded-2xl bg-dark-900/80 border border-white/5 space-y-2">
+            <h4 className="text-sm font-bold text-white flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-gold-400" />
+              <span>Revision Policy</span>
+            </h4>
+            <p className="text-xs text-gray-300 leading-relaxed">
+              Every tier includes designated iterative feedback cycles. Revisions encompass layout tweaks, content styling, color adjustments, and feature refinements prior to production deployment.
+            </p>
+          </div>
+
+          <div className="p-5 rounded-2xl bg-dark-900/80 border border-white/5 space-y-2">
+            <h4 className="text-sm font-bold text-white flex items-center gap-2">
+              <Zap className="w-4 h-4 text-emerald-400" />
+              <span>Delivery Expectations</span>
+            </h4>
+            <p className="text-xs text-gray-300 leading-relaxed">
+              Timelines begin upon receipt of project scope and brand assets. We provide milestone previews on private staging URLs so you can test before live deployment.
+            </p>
+          </div>
+
+          <div className="p-5 rounded-2xl bg-dark-900/80 border border-white/5 space-y-2">
+            <h4 className="text-sm font-bold text-white flex items-center gap-2">
+              <HelpCircle className="w-4 h-4 text-blue-400" />
+              <span>Zero Hidden Markups</span>
+            </h4>
+            <p className="text-xs text-gray-300 leading-relaxed">
+              Third-party services (custom domain registration, enterprise email, or paid AI APIs such as OpenAI / Google Cloud) are billed directly by the providers with zero studio surcharge.
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* Custom Enterprise Banner */}
@@ -127,20 +233,22 @@ export default function PricingPage() {
             <span>Need Custom Scope or Retainer?</span>
           </div>
           <h3 className="text-xl sm:text-2xl font-black text-white mb-2">
-            Enterprise Digital Architecture & Fractional CTO
+            Custom Digital Architecture & Bespoke Solutions
           </h3>
           <p className="text-gray-400 text-xs sm:text-sm max-w-2xl leading-relaxed">
-            For complex multi-tier enterprise systems, continuous product engineering, or dedicated monthly development sprints, we formulate bespoke contract structures.
+            Have specialized requirements, non-standard feature needs, or an enterprise workflow? We formulate tailored contracts and milestone roadmaps.
           </p>
         </div>
 
-        <Link
-          href="/hire?service=Custom%20Software%20Development"
-          className="btn-gold px-7 py-3 rounded-xl text-xs sm:text-sm font-bold shrink-0 flex items-center gap-2 shadow-gold-sm"
-        >
-          <span>Request Custom Proposal</span>
-          <ArrowRight className="w-4 h-4" />
-        </Link>
+        <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
+          <Link
+            href="/hire?service=Custom%20Quote"
+            className="btn-gold px-7 py-3 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-2 shadow-gold-sm"
+          >
+            <span>Request a Custom Quote</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
       </div>
     </div>
   );

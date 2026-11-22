@@ -190,13 +190,15 @@ export default function Footer() {
               </a>
 
               <a
-                href={`https://wa.me/${store.contact.whatsapp.replace(/[^0-9]/g, "")}`}
+                href={`https://wa.me/${store.contact.whatsapp.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(
+                  "Hi Akshaj Web Studio, I want to discuss a project."
+                )}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2.5 hover:text-white transition-colors text-emerald-400"
               >
                 <MessageSquare className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                <span>WhatsApp Official Chat</span>
+                <span>WhatsApp: {store.contact.whatsapp}</span>
               </a>
 
               <a

@@ -192,7 +192,7 @@ export default function ContactPage() {
         >
           <MessageSquare className="w-6 h-6 mb-2 group-hover:scale-110 transition-transform" />
           <span className="text-xs font-bold text-white">Chat on WhatsApp</span>
-          <span className="text-[10px] text-emerald-400 mt-0.5">Instant Direct Line</span>
+          <span className="text-[10px] text-emerald-400 mt-0.5 font-mono">+91 91985 62197</span>
         </a>
 
         {/* 2. Connect on LinkedIn */}
@@ -217,29 +217,7 @@ export default function ContactPage() {
           <span className="text-[10px] text-gold-400 mt-0.5 truncate max-w-[130px]">{officialEmail}</span>
         </a>
 
-        {/* 4. Call Now */}
-        <a
-          href={callUrl}
-          className="p-4 rounded-2xl bg-dark-900 hover:bg-dark-850 border border-white/10 hover:border-gold-500/40 text-gray-200 transition-all flex flex-col items-center justify-center text-center group"
-        >
-          <PhoneCall className="w-6 h-6 mb-2 text-gold-400 group-hover:scale-110 transition-transform" />
-          <span className="text-xs font-bold text-white">Call Now</span>
-          <span className="text-[10px] text-gray-400 mt-0.5">+91 91985 62197</span>
-        </a>
-
-        {/* 5. Message on Instagram */}
-        <a
-          href={igDirectMessageUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="p-4 rounded-2xl bg-pink-500/10 hover:bg-pink-500/20 border border-pink-500/40 text-pink-300 transition-all flex flex-col items-center justify-center text-center group"
-        >
-          <Instagram className="w-6 h-6 mb-2 group-hover:scale-110 transition-transform" />
-          <span className="text-xs font-bold text-white">Message on Instagram</span>
-          <span className="text-[10px] text-pink-400 mt-0.5">@{igUsername}</span>
-        </a>
-
-        {/* 6. Follow Me on Instagram */}
+        {/* 4. Follow on Instagram */}
         <a
           href={igProfileUrl}
           target="_blank"
@@ -247,8 +225,30 @@ export default function ContactPage() {
           className="p-4 rounded-2xl bg-gradient-to-r from-purple-500/15 via-pink-500/15 to-orange-500/15 hover:from-purple-500/30 hover:via-pink-500/30 hover:to-orange-500/30 border border-pink-500/40 hover:border-pink-500/70 text-pink-200 hover:text-white transition-all flex flex-col items-center justify-center text-center group shadow-[0_4px_20px_rgba(236,72,153,0.2)]"
         >
           <Instagram className="w-6 h-6 mb-2 text-pink-400 group-hover:scale-110 transition-transform" />
-          <span className="text-xs font-bold text-white">Follow Me on Instagram</span>
+          <span className="text-xs font-bold text-white">Follow on Instagram</span>
           <span className="text-[10px] text-pink-400 mt-0.5">@{igUsername}</span>
+        </a>
+
+        {/* 5. Official Website */}
+        <a
+          href="https://akshaj-web-studio.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="p-4 rounded-2xl bg-dark-900 hover:bg-dark-850 border border-white/10 hover:border-gold-500/40 text-gray-200 transition-all flex flex-col items-center justify-center text-center group"
+        >
+          <ExternalLink className="w-6 h-6 mb-2 text-gold-400 group-hover:scale-110 transition-transform" />
+          <span className="text-xs font-bold text-white">Official Website</span>
+          <span className="text-[10px] text-gold-400 mt-0.5">akshaj-web-studio</span>
+        </a>
+
+        {/* 6. Call Now */}
+        <a
+          href={callUrl}
+          className="p-4 rounded-2xl bg-dark-900 hover:bg-dark-850 border border-white/10 hover:border-gold-500/40 text-gray-200 transition-all flex flex-col items-center justify-center text-center group"
+        >
+          <PhoneCall className="w-6 h-6 mb-2 text-emerald-400 group-hover:scale-110 transition-transform" />
+          <span className="text-xs font-bold text-white">Call Direct</span>
+          <span className="text-[10px] text-gray-400 mt-0.5">+91 91985 62197</span>
         </a>
       </div>
 
@@ -536,7 +536,7 @@ export default function ContactPage() {
                         setFormData({ ...formData, name: e.target.value });
                         if (fieldErrors.name) setFieldErrors({ ...fieldErrors, name: "" });
                       }}
-                      placeholder="e.g. Vikram Singhania"
+                      placeholder="Your Full Name"
                       className={`w-full bg-dark-900 border rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white placeholder-gray-500 focus:outline-none transition-colors ${
                         fieldErrors.name
                           ? "border-red-500 focus:border-red-400"
@@ -564,7 +564,7 @@ export default function ContactPage() {
                         setFormData({ ...formData, email: e.target.value });
                         if (fieldErrors.email) setFieldErrors({ ...fieldErrors, email: "" });
                       }}
-                      placeholder="e.g. vikram@horizon.io"
+                      placeholder="yourname@domain.com"
                       className={`w-full bg-dark-900 border rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white placeholder-gray-500 focus:outline-none transition-colors ${
                         fieldErrors.email
                           ? "border-red-500 focus:border-red-400"

@@ -41,6 +41,8 @@ export interface ProjectItem {
   featured?: boolean;
   completionDate?: string;
   clientName?: string;
+  isConcept?: boolean;
+  statusLabel?: string;
 }
 
 export interface PricingCategory {

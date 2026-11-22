@@ -76,12 +76,6 @@ export default function AdminLoginPage() {
     }
   };
 
-  const handleAutoFillDemo = () => {
-    setEmail("admin@akshajwebstudio.com");
-    setPassword("AkshajStudio@2026");
-    setError(null);
-  };
-
   return (
     <div className="min-h-[85vh] flex items-center justify-center px-4 relative overflow-hidden py-12">
       {/* Background radial glow */}
@@ -171,29 +165,14 @@ export default function AdminLoginPage() {
           </button>
         </form>
 
-        {/* Demo Helper Box */}
-        <div className="mt-8 p-4 rounded-2xl bg-dark-900/90 border border-gold-500/20 text-xs">
-          <div className="flex items-center justify-between mb-2">
-            <span className="font-bold text-gold-400 uppercase font-mono text-[10px]">
-              Studio Master Credentials
-            </span>
-            <button
-              type="button"
-              onClick={handleAutoFillDemo}
-              className="text-gold-300 hover:underline font-semibold text-[11px]"
-            >
-              One-Click Fill
-            </button>
-          </div>
-          <div className="space-y-1 font-mono text-[11px] text-gray-300">
-            <div>
-              <span className="text-gray-500">Email:</span>{" "}
-              admin@akshajwebstudio.com
-            </div>
-            <div>
-              <span className="text-gray-500">Password:</span> AkshajStudio@2026
-            </div>
-          </div>
+        {/* Authorized Access Only Notice */}
+        <div className="mt-8 p-4 rounded-2xl bg-dark-900/90 border border-gold-500/20 text-xs text-center">
+          <span className="font-bold text-gold-400 uppercase font-mono text-[10px] block mb-1">
+            Authorized Personnel Only
+          </span>
+          <p className="text-[11px] text-gray-400 leading-relaxed">
+            Administrative access is restricted to verified studio operators. All authentication attempts are logged and monitored.
+          </p>
         </div>
 
         <div className="mt-6 text-center">

@@ -134,33 +134,12 @@ export default function RootLayout({
         priceRange: "₹₹₹",
         address: {
           "@type": "PostalAddress",
-          streetAddress: "Digital Innovation Hub, Cyber Enclave",
-          addressLocality: "Tech Park",
-          addressRegion: "Global",
           addressCountry: "IN",
         },
-        openingHoursSpecification: [
-          {
-            "@type": "OpeningHoursSpecification",
-            dayOfWeek: [
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday",
-            ],
-            opens: "09:00",
-            closes: "20:00",
-          },
-        ],
         sameAs: [
           "https://github.com/akshajlodhi21-pixel",
           "https://www.linkedin.com/in/lucky-bro-b4ab043a1/",
           "https://www.instagram.com/luckybro_9198/",
-          "https://twitter.com/akshajwebstudio",
-          "https://facebook.com/akshajwebstudio",
-          "https://youtube.com/@akshajwebstudio",
         ],
         knowsAbout: [
           "Website Development",

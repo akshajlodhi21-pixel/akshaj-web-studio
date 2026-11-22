@@ -113,11 +113,16 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                   <div className="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/20 to-transparent" />
 
                   <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-                    <span className="px-3 py-1 rounded-full bg-dark-950/90 border border-gold-500/40 text-xs font-semibold text-gold-300">
-                      {project.category}
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className="px-3 py-1 rounded-full bg-dark-950/90 border border-gold-500/40 text-xs font-semibold text-gold-300">
+                        {project.category}
+                      </span>
+                      <span className="px-2.5 py-1 rounded-full bg-dark-950/90 border border-gold-500/30 text-xs font-mono text-gold-400">
+                        {project.statusLabel || (project.isConcept ? "Concept Project" : "Production")}
+                      </span>
+                    </div>
 
-                    {project.liveUrl && (
+                    {project.liveUrl ? (
                       <a
                         href={project.liveUrl}
                         target="_blank"
@@ -127,6 +132,10 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                         <span>Live Preview</span>
                         <ExternalLink className="w-3.5 h-3.5" />
                       </a>
+                    ) : (
+                      <span className="px-3 py-1 rounded-lg bg-dark-950/90 border border-white/10 text-xs font-mono text-gray-400">
+                        Demo Preview Coming Soon
+                      </span>
                     )}
                   </div>
                 </>
@@ -192,7 +201,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             Close
           </button>
 
-          {project.liveUrl && (
+          {project.liveUrl ? (
             <a
               href={project.liveUrl}
               target="_blank"
@@ -202,6 +211,10 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
               <span>Visit Production Website</span>
               <ExternalLink className="w-4 h-4" />
             </a>
+          ) : (
+            <span className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-xs sm:text-sm font-mono text-gray-400">
+              Demo Preview Coming Soon
+            </span>
           )}
         </div>
       </div>

@@ -109,6 +109,13 @@ export default function PortfolioPage() {
                 </span>
               </div>
 
+              {/* Status Badge */}
+              <div className="absolute top-4 right-4">
+                <span className="px-2.5 py-1 rounded-full bg-dark-950/90 border border-gold-500/40 text-[10px] font-mono font-bold text-gold-300 backdrop-blur-md">
+                  {project.statusLabel || (project.isConcept ? "Concept Project" : "Production")}
+                </span>
+              </div>
+
               {/* View Overlay on Hover */}
               <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                 <span className="btn-gold px-4 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-gold-sm">
@@ -155,7 +162,7 @@ export default function PortfolioPage() {
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
 
-                {project.liveUrl && (
+                {project.liveUrl ? (
                   <a
                     href={project.liveUrl}
                     target="_blank"
@@ -165,6 +172,10 @@ export default function PortfolioPage() {
                     <span>Live Website</span>
                     <ExternalLink className="w-3.5 h-3.5 text-gold-400" />
                   </a>
+                ) : (
+                  <span className="px-2.5 py-1 rounded-lg bg-white/5 border border-white/5 text-[11px] font-mono text-gray-400">
+                    Demo Preview Coming Soon
+                  </span>
                 )}
               </div>
             </div>

@@ -324,7 +324,7 @@ export default function PaymentPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, clientName: e.target.value })
                       }
-                      placeholder="e.g. Vikram Singhania"
+                      placeholder="Your Full Name"
                       className="w-full bg-dark-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white placeholder-gray-500 focus:outline-none focus:border-gold-500 transition-colors"
                     />
                   </div>
@@ -341,7 +341,7 @@ export default function PaymentPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, email: e.target.value })
                       }
-                      placeholder="e.g. vikram@horizon.io"
+                      placeholder="yourname@domain.com"
                       className="w-full bg-dark-900 border border-white/10 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white placeholder-gray-500 focus:outline-none focus:border-gold-500 transition-colors"
                     />
                   </div>

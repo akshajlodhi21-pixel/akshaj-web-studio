@@ -396,24 +396,22 @@ export default function AboutPage() {
               </div>
             </div>
 
-            <div className="space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {filteredSkills.map((skill) => (
-                <div key={skill.id} className="space-y-1.5">
-                  <div className="flex items-center justify-between text-xs">
-                    <div className="flex items-center gap-2">
-                      <span className="text-gray-200 font-medium">{skill.name}</span>
-                      <span className="text-[10px] font-mono text-gold-400/80 px-1.5 py-0.5 rounded bg-dark-900 border border-white/5">
-                        {skill.category}
-                      </span>
+                <div
+                  key={skill.id}
+                  className="p-3.5 rounded-2xl bg-dark-900/80 border border-gold-500/20 hover:border-gold-500/40 transition-all flex items-center justify-between"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-2 h-2 rounded-full bg-gold-400" />
+                    <div>
+                      <div className="text-xs font-bold text-white">{skill.name}</div>
+                      <div className="text-[10px] font-mono text-gold-400/80">{skill.category}</div>
                     </div>
-                    <span className="text-gold-400 font-mono font-bold">{skill.level}%</span>
                   </div>
-                  <div className="w-full h-2 rounded-full bg-dark-900 border border-white/5 overflow-hidden">
-                    <div
-                      className="h-full rounded-full bg-gradient-to-r from-gold-500 to-gold-300 shadow-[0_0_10px_rgba(212,175,55,0.4)] transition-all duration-700"
-                      style={{ width: `${skill.level}%` }}
-                    />
-                  </div>
+                  <span className="px-2 py-0.5 rounded-md bg-gold-500/10 border border-gold-500/30 text-[10px] font-mono text-gold-300">
+                    Verified Competency
+                  </span>
                 </div>
               ))}
             </div>
@@ -466,6 +464,9 @@ export default function AboutPage() {
                     <span className="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-dark-950/90 text-[10px] font-mono text-gold-300 border border-gold-500/30">
                       {proj.category}
                     </span>
+                    <span className="absolute top-2 right-2 px-2 py-0.5 rounded-md bg-dark-950/90 text-[10px] font-mono text-gold-400 border border-gold-500/30">
+                      {proj.statusLabel || (proj.isConcept ? "Concept Project" : "Production")}
+                    </span>
                   </div>
 
                   <div className="p-4 flex-1 flex flex-col justify-between">
@@ -490,7 +491,7 @@ export default function AboutPage() {
                           <span>Live Demo</span>
                         </a>
                       ) : (
-                        <span className="text-[10px] text-gray-500">Internal Build</span>
+                        <span className="text-[10px] font-mono text-gray-400">Demo Preview Coming Soon</span>
                       )}
                       <Link
                         href={`/hire?service=${encodeURIComponent(proj.category)}`}

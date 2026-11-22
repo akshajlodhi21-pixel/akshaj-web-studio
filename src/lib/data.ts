@@ -13,7 +13,7 @@ export const initialSiteSettings: SiteSettings = {
   tagline: "Turning Ideas Into Digital Reality.",
   heroHeadline: "AKSHAJ WEB STUDIO",
   heroIntroduction:
-    "We transform ideas into powerful digital experiences. AKSHAJ WEB STUDIO specializes in custom Website Development, futuristic Web Design, native App Development, and scalable AI Solutions to help forward-thinking businesses establish and expand their digital presence.",
+    "We explore and build modern digital experiences through web development, app development, and AI-powered solutions.",
   heroSubheadline:
     "Engineering next-generation Website Development, mobile App Development, creative Web Design, and custom AI Solutions that empower your business to scale.",
   footerAboutText:
@@ -74,10 +74,7 @@ export const initialProfile: AdminProfile = {
     "Engineered intelligent AI-driven conversational bots and vector knowledge workflows.",
     "Established a seamless UPI payment and inquiry management pipeline for international clients.",
   ],
-  experienceYears: 3,
-  projectsCompleted: 10,
-  clientSatisfaction: 100,
-  location: "Available for Projects Worldwide",
+  location: "India (Available for Remote Projects Worldwide)",
   availableForHire: true,
 };
 
@@ -92,8 +89,8 @@ export const initialContactInfo: ContactInfo = {
   businessEmail: "akshajlodhi21@gmail.com",
   personalEmail: "akshajlodhi21@gmail.com",
   email: "akshajlodhi21@gmail.com",
-  address: "Digital Innovation Hub, Cyber Enclave, Tech Park, India",
-  workingHours: "Monday - Saturday: 9:00 AM - 8:00 PM IST",
+  address: "India • Available Worldwide for Remote Projects",
+  workingHours: "Flexible Online Communication • Project Inquiries Active",
   upiId: "akshajwebstudio@okaxis",
   upiHolderName: "Akshaj Web Studio",
   socials: {
@@ -330,101 +327,90 @@ export const initialProjects: ProjectItem[] = [
     title: "Apex Horizon - AI Executive Intelligence Suite",
     category: "AI Solutions",
     description:
-      "Autonomous enterprise analytics and generative executive summaries powered by Google Gemini and vector knowledge vaults.",
+      "Autonomous analytics and generative executive summaries concept powered by Google Gemini API and vector knowledge vaults.",
     fullOverview:
-      "Apex Horizon aggregates high-volume business data from multiple channels and synthesizes real-time executive intelligence briefings. Built with Next.js 14, TypeScript, Tailwind CSS, and vector embeddings.",
+      "Apex Horizon is an architectural demonstration of multi-channel enterprise intelligence synthesis. Built with Next.js 14, TypeScript, Tailwind CSS, and vector embeddings.",
     imageUrl:
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop",
-    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    liveUrl: "https://example.com/apex-horizon",
-    githubUrl: "https://github.com",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Gemini AI API", "Cloud Firestore"],
     featured: true,
-    completionDate: "October 2026",
-    clientName: "Horizon Enterprises Global",
+    isConcept: true,
+    statusLabel: "Concept Project",
   },
   {
     id: "proj-2",
     title: "Aura Luxe - Fine Jewelry E-Commerce Experience",
     category: "Web Development",
     description:
-      "Luxury direct-to-consumer jewelry portal featuring 3D model previews, instant UPI payments, and high-conversion checkout.",
+      "Direct-to-consumer luxury retail concept featuring responsive product showcases, fluid UI design, and single-page checkout funnels.",
     fullOverview:
-      "Engineered an ultra-luxurious e-commerce shopping experience for high-ticket jewelry. Includes instant razorpay/UPI checkout, automated insurance certificate generation, and live inventory sync.",
+      "Demonstration of high-ticket luxury e-commerce engineering. Combines fast product browsing, responsive catalog filters, and modern checkout architecture.",
     imageUrl:
       "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=1200&auto=format&fit=crop",
-    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    liveUrl: "https://example.com/aura-luxe",
-    githubUrl: "https://github.com",
-    technologies: ["React", "Next.js", "Tailwind CSS", "Razorpay / UPI", "Node.js"],
+    technologies: ["React", "Next.js", "Tailwind CSS", "Payment Gateways", "Node.js"],
     featured: true,
-    completionDate: "September 2026",
-    clientName: "Aura Jewels Ltd",
+    isConcept: true,
+    statusLabel: "Concept Project",
   },
   {
     id: "proj-3",
     title: "Vanguard Nexus - Android Field Operations App",
     category: "Android App",
     description:
-      "Native Android field management tool with offline GPS tracking, biometric authentication, and instant inspection reports.",
+      "Native Android mobile concept utility showcasing offline data persistence, material design, and background synchronization.",
     fullOverview:
-      "Mission-critical Android utility enabling over 1,200 field technicians to record site audits in real-time even without network connectivity, syncing securely whenever signal is restored.",
+      "Demonstration of resilient mobile engineering designed for field reporting, local SQLite/Room caching, and automatic synchronization upon reconnection.",
     imageUrl:
       "https://images.unsplash.com/photo-1526470608268-f674ce90ebd4?q=80&w=1200&auto=format&fit=crop",
-    liveUrl: "https://example.com/vanguard-nexus",
     technologies: ["Android", "Kotlin", "Firebase Sync", "Material 3", "Room Database"],
     featured: true,
-    completionDate: "August 2026",
-    clientName: "Vanguard Logistics",
+    isConcept: true,
+    statusLabel: "Demo Project",
   },
   {
     id: "proj-4",
-    title: "Oakridge International - School & Campus Ecosystem",
+    title: "Oakridge Campus - Educational Portal Ecosystem",
     category: "Web Development",
     description:
-      "Complete campus portal featuring digital admissions pipeline, dynamic timetable broadcaster, and secure parent portal.",
+      "Comprehensive educational web platform concept featuring digital admissions workflow, dynamic announcements, and departmental directories.",
     fullOverview:
-      "Developed a modern, accessible web portal serving over 3,000 students, teachers, and parents. Handles admissions, online fee status, attendance summaries, and digital event archives.",
+      "Architectural blueprint for academic institutions, combining student inquiry workflows, responsive faculty rosters, event galleries, and institutional notice management.",
     imageUrl:
       "https://images.unsplash.com/photo-1580582932707-520aed937b7b?q=80&w=1200&auto=format&fit=crop",
-    liveUrl: "https://example.com/oakridge",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "PostgreSQL", "Cloudinary"],
     featured: false,
-    completionDate: "July 2026",
-    clientName: "Oakridge Academy Trust",
+    isConcept: true,
+    statusLabel: "Concept Project",
   },
   {
     id: "proj-5",
     title: "Synapse Core - Custom Enterprise ERP System",
     category: "Custom Software",
     description:
-      "Bespoke multi-department ERP orchestrating supply chain, inventory management, role-based workflows, and automated invoice reconciliation.",
+      "Internal tooling concept unifying multi-department metrics, role-based access control, and automated report generation.",
     fullOverview:
-      "Replaced disjointed legacy spreadsheets with a unified cloud-native ERP dashboard. Features real-time KPI visualization, PDF quote generation, and audit trail compliance.",
+      "A custom ERP dashboard concept engineered with Next.js, TypeScript, and responsive data tables to replace fragmented manual workflows.",
     imageUrl:
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop",
-    liveUrl: "https://example.com/synapse-core",
-    githubUrl: "https://github.com",
     technologies: ["React", "TypeScript", "Tailwind CSS", "Node.js", "Express", "PostgreSQL"],
     featured: true,
-    completionDate: "May 2026",
-    clientName: "Synapse Industrial Manufacturing",
+    isConcept: true,
+    statusLabel: "Concept Project",
   },
   {
     id: "proj-6",
-    title: "Summit 2026 - International Tech Conclave",
+    title: "Summit Conclave - Interactive Event Platform",
     category: "Web Development",
     description:
-      "High-energy interactive event platform with live agenda scheduler, speaker stage tracking, and instant QR badge ticketing.",
+      "Interactive conference and summit platform concept with speaker lineups, dynamic track schedules, and attendee registration.",
     fullOverview:
-      "Designed and deployed the official summit portal attracting 15,000+ registered global attendees. Included speaker showcase, sponsor lounges, interactive stage schedules, and live stream.",
+      "Concept platform designed for conferences and summits, highlighting interactive agenda tracks, speaker profiles, and sponsor recognition tiers.",
     imageUrl:
       "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=1200&auto=format&fit=crop",
-    liveUrl: "https://example.com/summit-2026",
     technologies: ["Next.js", "Tailwind CSS", "Framer Motion", "Supabase", "QR Engine"],
     featured: false,
-    completionDate: "March 2026",
-    clientName: "Global Tech Summit Board",
+    isConcept: true,
+    statusLabel: "Concept Project",
   },
 ];
 
@@ -493,41 +479,4 @@ export const initialPricingCategories: PricingCategory[] = [
   },
 ];
 
-export const initialTestimonials: TestimonialItem[] = [
-  {
-    id: "test-1",
-    clientName: "Vikram Singhania",
-    clientRole: "Managing Director",
-    clientCompany: "Horizon Enterprises",
-    avatarUrl:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=300&auto=format&fit=crop",
-    quote:
-      "AKSHAJ WEB STUDIO elevated our digital presence to international standards. The craftsmanship, speed, and futuristic aesthetics blew our board away. Our inbound leads surged by over 240% within the first month.",
-    rating: 5,
-    projectTitle: "AI Executive Intelligence Suite",
-  },
-  {
-    id: "test-2",
-    clientName: "Elena Rostova",
-    clientRole: "Creative Director",
-    clientCompany: "Aura Luxe Fine Jewels",
-    avatarUrl:
-      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=300&auto=format&fit=crop",
-    quote:
-      "The dark and gold aesthetic developed for our brand is simply sublime. Every micro-interaction feels weighted and luxurious. The seamless checkout and UPI integration made buying effortless for our clients.",
-    rating: 5,
-    projectTitle: "Fine Jewelry E-Commerce Experience",
-  },
-  {
-    id: "test-3",
-    clientName: "Dr. Rajeshwar Rao",
-    clientRole: "Head of Campus Affairs",
-    clientCompany: "Oakridge Trust",
-    avatarUrl:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=300&auto=format&fit=crop",
-    quote:
-      "Professional, disciplined, and genuinely world-class. Akshaj built an educational portal that parents, students, and teachers love using daily. Inquiries for new admissions were processed seamlessly.",
-    rating: 5,
-    projectTitle: "School & Campus Ecosystem",
-  },
-];
+export const initialTestimonials: TestimonialItem[] = [];

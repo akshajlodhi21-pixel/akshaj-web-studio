@@ -98,6 +98,11 @@ export default function InteractivePortfolio() {
                 {project.category}
               </span>
 
+              {/* Status Badge */}
+              <span className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-dark-950/90 border border-gold-500/40 text-[10px] font-mono font-bold text-gold-300 backdrop-blur-md">
+                {project.statusLabel || (project.isConcept ? "Concept Project" : "Production")}
+              </span>
+
               {/* Video Walkthrough Indicator if present */}
               {project.videoUrl && (
                 <div className="absolute bottom-3 right-3 px-2.5 py-1 rounded-full bg-dark-950/85 border border-gold-500/40 text-gold-300 flex items-center gap-1.5 text-[10px] font-mono backdrop-blur-md">
@@ -146,7 +151,7 @@ export default function InteractivePortfolio() {
                 </button>
 
                 <div className="flex items-center gap-2">
-                  {project.liveUrl && (
+                  {project.liveUrl ? (
                     <a
                       href={project.liveUrl}
                       target="_blank"
@@ -157,6 +162,10 @@ export default function InteractivePortfolio() {
                       <span>Live</span>
                       <ExternalLink className="w-2.5 h-2.5" />
                     </a>
+                  ) : (
+                    <span className="px-2.5 py-1 rounded-lg bg-white/5 border border-white/5 text-[10px] font-mono text-gray-400">
+                      Demo Preview Coming Soon
+                    </span>
                   )}
 
                   <Link
