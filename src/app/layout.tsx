@@ -174,16 +174,6 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        {/* Google Search Favicon Guidelines Canonical Declarations */}
-        <link rel="icon" href="https://akshaj-web-studio.vercel.app/favicon.ico" sizes="any" />
-        <link rel="shortcut icon" href="https://akshaj-web-studio.vercel.app/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="48x48" href="https://akshaj-web-studio.vercel.app/favicon-48x48.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="https://akshaj-web-studio.vercel.app/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="https://akshaj-web-studio.vercel.app/favicon-16x16.png" />
-        <link rel="icon" type="image/png" sizes="192x192" href="https://akshaj-web-studio.vercel.app/android-chrome-192x192.png" />
-        <link rel="icon" type="image/png" sizes="512x512" href="https://akshaj-web-studio.vercel.app/android-chrome-512x512.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="https://akshaj-web-studio.vercel.app/apple-touch-icon.png" />
-        <link rel="manifest" href="https://akshaj-web-studio.vercel.app/site.webmanifest" />
         <meta name="theme-color" content="#030306" />
         <script
           type="application/ld+json"
