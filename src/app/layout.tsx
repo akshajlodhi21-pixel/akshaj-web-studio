@@ -76,6 +76,8 @@ export const metadata: Metadata = {
     icon: [
       { url: "https://akshaj-web-studio.vercel.app/favicon.ico", sizes: "any" },
       { url: "https://akshaj-web-studio.vercel.app/favicon-48x48.png", sizes: "48x48", type: "image/png" },
+      { url: "https://akshaj-web-studio.vercel.app/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+      { url: "https://akshaj-web-studio.vercel.app/favicon-144x144.png", sizes: "144x144", type: "image/png" },
       { url: "https://akshaj-web-studio.vercel.app/favicon.png", type: "image/png" },
       { url: "https://akshaj-web-studio.vercel.app/favicon-32x32.png", sizes: "32x32", type: "image/png" },
       { url: "https://akshaj-web-studio.vercel.app/favicon-16x16.png", sizes: "16x16", type: "image/png" },
