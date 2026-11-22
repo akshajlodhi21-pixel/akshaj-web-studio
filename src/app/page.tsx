@@ -24,6 +24,7 @@ import {
   User,
   Mail,
   Linkedin,
+  Instagram,
 } from "lucide-react";
 import HeroCanvas from "@/components/HeroCanvas";
 import SectionHeading from "@/components/SectionHeading";
@@ -114,7 +115,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          {/* Quick Direct Email & LinkedIn Contact Options */}
+          {/* Quick Direct Email, LinkedIn & Instagram Contact Options */}
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-xs">
             <a
               href={`mailto:${store.contact.email || "akshajlodhi21@gmail.com"}?subject=Project%20Inquiry%20-%20AKSHAJ%20WEB%20STUDIO`}
@@ -132,6 +133,17 @@ export default function HomePage() {
               <Linkedin className="w-3.5 h-3.5 fill-[#0A66C2]" />
               <span>LinkedIn</span>
             </a>
+            {store.contact.instagramEnabled !== false && (
+              <a
+                href={store.contact.instagramUrl || "https://www.instagram.com/luckybro_9198/"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-purple-500/15 via-pink-500/15 to-orange-500/15 hover:from-purple-500/30 hover:via-pink-500/30 hover:to-orange-500/30 border border-pink-500/40 text-pink-300 hover:text-white font-semibold transition-all shadow-[0_0_15px_rgba(236,72,153,0.2)] group"
+              >
+                <Instagram className="w-3.5 h-3.5 text-pink-400 group-hover:scale-110 transition-transform" />
+                <span>Follow Me on Instagram</span>
+              </a>
+            )}
           </div>
 
           {/* Floating High-Tech Metrics Bar */}
@@ -631,6 +643,20 @@ export default function HomePage() {
                 <Linkedin className="w-3.5 h-3.5 fill-[#0A66C2]" />
                 <span>Connect on LinkedIn</span>
               </a>
+              {store.contact.instagramEnabled !== false && (
+                <>
+                  <span>•</span>
+                  <a
+                    href={store.contact.instagramUrl || "https://www.instagram.com/luckybro_9198/"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-pink-300 hover:text-white flex items-center gap-1.5 font-semibold group"
+                  >
+                    <Instagram className="w-3.5 h-3.5 text-pink-400 group-hover:scale-110 transition-transform" />
+                    <span>Follow Me on Instagram</span>
+                  </a>
+                </>
+              )}
             </div>
           </div>
         </div>

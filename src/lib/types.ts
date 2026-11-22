@@ -146,6 +146,7 @@ export interface ContactInfo {
   whatsapp: string;
   instagramUsername: string;
   instagramUrl: string;
+  instagramEnabled?: boolean;
   businessEmail: string;
   personalEmail: string;
   email: string;

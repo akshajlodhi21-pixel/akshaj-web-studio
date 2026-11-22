@@ -190,6 +190,20 @@ export default function AboutPage() {
               <ExternalLink className="w-3.5 h-3.5 text-[#70b5f9] group-hover:text-white transition-colors" />
             </a>
 
+            {/* Official Follow Me on Instagram Button in Founder Profile Section */}
+            {store.contact.instagramEnabled !== false && (
+              <a
+                href={store.contact.instagramUrl || "https://www.instagram.com/luckybro_9198/"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="py-3 px-4 rounded-2xl bg-gradient-to-r from-purple-500/15 via-pink-500/15 to-orange-500/15 hover:from-purple-500/25 hover:via-pink-500/25 hover:to-orange-500/25 border border-pink-500/40 hover:border-pink-400 text-pink-300 hover:text-white font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(236,72,153,0.2)] group"
+              >
+                <Instagram className="w-4 h-4 text-pink-400 group-hover:scale-110 transition-transform" />
+                <span>Follow Me on Instagram</span>
+                <ExternalLink className="w-3.5 h-3.5 text-pink-400 group-hover:text-white transition-colors" />
+              </a>
+            )}
+
             {/* Direct Email Me Button */}
             <a
               href={`mailto:${store.contact.email || "akshajlodhi21@gmail.com"}?subject=Consultation%20with%20Akshaj%20Lodhi`}
@@ -604,25 +618,30 @@ export default function AboutPage() {
               </a>
 
               {/* Instagram */}
-              <a
-                href={store.contact.instagramUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-4 rounded-2xl bg-pink-500/10 hover:bg-pink-500/20 border border-pink-500/30 transition-all text-xs flex items-center justify-between group"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-pink-500/20 text-pink-400 flex items-center justify-center shrink-0">
-                    <Instagram className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <div className="font-bold text-pink-200">Instagram Profile</div>
-                    <div className="text-[11px] text-pink-400">
-                      @{store.contact.instagramUsername}
+              {store.contact.instagramEnabled !== false && (
+                <a
+                  href={store.contact.instagramUrl || "https://www.instagram.com/luckybro_9198/"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-4 rounded-2xl bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-orange-500/10 hover:from-purple-500/20 hover:via-pink-500/20 hover:to-orange-500/20 border border-pink-500/30 hover:border-pink-500/60 transition-all text-xs flex items-center justify-between group shadow-[0_0_15px_rgba(236,72,153,0.15)]"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-xl bg-pink-500/20 text-pink-400 flex items-center justify-center shrink-0">
+                      <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                    </div>
+                    <div>
+                      <div className="font-bold text-pink-200 group-hover:text-white transition-colors">Instagram Profile</div>
+                      <div className="text-[11px] text-pink-400 font-mono">
+                        @{store.contact.instagramUsername || "luckybro_9198"}
+                      </div>
                     </div>
                   </div>
-                </div>
-                <ExternalLink className="w-3.5 h-3.5 text-pink-400" />
-              </a>
+                  <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-pink-500/20 text-[10px] font-bold text-pink-300 group-hover:text-white transition-colors">
+                    <span>Follow</span>
+                    <ExternalLink className="w-3 h-3 text-pink-400 group-hover:text-white" />
+                  </div>
+                </a>
+              )}
 
               {/* Official LinkedIn */}
               <a

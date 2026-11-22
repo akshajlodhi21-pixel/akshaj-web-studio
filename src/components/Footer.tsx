@@ -210,16 +210,43 @@ export default function Footer() {
                 <span className="truncate text-white font-medium">{store.contact.email || "akshajlodhi21@gmail.com"}</span>
               </a>
 
-              {/* Direct Email Me Action Button */}
-              <div className="pt-1">
+              {/* Instagram Channel */}
+              {store.contact.instagramEnabled !== false && (
+                <a
+                  href={store.contact.instagramUrl || "https://www.instagram.com/luckybro_9198/"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2.5 hover:text-white transition-colors text-pink-300 group"
+                  title="Official Instagram Profile"
+                >
+                  <div className="w-6 h-6 rounded-md bg-gradient-to-tr from-purple-500/20 via-pink-500/20 to-orange-500/20 border border-pink-500/30 flex items-center justify-center shrink-0 group-hover:border-pink-400">
+                    <Instagram className="w-3.5 h-3.5 text-pink-400" />
+                  </div>
+                  <span className="truncate text-xs font-mono">@{store.contact.instagramUsername || "luckybro_9198"}</span>
+                </a>
+              )}
+
+              {/* Action Buttons Row */}
+              <div className="pt-1 flex flex-wrap gap-2">
                 <a
                   href={`mailto:${store.contact.email || "akshajlodhi21@gmail.com"}?subject=Project%20Inquiry%20-%20AKSHAJ%20WEB%20STUDIO`}
-                  className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg border border-gold-500/40 bg-gold-500/10 hover:bg-gold-500/20 text-gold-300 text-xs font-bold transition-all shadow-[0_0_10px_rgba(212,175,55,0.15)] group"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-gold-500/40 bg-gold-500/10 hover:bg-gold-500/20 text-gold-300 text-xs font-bold transition-all shadow-[0_0_10px_rgba(212,175,55,0.15)] group"
                 >
                   <Mail className="w-3.5 h-3.5 text-gold-400 group-hover:scale-110 transition-transform" />
-                  <span>Email Me Directly</span>
-                  <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                  <span>Email Me</span>
                 </a>
+
+                {store.contact.instagramEnabled !== false && (
+                  <a
+                    href={store.contact.instagramUrl || "https://www.instagram.com/luckybro_9198/"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-pink-500/40 bg-gradient-to-r from-purple-500/15 via-pink-500/15 to-orange-500/15 hover:from-purple-500/30 hover:via-pink-500/30 hover:to-orange-500/30 text-pink-300 hover:text-white text-xs font-bold transition-all shadow-[0_0_12px_rgba(236,72,153,0.2)] group"
+                  >
+                    <Instagram className="w-3.5 h-3.5 text-pink-400 group-hover:scale-110 transition-transform" />
+                    <span>Follow Me on Instagram</span>
+                  </a>
+                )}
               </div>
 
               <div className="flex items-start gap-2.5 text-gray-400">
@@ -235,6 +262,20 @@ export default function Footer() {
 
             {/* Social & Contact Icons */}
             <div className="mt-2 pt-3 border-t border-white/10 flex items-center gap-2.5">
+              {/* Official Instagram */}
+              {store.contact.instagramEnabled !== false && (
+                <a
+                  href={store.contact.instagramUrl || "https://www.instagram.com/luckybro_9198/"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-lg bg-dark-900 border border-pink-500/40 text-pink-400 hover:text-white hover:bg-gradient-to-tr hover:from-purple-600/30 hover:via-pink-600/30 hover:to-orange-500/30 hover:border-pink-400 transition-all shadow-[0_0_10px_rgba(236,72,153,0.2)]"
+                  aria-label="Official Instagram Profile"
+                  title="Follow on Instagram: @luckybro_9198"
+                >
+                  <Instagram className="w-4 h-4" />
+                </a>
+              )}
+
               {/* Official LinkedIn */}
               <a
                 href={store.contact.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/"}
@@ -266,17 +307,6 @@ export default function Footer() {
                 aria-label="GitHub"
               >
                 <Github className="w-4 h-4" />
-              </a>
-
-              {/* Instagram */}
-              <a
-                href={store.contact.socials.instagram}
-                target="_blank"
-                rel="noreferrer"
-                className="p-2 rounded-lg bg-dark-900 border border-white/10 text-gray-400 hover:text-pink-400 hover:border-pink-500/40 transition-colors"
-                aria-label="Instagram"
-              >
-                <Instagram className="w-4 h-4" />
               </a>
 
               {/* Twitter / X */}

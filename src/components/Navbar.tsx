@@ -17,6 +17,7 @@ import {
   DollarSign,
   Home,
   Linkedin,
+  Instagram,
 } from "lucide-react";
 import { useStudioStore } from "@/lib/store";
 
@@ -99,7 +100,22 @@ export default function Navbar() {
             </nav>
 
             {/* Right CTAs */}
-            <div className="hidden sm:flex items-center gap-3">
+            <div className="hidden sm:flex items-center gap-2.5">
+              {/* Official Instagram Profile Link */}
+              {store.contact.instagramEnabled !== false && (
+                <a
+                  href={store.contact.instagramUrl || "https://www.instagram.com/luckybro_9198/"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Follow Akshaj Lodhi on Instagram (@luckybro_9198)"
+                  aria-label="Official Instagram Profile"
+                  className="p-2 sm:px-3 sm:py-2 rounded-lg border border-pink-500/35 bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-orange-500/10 hover:from-purple-500/25 hover:via-pink-500/25 hover:to-orange-500/25 text-pink-300 hover:text-white transition-all text-xs font-semibold flex items-center gap-1.5 shadow-[0_0_12px_rgba(236,72,153,0.2)] hover:shadow-[0_0_18px_rgba(236,72,153,0.4)] group"
+                >
+                  <Instagram className="w-4 h-4 text-pink-400 group-hover:scale-110 transition-transform shrink-0" />
+                  <span className="hidden xl:inline">Instagram</span>
+                </a>
+              )}
+
               {/* Official LinkedIn Profile Link */}
               <a
                 href={store.contact.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/"}
@@ -141,6 +157,18 @@ export default function Navbar() {
 
             {/* Mobile Actions Button */}
             <div className="flex sm:hidden items-center gap-2">
+              {store.contact.instagramEnabled !== false && (
+                <a
+                  href={store.contact.instagramUrl || "https://www.instagram.com/luckybro_9198/"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Official Instagram Profile"
+                  aria-label="Official Instagram Profile"
+                  className="p-2 rounded-lg border border-pink-500/40 bg-pink-500/15 text-pink-300 flex items-center justify-center"
+                >
+                  <Instagram className="w-4 h-4 text-pink-400" />
+                </a>
+              )}
               <a
                 href={store.contact.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/"}
                 target="_blank"
@@ -225,6 +253,18 @@ export default function Navbar() {
 
             {/* Bottom actions in drawer */}
             <div className="pt-6 border-t border-white/10 flex flex-col gap-3">
+              {store.contact.instagramEnabled !== false && (
+                <a
+                  href={store.contact.instagramUrl || "https://www.instagram.com/luckybro_9198/"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-3 rounded-xl text-center text-xs text-pink-300 hover:text-white border border-pink-500/40 bg-gradient-to-r from-purple-500/15 via-pink-500/15 to-orange-500/15 flex items-center justify-center gap-2 font-bold transition-all shadow-[0_0_15px_rgba(236,72,153,0.2)]"
+                >
+                  <Instagram className="w-4 h-4 text-pink-400" />
+                  <span>Follow Me on Instagram</span>
+                </a>
+              )}
+
               <a
                 href={store.contact.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/"}
                 target="_blank"

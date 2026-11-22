@@ -56,8 +56,8 @@ export default function ContactPage() {
     "Hi Akshaj Web Studio, I am reaching out to discuss a digital project."
   )}`;
 
-  const igUsername = store.contact.instagramUsername || "akshajwebstudio";
-  const igProfileUrl = store.contact.instagramUrl || `https://instagram.com/${igUsername}`;
+  const igUsername = store.contact.instagramUsername || "luckybro_9198";
+  const igProfileUrl = store.contact.instagramUrl || "https://www.instagram.com/luckybro_9198/";
   const igDirectMessageUrl = `https://ig.me/m/${igUsername}`;
   const officialEmail = store.contact.email || "akshajlodhi21@gmail.com";
   const officialLinkedIn =
@@ -239,16 +239,16 @@ export default function ContactPage() {
           <span className="text-[10px] text-pink-400 mt-0.5">@{igUsername}</span>
         </a>
 
-        {/* 6. Follow on Instagram */}
+        {/* 6. Follow Me on Instagram */}
         <a
           href={igProfileUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="p-4 rounded-2xl bg-gradient-to-br from-purple-500/10 to-pink-500/10 hover:from-purple-500/20 hover:to-pink-500/20 border border-purple-500/30 text-purple-300 transition-all flex flex-col items-center justify-center text-center group"
+          className="p-4 rounded-2xl bg-gradient-to-r from-purple-500/15 via-pink-500/15 to-orange-500/15 hover:from-purple-500/30 hover:via-pink-500/30 hover:to-orange-500/30 border border-pink-500/40 hover:border-pink-500/70 text-pink-200 hover:text-white transition-all flex flex-col items-center justify-center text-center group shadow-[0_4px_20px_rgba(236,72,153,0.2)]"
         >
-          <UserPlus className="w-6 h-6 mb-2 group-hover:scale-110 transition-transform" />
-          <span className="text-xs font-bold text-white">Follow on Instagram</span>
-          <span className="text-[10px] text-purple-400 mt-0.5">Official Account</span>
+          <Instagram className="w-6 h-6 mb-2 text-pink-400 group-hover:scale-110 transition-transform" />
+          <span className="text-xs font-bold text-white">Follow Me on Instagram</span>
+          <span className="text-[10px] text-pink-400 mt-0.5">@{igUsername}</span>
         </a>
       </div>
 

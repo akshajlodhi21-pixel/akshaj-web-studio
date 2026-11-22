@@ -35,16 +35,16 @@ import {
 } from "firebase/firestore";
 
 const STORAGE_KEYS = {
-  PROFILE: "aws_store_profile_v3",
-  CONTACT: "aws_store_contact_v3",
-  SERVICES: "aws_store_services_v3",
-  PROJECTS: "aws_store_projects_v3",
-  PRICING: "aws_store_pricing_v3",
-  INQUIRIES: "aws_store_inquiries_v3",
-  PAYMENTS: "aws_store_payments_v3",
-  TESTIMONIALS: "aws_store_testimonials_v3",
-  SETTINGS: "aws_store_settings_v3",
-  ADMIN_SESSION: "aws_store_admin_auth_v3",
+  PROFILE: "aws_store_profile_v4",
+  CONTACT: "aws_store_contact_v4",
+  SERVICES: "aws_store_services_v4",
+  PROJECTS: "aws_store_projects_v4",
+  PRICING: "aws_store_pricing_v4",
+  INQUIRIES: "aws_store_inquiries_v4",
+  PAYMENTS: "aws_store_payments_v4",
+  TESTIMONIALS: "aws_store_testimonials_v4",
+  SETTINGS: "aws_store_settings_v4",
+  ADMIN_SESSION: "aws_store_admin_auth_v4",
 };
 
 class StudioStore {
@@ -110,6 +110,21 @@ class StudioStore {
           ...this.contact.socials,
           linkedin: "https://www.linkedin.com/in/lucky-bro-b4ab043a1/",
         };
+      }
+      if (!this.contact.instagramUsername || this.contact.instagramUsername === "akshajwebstudio") {
+        this.contact.instagramUsername = "luckybro_9198";
+      }
+      if (!this.contact.instagramUrl || this.contact.instagramUrl.includes("akshajwebstudio")) {
+        this.contact.instagramUrl = "https://www.instagram.com/luckybro_9198/";
+      }
+      if (!this.contact.socials?.instagram || this.contact.socials.instagram.includes("akshajwebstudio")) {
+        this.contact.socials = {
+          ...this.contact.socials,
+          instagram: "https://www.instagram.com/luckybro_9198/",
+        };
+      }
+      if (this.contact.instagramEnabled === undefined) {
+        this.contact.instagramEnabled = true;
       }
       this.services = getStored(STORAGE_KEYS.SERVICES, initialServices);
       this.projects = getStored(STORAGE_KEYS.PROJECTS, initialProjects);
