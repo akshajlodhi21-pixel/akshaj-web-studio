@@ -17,6 +17,7 @@ import {
   MapPin,
   Clock,
 } from "lucide-react";
+import XIcon from "@/components/XIcon";
 import { useStudioStore } from "@/lib/store";
 
 export default function Footer() {
@@ -228,6 +229,22 @@ export default function Footer() {
                 </a>
               )}
 
+              {/* Twitter / X Channel */}
+              {store.contact.twitterEnabled !== false && (
+                <a
+                  href={store.contact.twitterUrl || store.contact.socials.twitter || "https://x.com/LuckyBro199620"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2.5 hover:text-white transition-colors text-gray-300 group"
+                  title="Official Twitter / X Profile (@LuckyBro199620)"
+                >
+                  <div className="w-6 h-6 rounded-md bg-white/5 border border-white/20 flex items-center justify-center shrink-0 group-hover:border-gold-400 group-hover:bg-gold-500/10 transition-colors">
+                    <XIcon className="w-3.5 h-3.5 text-gray-300 group-hover:text-gold-400" />
+                  </div>
+                  <span className="truncate text-xs font-mono">@{store.contact.twitterUsername || "LuckyBro199620"}</span>
+                </a>
+              )}
+
               {/* Action Buttons Row */}
               <div className="pt-1 flex flex-wrap gap-2">
                 <a
@@ -247,6 +264,19 @@ export default function Footer() {
                   >
                     <Instagram className="w-3.5 h-3.5 text-pink-400 group-hover:scale-110 transition-transform" />
                     <span>Follow Me on Instagram</span>
+                  </a>
+                )}
+
+                {store.contact.twitterEnabled !== false && (
+                  <a
+                    href={store.contact.twitterUrl || store.contact.socials.twitter || "https://x.com/LuckyBro199620"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/20 bg-white/5 hover:border-gold-500/40 hover:bg-gold-500/10 text-gray-200 hover:text-white text-xs font-bold transition-all shadow-[0_0_12px_rgba(255,255,255,0.05)] group"
+                    title="Follow on X (Twitter)"
+                  >
+                    <XIcon className="w-3.5 h-3.5 text-gray-300 group-hover:text-gold-400 group-hover:scale-110 transition-transform" />
+                    <span>Follow on X</span>
                   </a>
                 )}
               </div>
@@ -290,6 +320,20 @@ export default function Footer() {
                 <Linkedin className="w-4 h-4 fill-[#0A66C2]" />
               </a>
 
+              {/* Twitter / X */}
+              {store.contact.twitterEnabled !== false && (
+                <a
+                  href={store.contact.twitterUrl || store.contact.socials.twitter || "https://x.com/LuckyBro199620"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-lg bg-dark-900 border border-white/20 text-gray-300 hover:text-white hover:bg-white/10 hover:border-gold-400 transition-all shadow-[0_0_10px_rgba(255,255,255,0.05)]"
+                  aria-label="Official Twitter / X Profile"
+                  title="Follow on X: @LuckyBro199620"
+                >
+                  <XIcon className="w-4 h-4" />
+                </a>
+              )}
+
               {/* Official Gmail Mailto */}
               <a
                 href={`mailto:${store.contact.email || "akshajlodhi21@gmail.com"}`}
@@ -309,17 +353,6 @@ export default function Footer() {
                 aria-label="GitHub"
               >
                 <Github className="w-4 h-4" />
-              </a>
-
-              {/* Twitter / X */}
-              <a
-                href={store.contact.socials.twitter}
-                target="_blank"
-                rel="noreferrer"
-                className="p-2 rounded-lg bg-dark-900 border border-white/10 text-gray-400 hover:text-gold-400 hover:border-gold-500/40 transition-colors"
-                aria-label="Twitter / X"
-              >
-                <Twitter className="w-4 h-4" />
               </a>
             </div>
           </div>

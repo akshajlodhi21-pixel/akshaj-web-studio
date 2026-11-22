@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     description:
       "AKSHAJ WEB STUDIO specializes in custom Website Development, native App Development, AI Solutions, and futuristic Web Design.",
     images: ["https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200"],
-    creator: "@akshajwebstudio",
+    creator: "@LuckyBro199620",
   },
   robots: {
     index: true,
@@ -127,7 +127,11 @@ export default function RootLayout({
           jobTitle: "Founder & Developer",
           image: "https://akshaj-web-studio.vercel.app/images/akshaj-lodhi.jpg",
           email: "akshajlodhi21@gmail.com",
-          sameAs: ["https://www.linkedin.com/in/lucky-bro-b4ab043a1/"],
+          sameAs: [
+            "https://www.linkedin.com/in/lucky-bro-b4ab043a1/",
+            "https://x.com/LuckyBro199620",
+            "https://www.instagram.com/luckybro_9198/",
+          ],
         },
         email: "akshajlodhi21@gmail.com",
         telephone: "+91 91985 62197",
@@ -139,6 +143,7 @@ export default function RootLayout({
         sameAs: [
           "https://github.com/akshajlodhi21-pixel",
           "https://www.linkedin.com/in/lucky-bro-b4ab043a1/",
+          "https://x.com/LuckyBro199620",
           "https://www.instagram.com/luckybro_9198/",
         ],
         knowsAbout: [

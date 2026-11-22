@@ -126,6 +126,21 @@ class StudioStore {
       if (this.contact.instagramEnabled === undefined) {
         this.contact.instagramEnabled = true;
       }
+      if (!this.contact.twitterUsername || this.contact.twitterUsername === "akshajwebstudio") {
+        this.contact.twitterUsername = "LuckyBro199620";
+      }
+      if (!this.contact.twitterUrl || this.contact.twitterUrl.includes("akshajwebstudio")) {
+        this.contact.twitterUrl = "https://x.com/LuckyBro199620";
+      }
+      if (!this.contact.socials?.twitter || this.contact.socials.twitter.includes("akshajwebstudio")) {
+        this.contact.socials = {
+          ...this.contact.socials,
+          twitter: "https://x.com/LuckyBro199620",
+        };
+      }
+      if (this.contact.twitterEnabled === undefined) {
+        this.contact.twitterEnabled = true;
+      }
       this.services = getStored(STORAGE_KEYS.SERVICES, initialServices);
       this.projects = getStored(STORAGE_KEYS.PROJECTS, initialProjects);
       this.pricing = getStored(STORAGE_KEYS.PRICING, initialPricingCategories);

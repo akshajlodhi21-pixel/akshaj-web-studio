@@ -36,6 +36,7 @@ import {
   Zap,
   Linkedin,
 } from "lucide-react";
+import XIcon from "@/components/XIcon";
 import { useStudioStore } from "@/lib/store";
 
 export default function AboutPage() {
@@ -667,6 +668,33 @@ export default function AboutPage() {
                   <ExternalLink className="w-3 h-3" />
                 </div>
               </a>
+
+              {/* Official Twitter / X */}
+              {store.contact.twitterEnabled !== false && (
+                <a
+                  href={store.contact.twitterUrl || store.contact.socials.twitter || "https://x.com/LuckyBro199620"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-4 rounded-2xl bg-dark-900/90 hover:bg-dark-850 border border-white/20 hover:border-gold-500/50 transition-all text-xs flex items-center justify-between group shadow-[0_0_15px_rgba(255,255,255,0.05)]"
+                  title="Follow Akshaj Lodhi on X / Twitter (@LuckyBro199620)"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-xl bg-white/10 text-white flex items-center justify-center shrink-0 group-hover:bg-gold-500/20 group-hover:text-gold-400 transition-colors">
+                      <XIcon className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                    </div>
+                    <div>
+                      <div className="font-bold text-gray-200 group-hover:text-white transition-colors">Twitter / X Profile</div>
+                      <div className="text-[11px] text-gray-400 font-mono">
+                        @{store.contact.twitterUsername || "LuckyBro199620"}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/10 text-[10px] font-bold text-gray-300 group-hover:text-gold-300 group-hover:bg-gold-500/20 transition-colors">
+                    <span>Follow</span>
+                    <ExternalLink className="w-3 h-3 text-gray-400 group-hover:text-gold-300" />
+                  </div>
+                </a>
+              )}
 
               {/* GitHub */}
               <a

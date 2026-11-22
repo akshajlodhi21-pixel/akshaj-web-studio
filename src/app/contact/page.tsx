@@ -24,6 +24,7 @@ import {
   UserPlus,
   Loader2,
 } from "lucide-react";
+import XIcon from "@/components/XIcon";
 import SectionHeading from "@/components/SectionHeading";
 import { useStudioStore } from "@/lib/store";
 import { generateId } from "@/lib/utils";
@@ -59,6 +60,8 @@ export default function ContactPage() {
   const igUsername = store.contact.instagramUsername || "luckybro_9198";
   const igProfileUrl = store.contact.instagramUrl || "https://www.instagram.com/luckybro_9198/";
   const igDirectMessageUrl = `https://ig.me/m/${igUsername}`;
+  const twitterUsername = store.contact.twitterUsername || "LuckyBro199620";
+  const twitterUrl = store.contact.twitterUrl || store.contact.socials.twitter || "https://x.com/LuckyBro199620";
   const officialEmail = store.contact.email || "akshajlodhi21@gmail.com";
   const officialLinkedIn =
     store.contact.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/";
@@ -181,8 +184,8 @@ export default function ContactPage() {
         </Link>
       </div>
 
-      {/* 6 Prominent Contact Action Buttons */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3.5 mb-14">
+      {/* Prominent Contact Action Buttons */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-3.5 mb-14">
         {/* 1. Chat on WhatsApp */}
         <a
           href={waUrl}
@@ -207,15 +210,20 @@ export default function ContactPage() {
           <span className="text-[10px] text-[#70b5f9] mt-0.5">Official Profile</span>
         </a>
 
-        {/* 3. Email Me Directly */}
-        <a
-          href={mailtoUrl}
-          className="p-4 rounded-2xl bg-gold-500/10 hover:bg-gold-500/20 border border-gold-500/40 text-gold-300 transition-all flex flex-col items-center justify-center text-center group shadow-[0_4px_20px_rgba(212,175,55,0.15)]"
-        >
-          <Mail className="w-6 h-6 mb-2 group-hover:scale-110 transition-transform" />
-          <span className="text-xs font-bold text-white">Email Me</span>
-          <span className="text-[10px] text-gold-400 mt-0.5 truncate max-w-[130px]">{officialEmail}</span>
-        </a>
+        {/* 3. Follow on X (Twitter) */}
+        {store.contact.twitterEnabled !== false && (
+          <a
+            href={twitterUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-4 rounded-2xl bg-dark-900/90 hover:bg-dark-850 border border-white/20 hover:border-gold-500/50 text-gray-200 hover:text-white transition-all flex flex-col items-center justify-center text-center group shadow-[0_4px_20px_rgba(255,255,255,0.05)]"
+            title="Follow Akshaj Lodhi on X / Twitter"
+          >
+            <XIcon className="w-6 h-6 mb-2 text-gray-200 group-hover:text-gold-400 group-hover:scale-110 transition-transform" />
+            <span className="text-xs font-bold text-white">Follow on X</span>
+            <span className="text-[10px] text-gray-400 mt-0.5 font-mono">@{twitterUsername}</span>
+          </a>
+        )}
 
         {/* 4. Follow on Instagram */}
         <a
@@ -229,16 +237,14 @@ export default function ContactPage() {
           <span className="text-[10px] text-pink-400 mt-0.5">@{igUsername}</span>
         </a>
 
-        {/* 5. Official Website */}
+        {/* 5. Email Me Directly */}
         <a
-          href="https://akshaj-web-studio.vercel.app/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="p-4 rounded-2xl bg-dark-900 hover:bg-dark-850 border border-white/10 hover:border-gold-500/40 text-gray-200 transition-all flex flex-col items-center justify-center text-center group"
+          href={mailtoUrl}
+          className="p-4 rounded-2xl bg-gold-500/10 hover:bg-gold-500/20 border border-gold-500/40 text-gold-300 transition-all flex flex-col items-center justify-center text-center group shadow-[0_4px_20px_rgba(212,175,55,0.15)]"
         >
-          <ExternalLink className="w-6 h-6 mb-2 text-gold-400 group-hover:scale-110 transition-transform" />
-          <span className="text-xs font-bold text-white">Official Website</span>
-          <span className="text-[10px] text-gold-400 mt-0.5">akshaj-web-studio</span>
+          <Mail className="w-6 h-6 mb-2 group-hover:scale-110 transition-transform" />
+          <span className="text-xs font-bold text-white">Email Me</span>
+          <span className="text-[10px] text-gold-400 mt-0.5 truncate max-w-[130px]">{officialEmail}</span>
         </a>
 
         {/* 6. Call Now */}
@@ -249,6 +255,18 @@ export default function ContactPage() {
           <PhoneCall className="w-6 h-6 mb-2 text-emerald-400 group-hover:scale-110 transition-transform" />
           <span className="text-xs font-bold text-white">Call Direct</span>
           <span className="text-[10px] text-gray-400 mt-0.5">+91 91985 62197</span>
+        </a>
+
+        {/* 7. Official Website */}
+        <a
+          href="https://akshaj-web-studio.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="p-4 rounded-2xl bg-dark-900 hover:bg-dark-850 border border-white/10 hover:border-gold-500/40 text-gray-200 transition-all flex flex-col items-center justify-center text-center group"
+        >
+          <ExternalLink className="w-6 h-6 mb-2 text-gold-400 group-hover:scale-110 transition-transform" />
+          <span className="text-xs font-bold text-white">Official Website</span>
+          <span className="text-[10px] text-gold-400 mt-0.5">akshaj-web-studio</span>
         </a>
       </div>
 
@@ -439,15 +457,23 @@ export default function ContactPage() {
                 <span className="truncate">Facebook</span>
               </a>
 
-              <a
-                href={store.contact.socials.twitter}
-                target="_blank"
-                rel="noreferrer"
-                className="col-span-2 flex items-center gap-2 p-2.5 rounded-xl bg-dark-900 border border-white/10 text-gray-300 hover:text-white hover:border-gold-500/40 transition-colors"
-              >
-                <Twitter className="w-4 h-4 text-gold-400 shrink-0" />
-                <span className="truncate">Twitter / X</span>
-              </a>
+              {store.contact.twitterEnabled !== false && (
+                <a
+                  href={twitterUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="col-span-2 flex items-center justify-between p-2.5 rounded-xl bg-dark-900 border border-white/20 text-gray-300 hover:text-white hover:border-gold-500/50 transition-colors group"
+                  title="Follow Akshaj Lodhi on X / Twitter (@LuckyBro199620)"
+                >
+                  <div className="flex items-center gap-2">
+                    <XIcon className="w-4 h-4 text-gray-300 group-hover:text-gold-400 shrink-0 group-hover:scale-110 transition-transform" />
+                    <span className="font-semibold text-xs text-white">Twitter / X</span>
+                  </div>
+                  <span className="text-[10px] px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-gray-400 font-mono group-hover:text-gold-300">
+                    @{twitterUsername} &rarr;
+                  </span>
+                </a>
+              )}
             </div>
           </div>
         </div>

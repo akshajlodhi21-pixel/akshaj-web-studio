@@ -30,6 +30,7 @@ import {
   Calculator,
   Lightbulb,
 } from "lucide-react";
+import XIcon from "@/components/XIcon";
 import HeroCanvas from "@/components/HeroCanvas";
 import SectionHeading from "@/components/SectionHeading";
 import ServiceModal from "@/components/ServiceModal";
@@ -161,6 +162,18 @@ export default function HomePage() {
               >
                 <Instagram className="w-3.5 h-3.5 text-pink-400 group-hover:scale-110 transition-transform" />
                 <span>Follow Me on Instagram</span>
+              </a>
+            )}
+            {store.contact.twitterEnabled !== false && (
+              <a
+                href={store.contact.twitterUrl || store.contact.socials.twitter || "https://x.com/LuckyBro199620"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-dark-900/90 hover:bg-dark-850 border border-white/20 hover:border-gold-500/50 text-gray-200 hover:text-white font-semibold transition-all shadow-[0_0_12px_rgba(255,255,255,0.05)] group"
+                title="Follow Akshaj Lodhi on X / Twitter (@LuckyBro199620)"
+              >
+                <XIcon className="w-3.5 h-3.5 text-gray-300 group-hover:text-gold-400 group-hover:scale-110 transition-transform" />
+                <span>Follow on X</span>
               </a>
             )}
           </div>
@@ -679,6 +692,21 @@ export default function HomePage() {
                   >
                     <Instagram className="w-3.5 h-3.5 text-pink-400 group-hover:scale-110 transition-transform" />
                     <span>Follow Me on Instagram</span>
+                  </a>
+                </>
+              )}
+              {store.contact.twitterEnabled !== false && (
+                <>
+                  <span>•</span>
+                  <a
+                    href={store.contact.twitterUrl || store.contact.socials.twitter || "https://x.com/LuckyBro199620"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-300 hover:text-white flex items-center gap-1.5 font-semibold group"
+                    title="Follow Akshaj Lodhi on X / Twitter (@LuckyBro199620)"
+                  >
+                    <XIcon className="w-3.5 h-3.5 text-gray-300 group-hover:text-gold-400 group-hover:scale-110 transition-transform" />
+                    <span>Follow on X</span>
                   </a>
                 </>
               )}

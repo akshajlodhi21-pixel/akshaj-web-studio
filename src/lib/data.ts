@@ -86,6 +86,9 @@ export const initialContactInfo: ContactInfo = {
   instagramUsername: "luckybro_9198",
   instagramUrl: "https://www.instagram.com/luckybro_9198/",
   instagramEnabled: true,
+  twitterUsername: "LuckyBro199620",
+  twitterUrl: "https://x.com/LuckyBro199620",
+  twitterEnabled: true,
   businessEmail: "akshajlodhi21@gmail.com",
   personalEmail: "akshajlodhi21@gmail.com",
   email: "akshajlodhi21@gmail.com",
@@ -96,7 +99,7 @@ export const initialContactInfo: ContactInfo = {
   socials: {
     github: "https://github.com/akshajlodhi21-pixel",
     linkedin: "https://www.linkedin.com/in/lucky-bro-b4ab043a1/",
-    twitter: "https://twitter.com/akshajwebstudio",
+    twitter: "https://x.com/LuckyBro199620",
     instagram: "https://www.instagram.com/luckybro_9198/",
     facebook: "https://facebook.com/akshajwebstudio",
     youtube: "https://youtube.com/@akshajwebstudio",

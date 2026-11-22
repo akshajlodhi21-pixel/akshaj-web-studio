@@ -19,6 +19,7 @@ import {
   Linkedin,
   Instagram,
 } from "lucide-react";
+import XIcon from "@/components/XIcon";
 import { useStudioStore } from "@/lib/store";
 
 export default function Navbar() {
@@ -129,6 +130,21 @@ export default function Navbar() {
                 <Linkedin className="w-4 h-4 text-[#0A66C2] group-hover:text-white fill-[#0A66C2] group-hover:fill-white transition-colors shrink-0" />
                 <span className="hidden xl:inline">LinkedIn</span>
               </a>
+
+              {/* Official Twitter / X Profile Link */}
+              {store.contact.twitterEnabled !== false && (
+                <a
+                  href={store.contact.twitterUrl || store.contact.socials.twitter || "https://x.com/LuckyBro199620"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Follow Akshaj Lodhi on X (@LuckyBro199620)"
+                  aria-label="Official X / Twitter Profile"
+                  className="p-2 sm:px-3 sm:py-2 rounded-lg border border-white/20 bg-dark-900/80 hover:bg-gold-500/10 text-gray-300 hover:text-white hover:border-gold-500/50 transition-all text-xs font-semibold flex items-center gap-1.5 shadow-[0_0_12px_rgba(255,255,255,0.06)] hover:shadow-[0_0_18px_rgba(212,175,55,0.35)] group"
+                >
+                  <XIcon className="w-3.5 h-3.5 text-gray-300 group-hover:text-gold-400 group-hover:scale-110 transition-transform shrink-0" />
+                  <span className="hidden xl:inline">X (Twitter)</span>
+                </a>
+              )}
 
               {/* Admin Portal icon */}
               <Link
@@ -275,6 +291,20 @@ export default function Navbar() {
                 <Linkedin className="w-4 h-4 text-[#0A66C2] fill-[#0A66C2]" />
                 <span>Connect on LinkedIn</span>
               </a>
+
+              {store.contact.twitterEnabled !== false && (
+                <a
+                  href={store.contact.twitterUrl || store.contact.socials.twitter || "https://x.com/LuckyBro199620"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-3 rounded-xl text-center text-xs text-gray-200 hover:text-white border border-white/20 hover:border-gold-500/50 bg-dark-900/80 hover:bg-gold-500/10 flex items-center justify-center gap-2 font-bold transition-all shadow-[0_0_15px_rgba(255,255,255,0.05)] group"
+                  title="Follow Akshaj Lodhi on X / Twitter (@LuckyBro199620)"
+                  aria-label="Follow on X (Twitter)"
+                >
+                  <XIcon className="w-4 h-4 text-gray-200 group-hover:text-gold-400" />
+                  <span>Follow on X (@LuckyBro199620)</span>
+                </a>
+              )}
 
               <Link
                 href="/hire"

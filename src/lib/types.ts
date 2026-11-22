@@ -149,6 +149,9 @@ export interface ContactInfo {
   instagramUsername: string;
   instagramUrl: string;
   instagramEnabled?: boolean;
+  twitterUsername?: string;
+  twitterUrl?: string;
+  twitterEnabled?: boolean;
   businessEmail: string;
   personalEmail: string;
   email: string;
