@@ -28,6 +28,8 @@ function HireFormContent() {
   const store = useStudioStore();
   const searchParams = useSearchParams();
   const preselectedService = searchParams.get("service") || "";
+  const preselectedDescription = searchParams.get("description") || "";
+  const preselectedBudget = searchParams.get("budget") || "";
 
   const [formData, setFormData] = useState({
     clientName: "",
@@ -36,8 +38,8 @@ function HireFormContent() {
     whatsappNumber: "",
     businessName: "",
     requiredService: preselectedService || "Website Development",
-    projectDescription: "",
-    budget: "₹30,000 - ₹60,000 (Professional Growth)",
+    projectDescription: preselectedDescription || "",
+    budget: preselectedBudget || "₹30,000 - ₹60,000 (Professional Growth)",
     expectedDeadline: "Normal (2 - 4 Weeks)",
     referenceWebsite: "",
   });
@@ -47,10 +49,15 @@ function HireFormContent() {
   const [apiError, setApiError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (preselectedService) {
-      setFormData((prev) => ({ ...prev, requiredService: preselectedService }));
+    if (preselectedService || preselectedDescription || preselectedBudget) {
+      setFormData((prev) => ({
+        ...prev,
+        requiredService: preselectedService || prev.requiredService,
+        projectDescription: preselectedDescription || prev.projectDescription,
+        budget: preselectedBudget || prev.budget,
+      }));
     }
-  }, [preselectedService]);
+  }, [preselectedService, preselectedDescription, preselectedBudget]);
 
   const budgetOptions = [
     "₹15,000 - ₹30,000 (Starter / MVP)",

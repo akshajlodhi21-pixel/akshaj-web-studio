@@ -45,6 +45,7 @@ export default function Navbar() {
     { name: "About Me", href: "/about", icon: User },
     { name: "Services", href: "/services", icon: Layers },
     { name: "Portfolio", href: "/portfolio", icon: Briefcase },
+    { name: "Studio Tools", href: "/#website-builder-tool", icon: Sparkles },
     { name: "Pricing", href: "/pricing", icon: DollarSign },
     { name: "Payment", href: "/payment", icon: CreditCard },
     { name: "Contact", href: "/contact", icon: PhoneCall },

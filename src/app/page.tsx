@@ -25,11 +25,19 @@ import {
   Mail,
   Linkedin,
   Instagram,
+  Palette,
+  Calculator,
+  Lightbulb,
 } from "lucide-react";
 import HeroCanvas from "@/components/HeroCanvas";
 import SectionHeading from "@/components/SectionHeading";
 import ServiceModal from "@/components/ServiceModal";
 import ProjectModal from "@/components/ProjectModal";
+import WebsiteBuilderTool from "@/components/WebsiteBuilderTool";
+import CostEstimator from "@/components/CostEstimator";
+import IdeaGenerator from "@/components/IdeaGenerator";
+import InteractivePortfolio from "@/components/InteractivePortfolio";
+import LiveContactExperience from "@/components/LiveContactExperience";
 import { useStudioStore } from "@/lib/store";
 import { ServiceItem, ProjectItem } from "@/lib/types";
 
@@ -41,7 +49,7 @@ export default function HomePage() {
   return (
     <div className="relative overflow-hidden">
       {/* ========================================================
-          HERO SECTION
+          1. HERO SECTION (INTERACTIVE PARTICLE CANVAS & HEADLINE)
          ======================================================== */}
       <section className="relative min-h-[95vh] flex items-center justify-center pt-16 pb-20 px-4 sm:px-6 lg:px-8 cyber-grid">
         {/* Interactive Particle Animation Canvas */}
@@ -65,17 +73,17 @@ export default function HomePage() {
             AKSHAJ <span className="text-gold-gradient">WEB STUDIO</span>
           </h1>
 
-          {/* Tagline */}
+          {/* Main Tagline */}
           <p className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-200 tracking-wide mb-6">
             &ldquo;{store.settings.tagline}&rdquo;
           </p>
 
           {/* Introduction exact text */}
-          <p className="max-w-3xl mx-auto text-gray-300 text-base sm:text-lg md:text-xl font-normal leading-relaxed mb-10">
+          <p className="max-w-3xl mx-auto text-gray-300 text-base sm:text-lg md:text-xl font-normal leading-relaxed mb-8">
             {store.settings.heroIntroduction}
           </p>
 
-          {/* The 4 Required CTA Buttons */}
+          {/* The 4 Core Navigation CTAs */}
           <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 max-w-2xl mx-auto">
             {/* Button 1: Hire Me */}
             <Link
@@ -115,7 +123,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          {/* Quick Direct Email, LinkedIn & Instagram Contact Options */}
+          {/* Direct Verified Contact Channels */}
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-xs">
             <a
               href={`mailto:${store.contact.email || "akshajlodhi21@gmail.com"}?subject=Project%20Inquiry%20-%20AKSHAJ%20WEB%20STUDIO`}
@@ -146,8 +154,51 @@ export default function HomePage() {
             )}
           </div>
 
+          {/* Interactive Tools Quick Access Navigation Bar */}
+          <div className="mt-8 pt-6 border-t border-white/10 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs">
+            <span className="text-[11px] font-mono text-gold-400 uppercase tracking-widest mr-1 flex items-center gap-1.5 font-bold">
+              <Sparkles className="w-3.5 h-3.5 text-gold-400" />
+              <span>Interactive Studio Tools:</span>
+            </span>
+            <a
+              href="#website-builder-tool"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-dark-900/90 border border-gold-500/30 hover:border-gold-400 text-gray-200 hover:text-white transition-all hover:bg-gold-500/10 shadow-sm"
+            >
+              <Palette className="w-3.5 h-3.5 text-gold-400" />
+              <span>Build Your Website Tool</span>
+            </a>
+            <a
+              href="#cost-estimator"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-dark-900/90 border border-gold-500/30 hover:border-gold-400 text-gray-200 hover:text-white transition-all hover:bg-gold-500/10 shadow-sm"
+            >
+              <Calculator className="w-3.5 h-3.5 text-gold-400" />
+              <span>Cost Estimator</span>
+            </a>
+            <a
+              href="#interactive-portfolio"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-dark-900/90 border border-gold-500/30 hover:border-gold-400 text-gray-200 hover:text-white transition-all hover:bg-gold-500/10 shadow-sm"
+            >
+              <Layers className="w-3.5 h-3.5 text-gold-400" />
+              <span>Interactive Portfolio</span>
+            </a>
+            <a
+              href="#idea-generator"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-dark-900/90 border border-gold-500/30 hover:border-gold-400 text-gray-200 hover:text-white transition-all hover:bg-gold-500/10 shadow-sm"
+            >
+              <Lightbulb className="w-3.5 h-3.5 text-gold-400" />
+              <span>AI Idea Generator</span>
+            </a>
+            <a
+              href="#live-contact-experience"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-dark-900/90 border border-gold-500/30 hover:border-gold-400 text-gray-200 hover:text-white transition-all hover:bg-gold-500/10 shadow-sm"
+            >
+              <PhoneCall className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Live Contact</span>
+            </a>
+          </div>
+
           {/* Floating High-Tech Metrics Bar */}
-          <div className="mt-16 sm:mt-20 grid grid-cols-2 md:grid-cols-4 gap-4 p-5 sm:p-6 rounded-2xl glass-panel border border-gold-500/20 max-w-4xl mx-auto text-left">
+          <div className="mt-14 sm:mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 p-5 sm:p-6 rounded-2xl glass-panel border border-gold-500/20 max-w-4xl mx-auto text-left shadow-gold-sm">
             <div className="p-3 border-r border-white/5 last:border-none">
               <div className="text-2xl sm:text-3xl font-extrabold text-gold-gradient font-mono">
                 {store.profile.projectsCompleted}+
@@ -188,7 +239,7 @@ export default function HomePage() {
       </section>
 
       {/* ========================================================
-          SERVICES PREVIEW SECTION (WITH IMAGES)
+          2. BESPOKE DIGITAL OFFERINGS (SERVICES GRID)
          ======================================================== */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
         <SectionHeading
@@ -285,94 +336,28 @@ export default function HomePage() {
       </section>
 
       {/* ========================================================
-          FEATURED PROJECTS SHOWCASE (WITH VIDEO/DEMO)
+          3. BUILD YOUR WEBSITE INTERACTIVE TOOL
          ======================================================== */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10 border-t border-white/5">
-        <SectionHeading
-          badge="Signature Creations"
-          title="Digital Craftsmanship In Action"
-          subtitle="Explore selected applications, enterprise web portals, and AI systems engineered by Akshaj Web Studio for global clients."
-        />
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {store.projects.slice(0, 3).map((project) => (
-            <div
-              key={project.id}
-              className="glass-panel glass-panel-hover rounded-3xl overflow-hidden border border-gold-500/20 flex flex-col justify-between group cursor-pointer"
-              onClick={() => setSelectedProject(project)}
-            >
-              <div className="relative w-full h-52 bg-dark-900 overflow-hidden">
-                <Image
-                  src={project.imageUrl}
-                  alt={project.title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/20 to-transparent" />
-                <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-dark-950/90 border border-gold-500/40 text-[11px] font-semibold text-gold-300">
-                  {project.category}
-                </span>
-
-                {project.videoUrl && (
-                  <div className="absolute bottom-4 right-4 p-2 rounded-full bg-dark-950/80 border border-gold-500/40 text-gold-300 flex items-center gap-1.5 text-xs font-mono">
-                    <Play className="w-3.5 h-3.5 fill-gold-400 text-gold-400" />
-                    <span>Video Walkthrough</span>
-                  </div>
-                )}
-              </div>
-
-              <div className="p-6 flex-1 flex flex-col justify-between">
-                <div>
-                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-gold-300 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-400 text-xs sm:text-sm leading-relaxed mb-4 line-clamp-2">
-                    {project.description}
-                  </p>
-
-                  <div className="flex flex-wrap gap-1.5 mb-6">
-                    {project.technologies.slice(0, 3).map((tech, i) => (
-                      <span
-                        key={i}
-                        className="px-2 py-0.5 rounded bg-dark-900 border border-white/10 text-[10px] text-gray-300 font-mono"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs">
-                  <span className="text-gold-400 font-semibold group-hover:underline flex items-center gap-1">
-                    <span>Inspect Case Study</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </span>
-
-                  {project.liveUrl && (
-                    <span className="text-gray-400 flex items-center gap-1 hover:text-white">
-                      <span>Live Site</span>
-                      <ExternalLink className="w-3 h-3" />
-                    </span>
-                  )}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-12 text-center">
-          <Link
-            href="/portfolio"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-gold-500/40 bg-gold-500/10 text-gold-300 text-sm font-bold hover:bg-gold-500/20 transition-all shadow-gold-sm"
-          >
-            <span>Explore Complete Portfolio</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
+      <section className="border-t border-white/5">
+        <WebsiteBuilderTool />
       </section>
 
       {/* ========================================================
-          MEET THE FOUNDER SECTION (PHOTO ON LEFT, BIOGRAPHY ON RIGHT)
+          4. PROJECT COST ESTIMATOR
+         ======================================================== */}
+      <section className="border-t border-white/5">
+        <CostEstimator />
+      </section>
+
+      {/* ========================================================
+          5. INTERACTIVE PORTFOLIO & CATEGORY FILTER SHOWCASE
+         ======================================================== */}
+      <section className="border-t border-white/5">
+        <InteractivePortfolio />
+      </section>
+
+      {/* ========================================================
+          6. MEET THE FOUNDER SECTION (PRESERVING FOUNDER PHOTO & BIO)
          ======================================================== */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10 border-t border-white/5">
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -476,7 +461,14 @@ export default function HomePage() {
       </section>
 
       {/* ========================================================
-          WHY CHOOSE US / VALUE PROPOSITION
+          7. AI BUSINESS IDEA GENERATOR
+         ======================================================== */}
+      <section className="border-t border-white/5">
+        <IdeaGenerator />
+      </section>
+
+      {/* ========================================================
+          8. WHY CHOOSE US / VALUE PROPOSITION
          ======================================================== */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10 border-t border-white/5">
         <SectionHeading
@@ -529,7 +521,7 @@ export default function HomePage() {
       </section>
 
       {/* ========================================================
-          TESTIMONIALS SECTION
+          9. CLIENT ENDORSEMENTS
          ======================================================== */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10 border-t border-white/5">
         <SectionHeading
@@ -578,9 +570,16 @@ export default function HomePage() {
       </section>
 
       {/* ========================================================
-          CALL TO ACTION BANNER
+          10. LIVE CONTACT EXPERIENCE
          ======================================================== */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
+      <section className="border-t border-white/5">
+        <LiveContactExperience />
+      </section>
+
+      {/* ========================================================
+          11. CALL TO ACTION BANNER
+         ======================================================== */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10 border-t border-white/5">
         <div className="relative rounded-3xl p-8 sm:p-12 lg:p-16 overflow-hidden border border-gold-500/40 bg-gradient-to-r from-dark-950 via-dark-900 to-dark-950 text-center shadow-gold-lg">
           <div className="absolute inset-0 bg-gold-gradient opacity-10 blur-3xl pointer-events-none" />
 

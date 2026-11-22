@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppFloating from "@/components/WhatsAppFloating";
+import AIAssistant from "@/components/AIAssistant";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://akshaj-web-studio.vercel.app"),
@@ -185,6 +186,7 @@ export default function RootLayout({
         <main className="min-h-screen pt-20">{children}</main>
         <Footer />
         <WhatsAppFloating />
+        <AIAssistant />
       </body>
     </html>
   );
