@@ -27,13 +27,24 @@ export default function AdminLoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("reason") === "expired") {
+        setError("Your administrative session has expired. Please sign in again.");
+      }
+    }
+  }, []);
 
   // If already logged in, redirect to admin console
   useEffect(() => {
-    if (store.isAdminLoggedIn) {
+    if (isMounted && store.isInitialized && store.isAdminLoggedIn) {
       router.push("/admin");
     }
-  }, [store.isAdminLoggedIn, router]);
+  }, [isMounted, store.isInitialized, store.isAdminLoggedIn, router]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();

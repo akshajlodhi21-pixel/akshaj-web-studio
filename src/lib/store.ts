@@ -34,7 +34,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 
-const STORAGE_KEYS = {
+export const STORAGE_KEYS = {
   PROFILE: "aws_store_profile_v4",
   CONTACT: "aws_store_contact_v4",
   SERVICES: "aws_store_services_v4",
@@ -86,7 +86,21 @@ class StudioStore {
         const item = localStorage.getItem(key);
         if (!item) return fallback;
         try {
-          return { ...fallback, ...JSON.parse(item) };
+          const parsed = JSON.parse(item);
+          if (Array.isArray(fallback)) {
+            if (Array.isArray(parsed)) return parsed as unknown as T;
+            if (parsed && typeof parsed === "object") {
+              const vals = Object.values(parsed);
+              if (Array.isArray(vals) && vals.length > 0) {
+                return vals as unknown as T;
+              }
+            }
+            return fallback;
+          }
+          if (typeof fallback === "object" && fallback !== null) {
+            return { ...fallback, ...parsed };
+          }
+          return (parsed !== undefined ? parsed : fallback) as T;
         } catch {
           return fallback;
         }
@@ -215,7 +229,22 @@ class StudioStore {
       ]);
       this.testimonials = getStored(STORAGE_KEYS.TESTIMONIALS, initialTestimonials);
       this.settings = getStored(STORAGE_KEYS.SETTINGS, initialSiteSettings);
-      this.isAdminLoggedIn = Boolean(sessionStorage.getItem(STORAGE_KEYS.ADMIN_SESSION));
+
+      // Explicitly normalize collections as valid arrays
+      if (!Array.isArray(this.services)) this.services = initialServices;
+      if (!Array.isArray(this.projects)) this.projects = initialProjects;
+      if (!Array.isArray(this.pricing)) this.pricing = initialPricingCategories;
+      if (!Array.isArray(this.inquiries)) this.inquiries = [];
+      if (!Array.isArray(this.payments)) this.payments = [];
+      if (!Array.isArray(this.testimonials)) this.testimonials = initialTestimonials;
+
+      const sessionToken =
+        sessionStorage.getItem(STORAGE_KEYS.ADMIN_SESSION) ||
+        sessionStorage.getItem("aws_store_admin_auth_v2");
+      this.isAdminLoggedIn = Boolean(sessionToken);
+      if (sessionToken && !sessionStorage.getItem(STORAGE_KEYS.ADMIN_SESSION)) {
+        sessionStorage.setItem(STORAGE_KEYS.ADMIN_SESSION, sessionToken);
+      }
       this.isInitialized = true;
       this.notify();
     } catch (e) {
@@ -302,6 +331,7 @@ class StudioStore {
     this.isAdminLoggedIn = true;
     if (typeof window !== "undefined") {
       sessionStorage.setItem(STORAGE_KEYS.ADMIN_SESSION, token);
+      sessionStorage.removeItem("aws_store_admin_auth_v2");
     }
     this.notify();
   }
@@ -310,6 +340,7 @@ class StudioStore {
     this.isAdminLoggedIn = false;
     if (typeof window !== "undefined") {
       sessionStorage.removeItem(STORAGE_KEYS.ADMIN_SESSION);
+      sessionStorage.removeItem("aws_store_admin_auth_v2");
     }
     this.notify();
   }

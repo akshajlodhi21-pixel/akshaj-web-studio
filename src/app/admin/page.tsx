@@ -42,7 +42,7 @@ import {
   Compass,
 } from "lucide-react";
 import XIcon from "@/components/XIcon";
-import { useStudioStore } from "@/lib/store";
+import { useStudioStore, STORAGE_KEYS } from "@/lib/store";
 import { exportToCSV, generateId } from "@/lib/utils";
 import {
   InquiryStatus,
@@ -80,12 +80,74 @@ export default function AdminDashboardPage() {
     setTimeout(() => setToastMessage(null), 3000);
   };
 
-  // Route protection
+  // Hydration & Route Protection
+  const [isMounted, setIsMounted] = useState(false);
+  const [isVerifyingSession, setIsVerifyingSession] = useState(true);
+
   useEffect(() => {
-    if (store.isInitialized && !store.isAdminLoggedIn) {
-      router.push("/admin/login");
-    }
-  }, [store.isInitialized, store.isAdminLoggedIn, router]);
+    setIsMounted(true);
+  }, []);
+
+  // Route protection & cryptographic session verification
+  useEffect(() => {
+    if (!isMounted) return;
+
+    let isSubscribed = true;
+
+    const verifySession = async () => {
+      if (!store.isInitialized) return;
+
+      const token =
+        typeof window !== "undefined"
+          ? sessionStorage.getItem(STORAGE_KEYS.ADMIN_SESSION) ||
+            sessionStorage.getItem("aws_store_admin_auth_v2")
+          : null;
+
+      if (!token || !store.isAdminLoggedIn) {
+        if (isSubscribed) {
+          setIsVerifyingSession(false);
+          router.push("/admin/login");
+        }
+        return;
+      }
+
+      try {
+        const res = await fetch("/api/admin/auth", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (res.ok) {
+          const data = await res.json().catch(() => ({}));
+          if (data.authenticated && isSubscribed) {
+            setIsVerifyingSession(false);
+            return;
+          }
+        }
+
+        // Token invalid or expired
+        if (isSubscribed) {
+          store.logoutAdmin();
+          setIsVerifyingSession(false);
+          router.push("/admin/login?reason=expired");
+        }
+      } catch (err) {
+        // Offline or temporary network glitch: allow local session if initialized
+        console.warn("Server session validation check skipped (offline/network):", err);
+        if (isSubscribed) {
+          setIsVerifyingSession(false);
+        }
+      }
+    };
+
+    verifySession();
+
+    return () => {
+      isSubscribed = false;
+    };
+  }, [isMounted, store.isInitialized, store.isAdminLoggedIn, router]);
 
   // Handle Logout
   const handleLogout = () => {
@@ -121,7 +183,9 @@ export default function AdminDashboardPage() {
     try {
       const token =
         typeof window !== "undefined"
-          ? sessionStorage.getItem("aws_store_admin_auth_v2") || undefined
+          ? sessionStorage.getItem(STORAGE_KEYS.ADMIN_SESSION) ||
+            sessionStorage.getItem("aws_store_admin_auth_v2") ||
+            undefined
           : undefined;
       const result = await uploadImageFile(file, "profile", token);
 
@@ -274,35 +338,45 @@ export default function AdminDashboardPage() {
     showToast("Website brand settings and SEO updated!");
   };
 
+  // Safe Normalized Store Collections (guards against corrupted storage)
+  const inquiriesList = Array.isArray(store.inquiries) ? store.inquiries : [];
+  const paymentsList = Array.isArray(store.payments) ? store.payments : [];
+  const servicesList = Array.isArray(store.services) ? store.services : [];
+  const projectsList = Array.isArray(store.projects) ? store.projects : [];
+  const testimonialsList = Array.isArray(store.testimonials) ? store.testimonials : [];
+  const pricingList = Array.isArray(store.pricing) ? store.pricing : [];
+
   // Inquiries Search & Filter
   const [inquiryStatusFilter, setInquiryStatusFilter] = useState<string>("All");
   const [inquirySearch, setInquirySearch] = useState("");
 
-  const filteredInquiries = store.inquiries.filter((inq) => {
+  const filteredInquiries = inquiriesList.filter((inq) => {
+    if (!inq) return false;
     const matchesStatus =
       inquiryStatusFilter === "All" || inq.status === inquiryStatusFilter;
+    const q = (inquirySearch || "").toLowerCase();
     const matchesSearch =
-      inq.clientName.toLowerCase().includes(inquirySearch.toLowerCase()) ||
-      inq.email.toLowerCase().includes(inquirySearch.toLowerCase()) ||
-      inq.requiredService.toLowerCase().includes(inquirySearch.toLowerCase()) ||
-      inq.id.toLowerCase().includes(inquirySearch.toLowerCase());
+      (inq.clientName || "").toLowerCase().includes(q) ||
+      (inq.email || "").toLowerCase().includes(q) ||
+      (inq.requiredService || "").toLowerCase().includes(q) ||
+      (inq.id || "").toLowerCase().includes(q);
     return matchesStatus && matchesSearch;
   });
 
   const handleExportCSV = () => {
-    const rows = store.inquiries.map((inq) => ({
-      "Tracking ID": inq.id,
-      "Client Name": inq.clientName,
-      Email: inq.email,
-      Phone: inq.phoneNumber,
+    const rows = inquiriesList.map((inq) => ({
+      "Tracking ID": inq.id || "",
+      "Client Name": inq.clientName || "",
+      Email: inq.email || "",
+      Phone: inq.phoneNumber || "",
       WhatsApp: inq.whatsappNumber || "N/A",
       Company: inq.businessName || "N/A",
-      "Required Service": inq.requiredService,
-      Budget: inq.budget,
-      Deadline: inq.expectedDeadline,
+      "Required Service": inq.requiredService || "",
+      Budget: inq.budget || "",
+      Deadline: inq.expectedDeadline || "",
       "Reference Link": inq.referenceWebsite || "N/A",
-      Status: inq.status,
-      "Date Submitted": inq.createdAt,
+      Status: inq.status || "",
+      "Date Submitted": inq.createdAt || "",
       Notes: inq.notes || "",
     }));
     exportToCSV(`akshaj-studio-inquiries-${new Date().toISOString().slice(0, 10)}.csv`, rows);
@@ -362,7 +436,9 @@ export default function AdminDashboardPage() {
     try {
       const token =
         typeof window !== "undefined"
-          ? sessionStorage.getItem("aws_store_admin_auth_v2") || undefined
+          ? sessionStorage.getItem(STORAGE_KEYS.ADMIN_SESSION) ||
+            sessionStorage.getItem("aws_store_admin_auth_v2") ||
+            undefined
           : undefined;
       const result = await uploadImageFile(file, "projects", token);
 
@@ -424,24 +500,25 @@ export default function AdminDashboardPage() {
     setIsAddingTestimonial(false);
   };
 
-  if (!store.isInitialized || !store.isAdminLoggedIn) {
+  if (!isMounted || !store.isInitialized || isVerifyingSession || !store.isAdminLoggedIn) {
     return (
       <div className="min-h-[70vh] flex items-center justify-center text-gold-400">
-        <div className="flex items-center gap-3 text-sm">
-          <RefreshCw className="w-5 h-5 animate-spin" />
-          <span>Verifying encrypted administrative session...</span>
+        <div className="flex flex-col items-center gap-3 text-sm p-8 rounded-2xl bg-dark-900/60 border border-gold-500/20 max-w-sm text-center">
+          <RefreshCw className="w-6 h-6 animate-spin text-gold-400" />
+          <span className="font-semibold text-white">Verifying Administrative Console</span>
+          <span className="text-xs text-gray-400">Authenticating secure encrypted session...</span>
         </div>
       </div>
     );
   }
 
-  // Analytics Metrics
-  const totalInquiries = store.inquiries.length;
-  const newInquiries = store.inquiries.filter((i) => i.status === "New").length;
-  const confirmedInquiries = store.inquiries.filter((i) => i.status === "Confirmed").length;
-  const inProgressInquiries = store.inquiries.filter((i) => i.status === "In Progress").length;
-  const verifiedPaymentsCount = store.payments.filter((p) => p.status === "Verified").length;
-  const verifiedPaymentsTotal = store.payments
+  // Analytics Metrics (safe against empty or corrupted lists)
+  const totalInquiries = inquiriesList.length;
+  const newInquiries = inquiriesList.filter((i) => i.status === "New").length;
+  const confirmedInquiries = inquiriesList.filter((i) => i.status === "Confirmed").length;
+  const inProgressInquiries = inquiriesList.filter((i) => i.status === "In Progress").length;
+  const verifiedPaymentsCount = paymentsList.filter((p) => p.status === "Verified").length;
+  const verifiedPaymentsTotal = paymentsList
     .filter((p) => p.status === "Verified")
     .reduce((sum, p) => sum + (Number(p.amount) || 0), 0);
 
@@ -606,7 +683,7 @@ export default function AdminDashboardPage() {
               </div>
 
               <div className="space-y-3">
-                {store.inquiries.slice(0, 4).map((inq) => (
+                {inquiriesList.slice(0, 4).map((inq) => (
                   <div
                     key={inq.id}
                     className="p-4 rounded-2xl bg-dark-900 border border-white/5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs"
@@ -1086,7 +1163,7 @@ export default function AdminDashboardPage() {
             {/* Existing Education Entries List */}
             {profileForm.education && profileForm.education.length > 0 ? (
               <div className="space-y-3">
-                {profileForm.education.map((edu) => (
+                {(profileForm.education || []).map((edu) => (
                   <div
                     key={edu.id}
                     className="p-4 rounded-2xl bg-dark-900/90 border border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs"
@@ -1923,7 +2000,7 @@ export default function AdminDashboardPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {store.services.map((srv) => (
+            {servicesList.map((srv) => (
               <div
                 key={srv.id}
                 className="p-6 rounded-3xl glass-panel border border-gold-500/20 flex flex-col justify-between"
@@ -2110,7 +2187,7 @@ export default function AdminDashboardPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {store.projects.map((proj) => (
+            {projectsList.map((proj) => (
               <div
                 key={proj.id}
                 className="p-5 rounded-3xl glass-panel border border-gold-500/20 flex flex-col justify-between"
@@ -2585,7 +2662,7 @@ export default function AdminDashboardPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/5">
-                  {store.payments.map((p) => (
+                  {paymentsList.map((p) => (
                     <tr key={p.id} className="hover:bg-white/[0.02]">
                       <td className="py-4 px-6 font-mono font-bold text-gold-300">
                         {p.id}
@@ -2684,7 +2761,7 @@ export default function AdminDashboardPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {store.testimonials.map((t) => (
+            {testimonialsList.map((t) => (
               <div
                 key={t.id}
                 className="p-6 rounded-3xl glass-panel border border-gold-500/20 flex flex-col justify-between"
@@ -2840,7 +2917,7 @@ export default function AdminDashboardPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {store.pricing.map((tier) => (
+            {pricingList.map((tier) => (
               <div
                 key={tier.id}
                 className="p-6 rounded-3xl glass-panel border border-gold-500/20 space-y-4"
