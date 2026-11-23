@@ -2,9 +2,21 @@ import { NextRequest, NextResponse } from "next/server";
 import { sendInquiryEmails } from "@/lib/email";
 import { generateId } from "@/lib/utils";
 
+// RFC 5322 Compliant Email Validation Regex
+const EMAIL_REGEX =
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
+
+    // Anti-Spam Honeypot Check
+    if (body.hp_website || body.honeypot) {
+      return NextResponse.json(
+        { error: "Spam submission detected and blocked." },
+        { status: 400 }
+      );
+    }
 
     const {
       clientName,
@@ -19,74 +31,86 @@ export async function POST(req: NextRequest) {
       referenceWebsite,
     } = body;
 
-    // Strict Server-Side Validation
-    if (!clientName || typeof clientName !== "string" || clientName.trim().length < 2) {
+    // Strict Server-Side Validation & Sanitization
+    const sanitizedName = typeof clientName === "string" ? clientName.trim().slice(0, 100) : "";
+    if (!sanitizedName || sanitizedName.length < 2) {
       return NextResponse.json(
         { error: "Client name is required (minimum 2 characters)." },
         { status: 400 }
       );
     }
 
-    if (!email || typeof email !== "string" || !email.includes("@")) {
+    const sanitizedEmail = typeof email === "string" ? email.trim().toLowerCase().slice(0, 120) : "";
+    if (!sanitizedEmail || !EMAIL_REGEX.test(sanitizedEmail)) {
       return NextResponse.json(
-        { error: "A valid email address is required." },
+        { error: "A valid email address is required (e.g. name@example.com)." },
         { status: 400 }
       );
     }
 
-    if (!phoneNumber || typeof phoneNumber !== "string" || phoneNumber.trim().length < 7) {
+    const sanitizedPhone = typeof phoneNumber === "string" ? phoneNumber.trim().slice(0, 30) : "";
+    const digitsOnly = sanitizedPhone.replace(/[^0-9]/g, "");
+    if (!sanitizedPhone || digitsOnly.length < 7) {
       return NextResponse.json(
-        { error: "A valid contact telephone number is required." },
+        { error: "A valid contact telephone number is required (at least 7 digits)." },
         { status: 400 }
       );
     }
 
-    if (!requiredService || typeof requiredService !== "string") {
+    const sanitizedService = typeof requiredService === "string" ? requiredService.trim().slice(0, 120) : "";
+    if (!sanitizedService) {
       return NextResponse.json(
-        { error: "Please specify a required service." },
+        { error: "Please specify a required service category." },
         { status: 400 }
       );
     }
 
-    if (!projectDescription || typeof projectDescription !== "string" || projectDescription.trim().length < 10) {
+    const sanitizedDesc = typeof projectDescription === "string" ? projectDescription.trim().slice(0, 6000) : "";
+    if (!sanitizedDesc || sanitizedDesc.length < 10) {
       return NextResponse.json(
-        { error: "Please provide a brief project description (at least 10 characters)." },
+        { error: "Please provide a project description (at least 10 characters)." },
         { status: 400 }
       );
     }
+
+    const sanitizedBusiness = typeof businessName === "string" ? businessName.trim().slice(0, 150) : undefined;
+    const sanitizedWhatsapp = typeof whatsappNumber === "string" ? whatsappNumber.trim().slice(0, 30) : undefined;
+    const sanitizedBudget = typeof budget === "string" ? budget.trim().slice(0, 100) : "Custom Scope";
+    const sanitizedDeadline = typeof expectedDeadline === "string" ? expectedDeadline.trim().slice(0, 100) : "Standard Delivery";
+    const sanitizedRef = typeof referenceWebsite === "string" ? referenceWebsite.trim().slice(0, 200) : undefined;
 
     const inquiryId = generateId("AWS-REQ");
 
     // Trigger Email Notification & Client Acknowledgment
     const emailResult = await sendInquiryEmails({
       inquiryId,
-      clientName: clientName.trim(),
-      email: email.trim(),
-      phoneNumber: phoneNumber.trim(),
-      whatsappNumber: whatsappNumber?.trim(),
-      businessName: businessName?.trim(),
-      requiredService: requiredService.trim(),
-      projectDescription: projectDescription.trim(),
-      budget: budget || "Custom Scope",
-      expectedDeadline: expectedDeadline || "Standard Delivery",
-      referenceWebsite: referenceWebsite?.trim(),
+      clientName: sanitizedName,
+      email: sanitizedEmail,
+      phoneNumber: sanitizedPhone,
+      whatsappNumber: sanitizedWhatsapp,
+      businessName: sanitizedBusiness,
+      requiredService: sanitizedService,
+      projectDescription: sanitizedDesc,
+      budget: sanitizedBudget,
+      expectedDeadline: sanitizedDeadline,
+      referenceWebsite: sanitizedRef,
     });
 
     const inquiryRecord = {
       id: inquiryId,
-      clientName: clientName.trim(),
-      email: email.trim(),
-      phoneNumber: phoneNumber.trim(),
-      whatsappNumber: whatsappNumber?.trim() || undefined,
-      businessName: businessName?.trim() || undefined,
-      requiredService: requiredService.trim(),
-      projectDescription: projectDescription.trim(),
-      budget: budget || "Custom Scope",
-      expectedDeadline: expectedDeadline || "Standard Delivery",
-      referenceWebsite: referenceWebsite?.trim() || undefined,
+      clientName: sanitizedName,
+      email: sanitizedEmail,
+      phoneNumber: sanitizedPhone,
+      whatsappNumber: sanitizedWhatsapp,
+      businessName: sanitizedBusiness,
+      requiredService: sanitizedService,
+      projectDescription: sanitizedDesc,
+      budget: sanitizedBudget,
+      expectedDeadline: sanitizedDeadline,
+      referenceWebsite: sanitizedRef,
       status: "New" as const,
       createdAt: new Date().toISOString(),
-      notes: "Submitted via client booking system.",
+      notes: "Submitted via AI Website Project Planner.",
       emailSent: emailResult.success,
     };
 

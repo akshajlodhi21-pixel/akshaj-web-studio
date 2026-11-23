@@ -178,6 +178,12 @@ class StudioStore {
           notes: "Contacted via official WhatsApp, preparing architecture draft.",
         },
       ]);
+      // Safely filter out temporary test audit inquiries from local storage if present
+      if (Array.isArray(this.inquiries)) {
+        this.inquiries = this.inquiries.filter(
+          (inq) => !inq.id?.includes("5245-257238") && inq.clientName !== "Akshaj Test Auditor"
+        );
+      }
       this.payments = getStored(STORAGE_KEYS.PAYMENTS, [
         {
           id: "AWS-PAY-1082",

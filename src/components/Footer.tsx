@@ -119,6 +119,12 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/planner" className="hover:text-gold-300 transition-colors flex items-center gap-1 text-gold-300 font-semibold">
+                  <Sparkles className="w-3 h-3 text-gold-400" />
+                  <span>AI Project Planner</span>
+                </Link>
+              </li>
+              <li>
                 <Link href="/portfolio" className="hover:text-gold-300 transition-colors">
                   Project Portfolio
                 </Link>

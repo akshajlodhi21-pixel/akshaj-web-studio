@@ -40,6 +40,7 @@ import CostEstimator from "@/components/CostEstimator";
 import IdeaGenerator from "@/components/IdeaGenerator";
 import InteractivePortfolio from "@/components/InteractivePortfolio";
 import LiveContactExperience from "@/components/LiveContactExperience";
+import AIProjectPlanner from "@/components/AIProjectPlanner";
 import { useStudioStore } from "@/lib/store";
 import { ServiceItem, ProjectItem } from "@/lib/types";
 
@@ -184,6 +185,13 @@ export default function HomePage() {
               <Sparkles className="w-3.5 h-3.5 text-gold-400" />
               <span>Interactive Studio Tools:</span>
             </span>
+            <a
+              href="#ai-project-planner"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gold-500/20 border border-gold-400 text-gold-200 hover:text-white transition-all hover:bg-gold-500/30 shadow-gold-sm font-bold"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-gold-400 animate-pulse" />
+              <span>AI Project Planner</span>
+            </a>
             <a
               href="#website-builder-tool"
               className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-dark-900/90 border border-gold-500/30 hover:border-gold-400 text-gray-200 hover:text-white transition-all hover:bg-gold-500/10 shadow-sm"
@@ -360,14 +368,21 @@ export default function HomePage() {
       </section>
 
       {/* ========================================================
-          3. BUILD YOUR WEBSITE INTERACTIVE TOOL
+          3. AI WEBSITE PROJECT PLANNER (INTERACTIVE BUILDER)
+         ======================================================== */}
+      <section className="border-t border-white/5">
+        <AIProjectPlanner />
+      </section>
+
+      {/* ========================================================
+          4. BUILD YOUR WEBSITE INTERACTIVE TOOL
          ======================================================== */}
       <section className="border-t border-white/5">
         <WebsiteBuilderTool />
       </section>
 
       {/* ========================================================
-          4. PROJECT COST ESTIMATOR
+          5. PROJECT COST ESTIMATOR
          ======================================================== */}
       <section className="border-t border-white/5">
         <CostEstimator />
