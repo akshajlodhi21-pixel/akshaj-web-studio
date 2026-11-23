@@ -251,6 +251,22 @@ export default function Footer() {
                 </a>
               )}
 
+              {/* LinkedIn Channel */}
+              {store.contact.linkedinEnabled !== false && (
+                <a
+                  href={store.contact.linkedinUrl || store.contact.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2.5 hover:text-white transition-colors text-[#70b5f9] group"
+                  title="Official LinkedIn Profile"
+                >
+                  <div className="w-6 h-6 rounded-md bg-[#0A66C2]/15 border border-[#0A66C2]/30 flex items-center justify-center shrink-0 group-hover:border-[#0A66C2] group-hover:bg-[#0A66C2]/25 transition-colors">
+                    <Linkedin className="w-3.5 h-3.5 fill-[#0A66C2]" />
+                  </div>
+                  <span className="truncate text-xs font-mono">linkedin.com/in/{store.contact.linkedinUsername || "lucky-bro-b4ab043a1"}</span>
+                </a>
+              )}
+
               {/* Action Buttons Row */}
               <div className="pt-1 flex flex-wrap gap-2">
                 <a
@@ -260,6 +276,19 @@ export default function Footer() {
                   <Mail className="w-3.5 h-3.5 text-gold-400 group-hover:scale-110 transition-transform" />
                   <span>Email Me</span>
                 </a>
+
+                {store.contact.linkedinEnabled !== false && (
+                  <a
+                    href={store.contact.linkedinUrl || store.contact.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#0A66C2]/40 bg-[#0A66C2]/15 hover:bg-[#0A66C2]/25 text-[#70b5f9] hover:text-white text-xs font-bold transition-all shadow-[0_0_12px_rgba(10,102,194,0.2)] group"
+                    title="Connect with Akshaj Lodhi on LinkedIn"
+                  >
+                    <Linkedin className="w-3.5 h-3.5 fill-[#0A66C2] group-hover:scale-110 transition-transform" />
+                    <span>Connect on LinkedIn</span>
+                  </a>
+                )}
 
                 {store.contact.instagramEnabled !== false && (
                   <a
@@ -315,16 +344,18 @@ export default function Footer() {
               )}
 
               {/* Official LinkedIn */}
-              <a
-                href={store.contact.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-lg bg-dark-900 border border-[#0A66C2]/40 text-[#70b5f9] hover:text-white hover:bg-[#0A66C2]/20 hover:border-[#0A66C2] transition-colors"
-                aria-label="Official LinkedIn Profile"
-                title="LinkedIn Profile"
-              >
-                <Linkedin className="w-4 h-4 fill-[#0A66C2]" />
-              </a>
+              {store.contact.linkedinEnabled !== false && (
+                <a
+                  href={store.contact.linkedinUrl || store.contact.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 rounded-lg bg-dark-900 border border-[#0A66C2]/40 text-[#70b5f9] hover:text-white hover:bg-[#0A66C2]/20 hover:border-[#0A66C2] transition-colors"
+                  aria-label="Official LinkedIn Profile"
+                  title="LinkedIn Profile"
+                >
+                  <Linkedin className="w-4 h-4 fill-[#0A66C2]" />
+                </a>
+              )}
 
               {/* Twitter / X */}
               {store.contact.twitterEnabled !== false && (

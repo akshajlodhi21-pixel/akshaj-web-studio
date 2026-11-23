@@ -67,9 +67,9 @@ const FAQ_KNOWLEDGE: Array<{
     hasContact: true,
   },
   {
-    triggers: ["contact", "hire", "talk", "email", "whatsapp", "call", "instagram", "consult"],
+    triggers: ["contact", "hire", "talk", "email", "whatsapp", "call", "instagram", "linkedin", "consult"],
     reply:
-      "You can connect directly with Founder Akshaj Lodhi through any of our official channels:\n\n• WhatsApp: +91 91985 62197 (Instant Chat)\n• Email: akshajlodhi21@gmail.com\n• Instagram: @luckybro_9198\n• Phone: +91 91985 62197\n• Book Project Consultation: Use our online Hire portal!",
+      "You can connect directly with Founder Akshaj Lodhi through any of our official channels:\n\n• WhatsApp: +91 91985 62197 (Instant Chat)\n• LinkedIn: https://www.linkedin.com/in/lucky-bro-b4ab043a1/\n• Email: akshajlodhi21@gmail.com\n• Instagram: @luckybro_9198\n• X / Twitter: @LuckyBro199620\n• Phone: +91 91985 62197\n• Book Project Consultation: Use our online Hire portal!",
     hasContact: true,
   },
 ];

@@ -152,6 +152,9 @@ export interface ContactInfo {
   twitterUsername?: string;
   twitterUrl?: string;
   twitterEnabled?: boolean;
+  linkedinUsername?: string;
+  linkedinUrl?: string;
+  linkedinEnabled?: boolean;
   businessEmail: string;
   personalEmail: string;
   email: string;

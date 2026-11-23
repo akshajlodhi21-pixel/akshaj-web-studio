@@ -64,7 +64,8 @@ export default function ContactPage() {
   const twitterUrl = store.contact.twitterUrl || store.contact.socials.twitter || "https://x.com/LuckyBro199620";
   const officialEmail = store.contact.email || "akshajlodhi21@gmail.com";
   const officialLinkedIn =
-    store.contact.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/";
+    store.contact.linkedinUrl || store.contact.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/";
+  const linkedinUsername = store.contact.linkedinUsername || "lucky-bro-b4ab043a1";
   const mailtoUrl = `mailto:${officialEmail}?subject=Project%20Inquiry%20-%20AKSHAJ%20WEB%20STUDIO`;
   const callUrl = `tel:${store.contact.businessPhone.replace(/\s+/g, "")}`;
 
@@ -199,16 +200,18 @@ export default function ContactPage() {
         </a>
 
         {/* 2. Connect on LinkedIn */}
-        <a
-          href={officialLinkedIn}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="p-4 rounded-2xl bg-[#0A66C2]/15 hover:bg-[#0A66C2]/25 border border-[#0A66C2]/50 text-[#70b5f9] transition-all flex flex-col items-center justify-center text-center group shadow-[0_4px_20px_rgba(10,102,194,0.2)]"
-        >
-          <Linkedin className="w-6 h-6 mb-2 fill-[#0A66C2] group-hover:scale-110 transition-transform" />
-          <span className="text-xs font-bold text-white">Connect on LinkedIn</span>
-          <span className="text-[10px] text-[#70b5f9] mt-0.5">Official Profile</span>
-        </a>
+        {store.contact.linkedinEnabled !== false && (
+          <a
+            href={officialLinkedIn}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-4 rounded-2xl bg-[#0A66C2]/15 hover:bg-[#0A66C2]/25 border border-[#0A66C2]/50 text-[#70b5f9] transition-all flex flex-col items-center justify-center text-center group shadow-[0_4px_20px_rgba(10,102,194,0.2)]"
+          >
+            <Linkedin className="w-6 h-6 mb-2 fill-[#0A66C2] group-hover:scale-110 transition-transform" />
+            <span className="text-xs font-bold text-white">Connect on LinkedIn</span>
+            <span className="text-[10px] text-[#70b5f9] mt-0.5">Official Profile</span>
+          </a>
+        )}
 
         {/* 3. Follow on X (Twitter) */}
         {store.contact.twitterEnabled !== false && (
@@ -402,20 +405,22 @@ export default function ContactPage() {
             </h4>
             <div className="grid grid-cols-2 gap-2.5 text-xs">
               {/* Official LinkedIn Banner */}
-              <a
-                href={officialLinkedIn}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="col-span-2 flex items-center justify-between p-3 rounded-xl bg-[#0A66C2]/15 border border-[#0A66C2]/40 text-[#70b5f9] hover:text-white transition-all group"
-              >
-                <div className="flex items-center gap-2.5">
-                  <Linkedin className="w-4 h-4 fill-[#0A66C2] group-hover:scale-110 transition-transform shrink-0" />
-                  <span className="font-bold text-xs text-white">Connect on LinkedIn</span>
-                </div>
-                <span className="text-[10px] px-2 py-0.5 rounded-md bg-[#0A66C2]/30 text-[#70b5f9] font-mono group-hover:text-white">
-                  lucky-bro-b4ab043a1 &rarr;
-                </span>
-              </a>
+              {store.contact.linkedinEnabled !== false && (
+                <a
+                  href={officialLinkedIn}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="col-span-2 flex items-center justify-between p-3 rounded-xl bg-[#0A66C2]/15 border border-[#0A66C2]/40 text-[#70b5f9] hover:text-white transition-all group"
+                >
+                  <div className="flex items-center gap-2.5">
+                    <Linkedin className="w-4 h-4 fill-[#0A66C2] group-hover:scale-110 transition-transform shrink-0" />
+                    <span className="font-bold text-xs text-white">Connect on LinkedIn</span>
+                  </div>
+                  <span className="text-[10px] px-2 py-0.5 rounded-md bg-[#0A66C2]/30 text-[#70b5f9] font-mono group-hover:text-white">
+                    @{linkedinUsername} &rarr;
+                  </span>
+                </a>
+              )}
 
               <a
                 href={igProfileUrl}
@@ -535,15 +540,17 @@ export default function ContactPage() {
                   >
                     Send Another Message
                   </button>
-                  <a
-                    href={officialLinkedIn}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-4 py-2 rounded-xl border border-[#0A66C2]/40 text-xs font-semibold text-[#70b5f9] hover:text-white bg-[#0A66C2]/15 flex items-center gap-1.5"
-                  >
-                    <Linkedin className="w-3.5 h-3.5 fill-[#0A66C2]" />
-                    <span>Connect on LinkedIn</span>
-                  </a>
+                  {store.contact.linkedinEnabled !== false && (
+                    <a
+                      href={officialLinkedIn}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-2 rounded-xl border border-[#0A66C2]/40 text-xs font-semibold text-[#70b5f9] hover:text-white bg-[#0A66C2]/15 flex items-center gap-1.5"
+                    >
+                      <Linkedin className="w-3.5 h-3.5 fill-[#0A66C2]" />
+                      <span>Connect on LinkedIn</span>
+                    </a>
+                  )}
                 </div>
               </div>
             ) : (

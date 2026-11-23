@@ -34,6 +34,7 @@ import {
   Trophy,
   Video,
   Instagram,
+  Linkedin,
   Settings,
   Crop,
   GraduationCap,
@@ -1538,21 +1539,80 @@ export default function AdminDashboardPage() {
                 </div>
               </div>
 
-              <div>
-                <label className="block text-xs font-bold text-gray-300 mb-1">
-                  LinkedIn Profile URL *
-                </label>
-                <input
-                  type="url"
-                  value={contactForm.socials.linkedin}
-                  onChange={(e) =>
-                    setContactForm({
-                      ...contactForm,
-                      socials: { ...contactForm.socials, linkedin: e.target.value },
-                    })
-                  }
-                  className="w-full bg-dark-900 border border-white/15 rounded-xl px-3 py-2 text-xs text-white font-mono"
-                />
+              <div className="col-span-1 sm:col-span-2 p-4 rounded-2xl bg-[#0A66C2]/10 border border-[#0A66C2]/30 space-y-3">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div className="flex items-center gap-2">
+                    <Linkedin className="w-4 h-4 text-[#0A66C2] fill-[#0A66C2]" />
+                    <span className="text-xs font-bold text-white uppercase tracking-wider font-mono">
+                      LinkedIn Profile & Settings
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <label className="flex items-center gap-1.5 cursor-pointer text-xs">
+                      <input
+                        type="checkbox"
+                        checked={contactForm.linkedinEnabled !== false}
+                        onChange={(e) =>
+                          setContactForm({
+                            ...contactForm,
+                            linkedinEnabled: e.target.checked,
+                          })
+                        }
+                        className="rounded accent-[#0A66C2] w-3.5 h-3.5"
+                      />
+                      <span className="text-gray-300 font-medium">
+                        {contactForm.linkedinEnabled !== false ? "Enabled" : "Disabled"}
+                      </span>
+                    </label>
+
+                    <a
+                      href={contactForm.linkedinUrl || contactForm.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/"}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#0A66C2]/20 hover:bg-[#0A66C2]/30 text-[#70b5f9] hover:text-white border border-[#0A66C2]/40 text-[11px] font-semibold transition-all"
+                    >
+                      <ExternalLink className="w-3 h-3" />
+                      <span>Preview Profile</span>
+                    </a>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-300 mb-1">
+                      LinkedIn Username / Identifier *
+                    </label>
+                    <input
+                      type="text"
+                      value={contactForm.linkedinUsername || ""}
+                      onChange={(e) =>
+                        setContactForm({ ...contactForm, linkedinUsername: e.target.value })
+                      }
+                      placeholder="lucky-bro-b4ab043a1"
+                      className="w-full bg-dark-900 border border-white/15 rounded-xl px-3 py-2 text-xs text-white font-mono"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-gray-300 mb-1">
+                      LinkedIn Profile URL *
+                    </label>
+                    <input
+                      type="url"
+                      value={contactForm.linkedinUrl || contactForm.socials.linkedin || ""}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        setContactForm({
+                          ...contactForm,
+                          linkedinUrl: val,
+                          socials: { ...contactForm.socials, linkedin: val },
+                        });
+                      }}
+                      placeholder="https://www.linkedin.com/in/lucky-bro-b4ab043a1/"
+                      className="w-full bg-dark-900 border border-white/15 rounded-xl px-3 py-2 text-xs text-white font-mono"
+                    />
+                  </div>
+                </div>
               </div>
 
               <div>
@@ -1847,13 +1907,15 @@ export default function AdminDashboardPage() {
                 </label>
                 <input
                   type="url"
-                  value={contactForm.socials.linkedin}
-                  onChange={(e) =>
+                  value={contactForm.linkedinUrl || contactForm.socials.linkedin || ""}
+                  onChange={(e) => {
+                    const val = e.target.value;
                     setContactForm({
                       ...contactForm,
-                      socials: { ...contactForm.socials, linkedin: e.target.value },
-                    })
-                  }
+                      linkedinUrl: val,
+                      socials: { ...contactForm.socials, linkedin: val },
+                    });
+                  }}
                   className="w-full bg-dark-900 border border-white/15 rounded-xl px-3 py-2 text-xs text-white"
                 />
               </div>

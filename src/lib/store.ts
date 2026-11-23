@@ -155,6 +155,15 @@ class StudioStore {
       if (this.contact.twitterEnabled === undefined) {
         this.contact.twitterEnabled = true;
       }
+      if (!this.contact.linkedinUsername || this.contact.linkedinUsername === "akshajwebstudio") {
+        this.contact.linkedinUsername = "lucky-bro-b4ab043a1";
+      }
+      if (!this.contact.linkedinUrl || this.contact.linkedinUrl.includes("akshajwebstudio")) {
+        this.contact.linkedinUrl = "https://www.linkedin.com/in/lucky-bro-b4ab043a1/";
+      }
+      if (this.contact.linkedinEnabled === undefined) {
+        this.contact.linkedinEnabled = true;
+      }
       this.services = getStored(STORAGE_KEYS.SERVICES, initialServices);
       this.projects = getStored(STORAGE_KEYS.PROJECTS, initialProjects);
       this.pricing = getStored(STORAGE_KEYS.PRICING, initialPricingCategories);

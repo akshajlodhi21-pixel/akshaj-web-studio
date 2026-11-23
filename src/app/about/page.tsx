@@ -180,16 +180,18 @@ export default function AboutPage() {
             </Link>
 
             {/* Official Connect on LinkedIn Button in Founder Profile Section */}
-            <a
-              href={store.contact.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/"}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="py-3 px-4 rounded-2xl bg-[#0A66C2]/15 hover:bg-[#0A66C2]/25 border border-[#0A66C2]/50 text-[#70b5f9] hover:text-white font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(10,102,194,0.25)] group"
-            >
-              <Linkedin className="w-4 h-4 fill-[#0A66C2] group-hover:fill-white text-[#0A66C2] group-hover:text-white transition-colors" />
-              <span>Connect on LinkedIn</span>
-              <ExternalLink className="w-3.5 h-3.5 text-[#70b5f9] group-hover:text-white transition-colors" />
-            </a>
+            {store.contact.linkedinEnabled !== false && (
+              <a
+                href={store.contact.linkedinUrl || store.contact.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="py-3 px-4 rounded-2xl bg-[#0A66C2]/15 hover:bg-[#0A66C2]/25 border border-[#0A66C2]/50 text-[#70b5f9] hover:text-white font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(10,102,194,0.25)] group"
+              >
+                <Linkedin className="w-4 h-4 fill-[#0A66C2] group-hover:fill-white text-[#0A66C2] group-hover:text-white transition-colors" />
+                <span>Connect on LinkedIn</span>
+                <ExternalLink className="w-3.5 h-3.5 text-[#70b5f9] group-hover:text-white transition-colors" />
+              </a>
+            )}
 
             {/* Official Follow Me on Instagram Button in Founder Profile Section */}
             {store.contact.instagramEnabled !== false && (
@@ -646,28 +648,30 @@ export default function AboutPage() {
               )}
 
               {/* Official LinkedIn */}
-              <a
-                href={store.contact.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-4 rounded-2xl bg-[#0A66C2]/10 hover:bg-[#0A66C2]/20 border border-[#0A66C2]/30 hover:border-[#0A66C2]/60 transition-all text-xs flex items-center justify-between group shadow-[0_0_15px_rgba(10,102,194,0.15)]"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-[#0A66C2]/20 text-[#0A66C2] flex items-center justify-center shrink-0">
-                    <Linkedin className="w-5 h-5 fill-[#0A66C2]" />
-                  </div>
-                  <div>
-                    <div className="font-bold text-[#70b5f9] group-hover:text-white transition-colors">Connect on LinkedIn</div>
-                    <div className="text-[11px] text-gray-400 truncate max-w-[170px]">
-                      {store.contact.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/"}
+              {store.contact.linkedinEnabled !== false && (
+                <a
+                  href={store.contact.linkedinUrl || store.contact.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-4 rounded-2xl bg-[#0A66C2]/10 hover:bg-[#0A66C2]/20 border border-[#0A66C2]/30 hover:border-[#0A66C2]/60 transition-all text-xs flex items-center justify-between group shadow-[0_0_15px_rgba(10,102,194,0.15)]"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-xl bg-[#0A66C2]/20 text-[#0A66C2] flex items-center justify-center shrink-0">
+                      <Linkedin className="w-5 h-5 fill-[#0A66C2]" />
+                    </div>
+                    <div>
+                      <div className="font-bold text-[#70b5f9] group-hover:text-white transition-colors">Connect on LinkedIn</div>
+                      <div className="text-[11px] text-gray-400 truncate max-w-[170px]">
+                        {store.contact.linkedinUrl || store.contact.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/"}
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#0A66C2]/20 text-[10px] font-bold text-[#70b5f9] group-hover:text-white transition-colors">
-                  <span>Connect</span>
-                  <ExternalLink className="w-3 h-3" />
-                </div>
-              </a>
+                  <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#0A66C2]/20 text-[10px] font-bold text-[#70b5f9] group-hover:text-white transition-colors">
+                    <span>Connect</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </div>
+                </a>
+              )}
 
               {/* Official Twitter / X */}
               {store.contact.twitterEnabled !== false && (

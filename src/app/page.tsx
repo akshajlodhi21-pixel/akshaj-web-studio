@@ -145,15 +145,18 @@ export default function HomePage() {
               <MessageSquare className="w-3.5 h-3.5 text-emerald-400 group-hover:scale-110 transition-transform" />
               <span>WhatsApp: {store.contact.whatsapp}</span>
             </a>
-            <a
-              href={store.contact.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/"}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#0A66C2]/10 hover:bg-[#0A66C2]/20 border border-[#0A66C2]/40 text-[#70b5f9] hover:text-white font-semibold transition-all"
-            >
-              <Linkedin className="w-3.5 h-3.5 fill-[#0A66C2]" />
-              <span>LinkedIn</span>
-            </a>
+            {store.contact.linkedinEnabled !== false && (
+              <a
+                href={store.contact.linkedinUrl || store.contact.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#0A66C2]/10 hover:bg-[#0A66C2]/20 border border-[#0A66C2]/40 text-[#70b5f9] hover:text-white font-semibold transition-all"
+                title="Connect with Akshaj Lodhi on LinkedIn"
+              >
+                <Linkedin className="w-3.5 h-3.5 fill-[#0A66C2]" />
+                <span>LinkedIn</span>
+              </a>
+            )}
             {store.contact.instagramEnabled !== false && (
               <a
                 href={store.contact.instagramUrl || "https://www.instagram.com/luckybro_9198/"}
@@ -686,16 +689,21 @@ export default function HomePage() {
                 <MessageSquare className="w-3.5 h-3.5 text-emerald-400" />
                 <span>WhatsApp: {store.contact.whatsapp}</span>
               </a>
-              <span>•</span>
-              <a
-                href={store.contact.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[#70b5f9] hover:text-white flex items-center gap-1.5 font-semibold"
-              >
-                <Linkedin className="w-3.5 h-3.5 fill-[#0A66C2]" />
-                <span>Connect on LinkedIn</span>
-              </a>
+              {store.contact.linkedinEnabled !== false && (
+                <>
+                  <span>•</span>
+                  <a
+                    href={store.contact.linkedinUrl || store.contact.socials.linkedin || "https://www.linkedin.com/in/lucky-bro-b4ab043a1/"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#70b5f9] hover:text-white flex items-center gap-1.5 font-semibold"
+                    title="Connect with Akshaj Lodhi on LinkedIn"
+                  >
+                    <Linkedin className="w-3.5 h-3.5 fill-[#0A66C2]" />
+                    <span>Connect on LinkedIn</span>
+                  </a>
+                </>
+              )}
               {store.contact.instagramEnabled !== false && (
                 <>
                   <span>•</span>
