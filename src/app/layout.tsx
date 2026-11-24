@@ -72,26 +72,7 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  icons: {
-    icon: [
-      { url: "https://akshaj-web-studio.vercel.app/favicon.ico", sizes: "any" },
-      { url: "https://akshaj-web-studio.vercel.app/favicon-48x48.png", sizes: "48x48", type: "image/png" },
-      { url: "https://akshaj-web-studio.vercel.app/favicon-96x96.png", sizes: "96x96", type: "image/png" },
-      { url: "https://akshaj-web-studio.vercel.app/favicon-144x144.png", sizes: "144x144", type: "image/png" },
-      { url: "https://akshaj-web-studio.vercel.app/favicon.png", sizes: "48x48", type: "image/png" },
-      { url: "https://akshaj-web-studio.vercel.app/icon-192.png", sizes: "192x192", type: "image/png" },
-      { url: "https://akshaj-web-studio.vercel.app/icon-512.png", sizes: "512x512", type: "image/png" },
-      { url: "https://akshaj-web-studio.vercel.app/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-      { url: "https://akshaj-web-studio.vercel.app/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "https://akshaj-web-studio.vercel.app/android-chrome-192x192.png", sizes: "192x192", type: "image/png" },
-      { url: "https://akshaj-web-studio.vercel.app/android-chrome-512x512.png", sizes: "512x512", type: "image/png" },
-    ],
-    shortcut: "https://akshaj-web-studio.vercel.app/favicon.ico",
-    apple: [
-      { url: "https://akshaj-web-studio.vercel.app/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
-    ],
-  },
-  manifest: "https://akshaj-web-studio.vercel.app/site.webmanifest",
+  manifest: "/site.webmanifest",
 };
 
 export default function RootLayout({
@@ -163,6 +144,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
+        <link rel="icon" href="/favicon-48x48.png" type="image/png" sizes="48x48" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
         <meta name="theme-color" content="#030306" />
         <script
           type="application/ld+json"
